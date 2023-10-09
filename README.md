@@ -1,2 +1,2 @@
-# SintoCheck
-SintoCheck
+# SíntoCheck
+SíntoCheck
