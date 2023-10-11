@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import express from "express";
 
-import https from "https";
-import fs from "fs";
+// import https from "https";
+// import fs from "fs";
 
 const prisma = new PrismaClient();
 const app = express();
@@ -117,18 +117,16 @@ app.post(`/PersonalizedHealthData`, async (req, res) => {
   res.json(result);
 });
 
-// const server = app.listen(3000, () =>
-//   console.log(`
-// 🚀 Server ready at: http://localhost:3000
-// ⭐️ See sample requests: http://pris.ly/e/ts/rest-express#3-using-the-rest-api`)
-// );
-
-const server = https.createServer(
-  {
-    key: fs.readFileSync("src/localhost-key.pem", "utf-8"),
-    cert: fs.readFileSync("src/localhost.pem", "utf-8"),
-  },
-  app
+const server = app.listen(3000, () =>
+  console.log(`Server ready at: http://localhost:3000`)
 );
 
-server.listen(3000);
+// const server = https.createServer(
+//   {
+//     key: fs.readFileSync("src/localhost-key.pem", "utf-8"),
+//     cert: fs.readFileSync("src/localhost.pem", "utf-8"),
+//   },
+//   app
+// );
+
+// server.listen(3000);
