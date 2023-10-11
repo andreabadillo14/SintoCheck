@@ -132,7 +132,7 @@ app.post(`/HealthDataRecord`, async (req, res) => {
   res.json(result);
 });
 
-app.get(`/PatientHealthDataRecord/:id`, async (req, res) => {
+app.get(`/TrackedHealthData/:id`, async (req, res) => {
   const { id } = req.params;
 
   const result = await prisma.healthDataRecord.findMany({
@@ -152,7 +152,7 @@ app.get(`/PatientHealthDataRecord/:id`, async (req, res) => {
   res.json(result);
 });
 
-app.get(`/HealthDataRecord/:patientId/:healthDataId`, async (req, res) => {
+app.get(`/HealthDataRecords/:patientId/:healthDataId`, async (req, res) => {
   const { patientId, healthDataId } = req.params;
 
   const result = await prisma.healthDataRecord.findMany({
