@@ -11,6 +11,7 @@
 
 `/HealthData`
 `/PersonalizedHealthData/:id`
+
 #### POST
 
 `/signup/patient`: 
