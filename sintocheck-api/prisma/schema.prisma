@@ -56,20 +56,20 @@ model HealthData {
 }
 
 model HealthDataRecord {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
-  patient      Patient?    @relation(fields: [patientId], references: [id])
-  patientId    String?     @db.ObjectId
-  healthData   HealthData? @relation(fields: [healthDataId], references: [id])
-  healthDataId String?     @db.ObjectId
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  patient      Patient    @relation(fields: [patientId], references: [id])
+  patientId    String     @db.ObjectId
+  healthData   HealthData @relation(fields: [healthDataId], references: [id])
+  healthDataId String     @db.ObjectId
   value        Float
   note         String?
-  createdAt    DateTime    @default(now())
+  createdAt    DateTime   @default(now())
 }
 
 model Note {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  patient   Patient? @relation(fields: [patientId], references: [id])
-  patientId String?  @db.ObjectId
+  patient   Patient  @relation(fields: [patientId], references: [id])
+  patientId String   @db.ObjectId
   title     String
   content   String
   createdAt DateTime @default(now())

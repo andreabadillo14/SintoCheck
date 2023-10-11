@@ -117,6 +117,57 @@ app.post(`/PersonalizedHealthData`, async (req, res) => {
   res.json(result);
 });
 
+app.post(`/HealthDataRecord`, async (req, res) => {
+  const { patientId, healthDataId, value, note } = req.body;
+
+  const result = await prisma.healthDataRecord.create({
+    data: {
+      patientId,
+      healthDataId,
+      value,
+      note,
+    },
+  });
+
+  res.json(result);
+});
+
+app.get(`/PatientHealthDataRecord/:id`, async (req, res) => {
+  const { id } = req.params;
+
+  const result = await prisma.healthDataRecord.findMany({
+    where: {
+      patientId: id,
+      // Return only the records of the last 7 days
+      createdAt: {
+        gte: new Date(new Date().setDate(new Date().getDate() - 7)),
+      },
+    },
+    select: {
+      healthData: true,
+    },
+    distinct: ["healthDataId"],
+  });
+
+  res.json(result);
+});
+
+app.get(`/HealthDataRecord/:patientId/:healthDataId`, async (req, res) => {
+  const { patientId, healthDataId } = req.params;
+
+  const result = await prisma.healthDataRecord.findMany({
+    where: {
+      patientId: patientId,
+      healthDataId: healthDataId,
+    },
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
+
+  res.json(result);
+});
+
 const server = app.listen(3000, () =>
   console.log(`Server ready at: http://localhost:3000`)
 );
