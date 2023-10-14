@@ -20,7 +20,7 @@ model Patient {
 
   doctors           Doctor[]           @relation(fields: [doctorIds], references: [id])
   doctorIds         String[]           @db.ObjectId
-  healthData        HealthData[]
+  healthData        HealthData[] 
   healthDataRecords HealthDataRecord[]
   notes             Note[]
 
@@ -43,7 +43,7 @@ model Doctor {
 
 model HealthData {
   id               String             @id @default(auto()) @map("_id") @db.ObjectId
-  patient          Patient?           @relation(fields: [patientId], references: [id])
+  patient          Patient?           @relation(fields: [patientId], references: [id], onDelete: Cascade)
   patientId        String?            @db.ObjectId
   name             String
   quantitative     Boolean
@@ -57,9 +57,9 @@ model HealthData {
 
 model HealthDataRecord {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
-  patient      Patient    @relation(fields: [patientId], references: [id])
+  patient      Patient    @relation(fields: [patientId], references: [id], onDelete: Cascade)
   patientId    String     @db.ObjectId
-  healthData   HealthData @relation(fields: [healthDataId], references: [id])
+  healthData   HealthData @relation(fields: [healthDataId], references: [id], onDelete: Cascade)
   healthDataId String     @db.ObjectId
   value        Float
   note         String?
@@ -68,7 +68,7 @@ model HealthDataRecord {
 
 model Note {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  patient   Patient  @relation(fields: [patientId], references: [id])
+  patient   Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
   patientId String   @db.ObjectId
   title     String
   content   String
