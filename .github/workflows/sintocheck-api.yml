@@ -13,7 +13,7 @@ jobs:
   build:
     defaults: 
       run: 
-        working-directory: sintocheck-api
+        working-directory: ./sintocheck-api
 
     runs-on: ubuntu-latest
 
