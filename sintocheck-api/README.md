@@ -24,11 +24,11 @@ Creates a new `Patient` record in the database with the provided information.
 | `name`              | string  | Yes      | Name of the patient                  |
 | `phone`             | string  | Yes      | Phone number of the patient          |
 | `password`          | string  | Yes      | Password for the patient             |
-| `birthdate`         | string  | No       | Date of birth of the patient         |
-| `height`            | number  | No       | Height of the patient in centimeters |
-| `weight`            | number  | No       | Weight of the patient in kilograms   |
-| `medicine`          | string  | No       | Medication taken by the patient      |
-| `medicalBackground` | string  | No       | Medical background of the patient    |
+| `birthdate`         | string?  | No       | Date of birth of the patient         |
+| `height`            | number?  | No       | Height of the patient in centimeters |
+| `weight`            | number?  | No       | Weight of the patient in kilograms   |
+| `medicine`          | string?  | No       | Medication taken by the patient      |
+| `medicalBackground` | string?  | No       | Medical background of the patient    |
 
 - **Success Response:**
   - **Status Code:** `200 OK`
