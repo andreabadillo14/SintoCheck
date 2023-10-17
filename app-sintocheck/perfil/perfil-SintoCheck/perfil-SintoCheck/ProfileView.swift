@@ -25,11 +25,14 @@ struct ProfileView: View {
                                 Text("\(name)")
                                 Text("\(phoneNumber)")
                             }
-        
+                            
                         }
                         Spacer()
                         
-        
+                        VStack {
+                            Text("hola")
+                        }
+                        Spacer()
                     }
                     .padding()
                     .navigationTitle("Mi perfil")
