@@ -13,6 +13,12 @@ struct AddHealthDataView: View {
     }
 }
 
-#Preview {
-    AddHealthDataView()
+struct AddHealthDataView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddHealthDataView()
+    }
 }
+
+//#Preview {
+//    AddHealthDataView()
+//}
