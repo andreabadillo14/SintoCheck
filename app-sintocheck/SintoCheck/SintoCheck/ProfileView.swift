@@ -49,6 +49,7 @@ struct ProfileView: View {
                             }
                             
                         }
+                        
                     }
                     
                     Section {
