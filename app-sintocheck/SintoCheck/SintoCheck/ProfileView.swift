@@ -12,7 +12,7 @@ struct ProfileView: View {
     @State var phoneNumber = "81-1254-0017"
 
     var patients = [
-        Patient(id: UUID(), birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
+        Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
     ]
     
     var body: some View {
@@ -26,7 +26,7 @@ struct ProfileView: View {
                             .frame(width: 90)
                             .padding(.leading, -60)
                         
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading) { // esto sigue hardcordeado
                             Text("\(name)")
                             Text("\(phoneNumber)")
                         }

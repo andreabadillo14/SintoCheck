@@ -9,34 +9,52 @@ import SwiftUI
 
 struct MedicalDataView: View {
     var APatient : Patient
-
+    
     
     var body: some View {
         Section {
+            Text("Detalles Personales Médicos")
+                .bold()
+                .font(.largeTitle)
+                .padding(.top, 20)
             List {
                 HStack {
                     Text("Fecha de nacimiento: ")
+                    Spacer()
                     Text(APatient.birthdate)
+                        .opacity(0.8)
                 }
                 
                 HStack {
                     Text("Altura: ")
-                    Text("\(APatient.height)")
+                    Spacer()
+                    Text(String(format: "%.2f", APatient.height))
+                        .opacity(0.8)
+                    Text("cm")
+                        .opacity(0.8)
                 }
                 
                 HStack {
                     Text("Peso: ")
-                    Text("\(APatient.weight)")
+                    Spacer()
+                    Text(String(format: "%.1f", APatient.weight))
+                        .opacity(0.8)
+                    Text("kg") 
+                        .opacity(0.8)
                 }
                 
                 HStack {
                     Text("Medicina: ")
+                    Spacer()
                     Text("\(APatient.medicine)")
+                        .opacity(0.8)
                 }
                 
                 HStack {
                     Text("Antecedentes: ")
+                    Spacer()
                     Text("\(APatient.medicalBackground)")
+                        .opacity(0.8)
                 }
             }
         }
@@ -44,5 +62,5 @@ struct MedicalDataView: View {
 }
 
 #Preview {
-    MedicalDataView(APatient: Patient(id: UUID(), birthdate: "1934-04-23", height: 1.65, weight: 0, medicine: "no", medicalBackground: "no"))
+    MedicalDataView(APatient: Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1934-04-23", height: 1.65, weight: 0, medicine: "no", medicalBackground: "no"))
 }
