@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E41CFC22AE2F823007BD83B /* DoctorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */; };
 		6E41DA722AE21E1500BC3ECD /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41DA712AE21E1500BC3ECD /* Patient.swift */; };
 		6E5219AC2ADF6CFA00220B6E /* SintoCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5219AB2ADF6CFA00220B6E /* SintoCheckApp.swift */; };
 		6E5219AE2ADF6CFA00220B6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5219AD2ADF6CFA00220B6E /* ContentView.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetailsView.swift; sourceTree = "<group>"; };
 		6E41DA712AE21E1500BC3ECD /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		6E5219A82ADF6CFA00220B6E /* SintoCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SintoCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5219AB2ADF6CFA00220B6E /* SintoCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SintoCheckApp.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				6E5219AB2ADF6CFA00220B6E /* SintoCheckApp.swift */,
 				6E5219AD2ADF6CFA00220B6E /* ContentView.swift */,
 				6E5219B92ADF6D1900220B6E /* ProfileView.swift */,
+				6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */,
 				6E41DA712AE21E1500BC3ECD /* Patient.swift */,
 				6EB9D4B12AE06E7700740DFF /* HealthData.swift */,
 				6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */,
@@ -160,6 +163,7 @@
 			files = (
 				6E5219AE2ADF6CFA00220B6E /* ContentView.swift in Sources */,
 				6E5219BC2ADF6D3800220B6E /* SettingsView.swift in Sources */,
+				6E41CFC22AE2F823007BD83B /* DoctorDetailsView.swift in Sources */,
 				6E41DA722AE21E1500BC3ECD /* Patient.swift in Sources */,
 				6E5219BA2ADF6D1900220B6E /* ProfileView.swift in Sources */,
 				6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */,
