@@ -19,14 +19,14 @@ struct MedicalDataView: View {
                 .padding(.top, 20)
             List {
                 HStack {
-                    Text("Fecha de nacimiento: ")
+                    Text("Fecha de nacimiento")
                     Spacer()
                     Text(APatient.birthdate)
                         .opacity(0.8)
                 }
                 
                 HStack {
-                    Text("Altura: ")
+                    Text("Altura")
                     Spacer()
                     Text(String(format: "%.2f", APatient.height))
                         .opacity(0.8)
@@ -35,7 +35,7 @@ struct MedicalDataView: View {
                 }
                 
                 HStack {
-                    Text("Peso: ")
+                    Text("Peso")
                     Spacer()
                     Text(String(format: "%.1f", APatient.weight))
                         .opacity(0.8)
@@ -44,14 +44,14 @@ struct MedicalDataView: View {
                 }
                 
                 HStack {
-                    Text("Medicina: ")
+                    Text("Medicina")
                     Spacer()
                     Text("\(APatient.medicine)")
                         .opacity(0.8)
                 }
                 
                 HStack {
-                    Text("Antecedentes: ")
+                    Text("Antecedentes")
                     Spacer()
                     Text("\(APatient.medicalBackground)")
                         .opacity(0.8)
