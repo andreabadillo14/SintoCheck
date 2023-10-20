@@ -10,6 +10,11 @@ import SwiftUI
 struct ProfileView: View {
     @State var name = "Hermenegildo Pérez"
     @State var phoneNumber = "81-1254-0017"
+
+    var patients = [
+        Patient(id: UUID(), birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
+    ]
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -31,8 +36,8 @@ struct ProfileView: View {
                     Spacer()
                     
                     Section {
-                        List {
-                            NavigationLink(destination: MedicalDataView()) {
+                        List(patients) { patient in
+                            NavigationLink(destination: MedicalDataView(APatient: patient)) {
                                 Text("Detalles personales médicos")
                             }
                             NavigationLink(destination: HealthDataDetails()) {
@@ -44,7 +49,7 @@ struct ProfileView: View {
                     }
                     Section {
                         List {
-                            NavigationLink(destination: MedicalDataView()) {
+                            NavigationLink(destination: HealthDataDetails()) {
                                 Text("Detalles de médico")
                             }
                             
@@ -54,7 +59,7 @@ struct ProfileView: View {
                     
                     Section {
                         List {
-                            NavigationLink(destination: MedicalDataView()) {
+                            NavigationLink(destination: HealthDataDetails()) {
                                 Text("Enlazar a un médico")
                             }
                             
