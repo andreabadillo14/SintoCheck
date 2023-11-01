@@ -61,6 +61,8 @@ struct MedicalDataView: View {
     }
 }
 
-#Preview {
-    MedicalDataView(APatient: Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1934-04-23", height: 1.65, weight: 0, medicine: "no", medicalBackground: "no"))
+struct MedicalDataView_Previews: PreviewProvider {
+    static var previews: some View {
+        MedicalDataView(APatient: Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1934-04-23", height: 1.65, weight: 0, medicine: "no", medicalBackground: "no"))
+    }
 }
