@@ -1,21 +1,20 @@
 //
-//  DoctorDetailsView.swift
+//  LoginView.swift
 //  SintoCheck
 //
-//  Created by Andrea Badillo on 10/20/23.
+//  Created by Alumno on 23/10/23.
 //
 
 import SwiftUI
 
-struct DoctorDetailsView: View {
+struct LoginView: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct DoctorDetailsView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        DoctorDetailsView()
+        LoginView()
     }
 }
-

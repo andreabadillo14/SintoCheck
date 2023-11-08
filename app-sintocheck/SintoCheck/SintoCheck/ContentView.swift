@@ -22,10 +22,10 @@ struct ContentView: View {
                         .tag(0)
                     
                     AddHealthDataView()
-                        .tabItem {
-                            Image(systemName: "plus")
-                            Text("Añadir registro")
-                        }
+                    .tabItem {
+                        Image(systemName: "plus")
+                        Text("Añadir registro")
+                    }
                         .tag(1)
                     
                     SettingsView()

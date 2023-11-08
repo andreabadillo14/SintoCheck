@@ -19,6 +19,8 @@
 		6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */; };
 		6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */; };
 		6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9D4B12AE06E7700740DFF /* HealthData.swift */; };
+		FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */; };
+		FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataDetails.swift; sourceTree = "<group>"; };
 		6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDataView.swift; sourceTree = "<group>"; };
 		6EB9D4B12AE06E7700740DFF /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
+		FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,8 @@
 				6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */,
 				6E5219BB2ADF6D3800220B6E /* SettingsView.swift */,
 				6E5219BD2ADF6D5000220B6E /* AddHealthDataView.swift */,
+				FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */,
+				FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */,
 				6E5219AF2ADF6CFB00220B6E /* Assets.xcassets */,
 				6E5219B12ADF6CFB00220B6E /* Preview Content */,
 			);
@@ -169,6 +175,8 @@
 				6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */,
 				6E5219BE2ADF6D5000220B6E /* AddHealthDataView.swift in Sources */,
 				6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */,
+				FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */,
+				FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */,
 				6E5219AC2ADF6CFA00220B6E /* SintoCheckApp.swift in Sources */,
 				6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */,
 			);
