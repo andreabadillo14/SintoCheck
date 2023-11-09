@@ -19,6 +19,10 @@
 		6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */; };
 		6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */; };
 		6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9D4B12AE06E7700740DFF /* HealthData.swift */; };
+		9E3956F02AFD8E5800BE4298 /* DoctorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3956EF2AFD8E5800BE4298 /* DoctorDetails.swift */; };
+		9E3956F32AFD8ECB00BE4298 /* InfoDoctor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3956F22AFD8ECB00BE4298 /* InfoDoctor.swift */; };
+		9E3956F52AFD902C00BE4298 /* MedicalLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3956F42AFD902C00BE4298 /* MedicalLinkView.swift */; };
+		9E3956F72AFD92E500BE4298 /* addNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E3956F62AFD92E500BE4298 /* addNote.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,10 @@
 		6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataDetails.swift; sourceTree = "<group>"; };
 		6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDataView.swift; sourceTree = "<group>"; };
 		6EB9D4B12AE06E7700740DFF /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
+		9E3956EF2AFD8E5800BE4298 /* DoctorDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetails.swift; sourceTree = "<group>"; };
+		9E3956F22AFD8ECB00BE4298 /* InfoDoctor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDoctor.swift; sourceTree = "<group>"; };
+		9E3956F42AFD902C00BE4298 /* MedicalLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalLinkView.swift; sourceTree = "<group>"; };
+		9E3956F62AFD92E500BE4298 /* addNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNote.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,12 +78,16 @@
 				6E5219AB2ADF6CFA00220B6E /* SintoCheckApp.swift */,
 				6E5219AD2ADF6CFA00220B6E /* ContentView.swift */,
 				6E5219B92ADF6D1900220B6E /* ProfileView.swift */,
+				9E3956F62AFD92E500BE4298 /* addNote.swift */,
 				6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */,
 				6E41DA712AE21E1500BC3ECD /* Patient.swift */,
+				9E3956F42AFD902C00BE4298 /* MedicalLinkView.swift */,
 				6EB9D4B12AE06E7700740DFF /* HealthData.swift */,
 				6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */,
+				9E3956F12AFD8EB100BE4298 /* ViewsUtilidad */,
 				6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */,
 				6E5219BB2ADF6D3800220B6E /* SettingsView.swift */,
+				9E3956EF2AFD8E5800BE4298 /* DoctorDetails.swift */,
 				6E5219BD2ADF6D5000220B6E /* AddHealthDataView.swift */,
 				6E5219AF2ADF6CFB00220B6E /* Assets.xcassets */,
 				6E5219B12ADF6CFB00220B6E /* Preview Content */,
@@ -89,6 +101,14 @@
 				6E5219B22ADF6CFB00220B6E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		9E3956F12AFD8EB100BE4298 /* ViewsUtilidad */ = {
+			isa = PBXGroup;
+			children = (
+				9E3956F22AFD8ECB00BE4298 /* InfoDoctor.swift */,
+			);
+			path = ViewsUtilidad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,14 +182,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E5219AE2ADF6CFA00220B6E /* ContentView.swift in Sources */,
+				9E3956F72AFD92E500BE4298 /* addNote.swift in Sources */,
 				6E5219BC2ADF6D3800220B6E /* SettingsView.swift in Sources */,
 				6E41CFC22AE2F823007BD83B /* DoctorDetailsView.swift in Sources */,
+				9E3956F52AFD902C00BE4298 /* MedicalLinkView.swift in Sources */,
 				6E41DA722AE21E1500BC3ECD /* Patient.swift in Sources */,
 				6E5219BA2ADF6D1900220B6E /* ProfileView.swift in Sources */,
 				6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */,
+				9E3956F32AFD8ECB00BE4298 /* InfoDoctor.swift in Sources */,
 				6E5219BE2ADF6D5000220B6E /* AddHealthDataView.swift in Sources */,
 				6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */,
 				6E5219AC2ADF6CFA00220B6E /* SintoCheckApp.swift in Sources */,
+				9E3956F02AFD8E5800BE4298 /* DoctorDetails.swift in Sources */,
 				6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,6 +328,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SintoCheck/Preview Content\"";
+				DEVELOPMENT_TEAM = KRKLSWBZVJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -332,6 +357,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SintoCheck/Preview Content\"";
+				DEVELOPMENT_TEAM = KRKLSWBZVJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

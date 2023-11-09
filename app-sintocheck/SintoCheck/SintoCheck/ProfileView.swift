@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     @State var name = "Hermenegildo Pérez"
     @State var phoneNumber = "81-1254-0017"
+    @State var seRegistroDoctor = false
+    @State var mensajeEnlace = ""
 
     var patients = [
         Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
@@ -59,7 +61,7 @@ struct ProfileView: View {
                     
                     Section {
                         List {
-                            NavigationLink(destination: HealthDataDetails()) {
+                            NavigationLink(destination: MedicalLinkView(exito: $seRegistroDoctor, mensajeLink: $mensajeEnlace)) {
                                 Text("Enlazar a un médico")
                             }
                             
@@ -79,6 +81,7 @@ struct ProfileView: View {
             
             .background(Color.clear)
             //.navigationTitle("Mi perfil")
+            .alert("\(mensajeEnlace)", isPresented: $seRegistroDoctor, actions: {})
             
         }
         
