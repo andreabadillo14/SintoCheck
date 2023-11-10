@@ -7,7 +7,8 @@
 
 import Foundation
 
-class PersonalizedHealthDataRequest : Codable {
+class PersonalizedHealthDataRequest : Codable, Identifiable {
+    var id : UUID = UUID()
     var name: String
     var quantitative: Bool
     var patientId: Int
@@ -15,7 +16,8 @@ class PersonalizedHealthDataRequest : Codable {
     var rangeMax: Double
     var unit: String
     
-    init(name: String, quantitative: Bool, patientId: Int, rangeMin: Double, rangeMax: Double, unit: String) {
+    init(id: UUID, name: String, quantitative: Bool, patientId: Int, rangeMin: Double, rangeMax: Double, unit: String) {
+        self.id = id
         self.name = name
         self.quantitative = quantitative
         self.patientId = patientId
