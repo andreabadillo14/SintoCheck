@@ -9,9 +9,9 @@ import SwiftUI
 
 struct InfoDoctor: View {
     let name: String
-    let lastname: String
     //supongo que posicion de medicina
-    let medicine: String
+    //este valor no viene del API entonces no estoy seguro de que hacer con el ahora, tal vez switch case de si es un doctor o algo asi? o cambiar el api y ya
+    let medicine: String = "Placeholder"
     //especialidad
     let medicalBackground: String
     //agrego numero de telefono porque creo que falta pero tal vez lo quitaron, string porque tal vez tiene +52 o algo raro.
@@ -29,7 +29,7 @@ struct InfoDoctor: View {
                 Text(medicine)
                     .foregroundColor(Color.gray)
                     .font(.system(size: 14))
-                Text("\(name) \(lastname)")
+                Text("\(name)")
                 HStack {
                     Text(phoneNumber)
                     Image(systemName: "phone.fill")
@@ -51,5 +51,5 @@ struct InfoDoctor: View {
 }
 
 #Preview {
-    InfoDoctor(name: "Astrid", lastname: "Serna", medicine: "Doctora", medicalBackground: "Cardiología", phoneNumber: "81-1254-0017")
+    InfoDoctor(name: "Astrid", medicalBackground: "Cardiología", phoneNumber: "81-1254-0017")
 }
