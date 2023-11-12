@@ -28,7 +28,7 @@ struct RegisterView: View {
                     Text("Confirmacion Contraseña")
                     TextField("Confirmacion de contraseña", text: $confContraseña)
                         .textFieldStyle(.roundedBorder)
-                    Button("Registrarme"){
+                    Button("Registrar"){
                     }
                     .padding()
                     .background(Color.red)
