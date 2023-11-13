@@ -15,6 +15,7 @@ struct Note: Codable, Identifiable {
     let content: String
 }
 
+//estoy seguro que todos estos requests se pueden manejar como una sola funcion en lugar de estar haciendo copy paste como lo hago, pero no se como tomar el tipo de dato como parametro entonces por ahora lo hago asi.
 func addNoteAPI(title: String, content: String, completion: @escaping (Note?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
     guard let url = URL(string: "https://sintocheck-backend.vercel.app/note") else {return}
@@ -56,6 +57,7 @@ func addNoteAPI(title: String, content: String, completion: @escaping (Note?) ->
         }
     }.resume()
 }
+
 
 struct addNote: View {
     @State var titulo = ""
