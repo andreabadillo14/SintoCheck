@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
      @State var phone = ""
      @State var pass = ""
+    @State var mostrarRegistro = false
      let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
     
@@ -18,7 +19,7 @@ struct LoginView: View {
             Image("Logo")
                 .frame(width: 100, height: 150)
             Text("Iniciar Sesion")
-                .font(.title)
+                .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
                 .padding(.top, 35)
@@ -51,10 +52,13 @@ struct LoginView: View {
             HStack{
                 Text("No tienes una cuenta?")
                 Button(action: {
-                    
+                    mostrarRegistro = true
                 }){
                     Text("Registrarme")
                         .foregroundColor(azul)
+                }
+                .fullScreenCover(isPresented: $mostrarRegistro){
+                    RegisterView()
                 }
             }
             .padding(.top, 15)
