@@ -61,7 +61,7 @@ struct ProfileView: View {
                         
                         Section {
                             List {
-                                NavigationLink(destination: HealthDataDetails()) {
+                                NavigationLink(destination: DoctorDetailsView()) {
                                     Text("Enlazar a un médico")
                                 }
                                 
