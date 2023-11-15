@@ -63,6 +63,7 @@ struct ProfileView: View {
                             }
                             .padding(.leading)
                             
+                            
                         }
                         Spacer()
                         
@@ -102,6 +103,7 @@ struct ProfileView: View {
                         Spacer()
                     }
                     .padding()
+                    
                     // 124,152,159
                     .navigationTitle("Mi perfil")
                     //.foregroundColor(Color(red: 124/255, green: 152/255, blue: 159/255))
