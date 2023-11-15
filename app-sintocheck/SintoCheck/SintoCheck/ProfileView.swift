@@ -50,6 +50,12 @@ struct ProfileView: View {
                     .ignoresSafeArea()
                 VStack {
                     VStack {
+                        Text("Mi perfil")
+                            .bold()
+                            .font(.largeTitle)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            
                         HStack(alignment: .center) {
                             Image(systemName: "person.circle.fill")
                                 .resizable()
@@ -105,7 +111,7 @@ struct ProfileView: View {
                     .padding()
                     
                     // 124,152,159
-                    .navigationTitle("Mi perfil")
+                    //.navigationTitle("Mi perfil")
                     //.foregroundColor(Color(red: 124/255, green: 152/255, blue: 159/255))
                     
                 }
