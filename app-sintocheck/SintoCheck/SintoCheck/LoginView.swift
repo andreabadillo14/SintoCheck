@@ -46,7 +46,7 @@ struct LoginView: View {
                     .padding(.vertical)
                     .frame(width: UIScreen.main.bounds.width - 50)
             }
-            .background(Color(red: 148/255, green: 28/255, blue: 47/255))
+            .background(azul)
             .cornerRadius(10)
             .padding(.top, 25)
             HStack{
