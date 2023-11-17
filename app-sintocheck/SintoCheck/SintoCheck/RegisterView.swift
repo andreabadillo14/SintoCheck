@@ -20,6 +20,7 @@ struct RegisterView: View {
     
     let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
+    
     var body: some View {
         VStack (spacing: 0){
             Image("Logo")
@@ -84,7 +85,7 @@ struct RegisterView: View {
             .alert("Por favor llena todos los datos", isPresented : $missingData, actions: {})
             .alert("Las contraseñas no coinciden", isPresented : $unmatchedPasswords, actions: {})
             .fullScreenCover(isPresented: $mostrarDatosAdicionales){
-                RegisterOptionalDataView(nombre : nombre, phone : phone, pass : pass, ConfirmPass : ConfirmPass)
+                RegisterOptionalDataView(heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: nombre, phone: phone, pass: pass, ConfirmPass: pass)
                 }
             .background(azul)
             .cornerRadius(10)

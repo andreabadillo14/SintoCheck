@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct RegisterOptionalDataView: View {
-    @State var birthDate = Date()
-    @State var height = ""
-    @State var weight = ""
-    @State var medicine = ""
-    @State var background = ""
+    @State var birthDate : Date = Date()
+    @State var heightS : String
+    @State var weightS : String
+    @State var height : Float
+    @State var weight : Float
+    @State var medicine : String
+    @State var background : String
     @State var mostrarRegistro = false
     
     var nombre : String
@@ -22,6 +24,20 @@ struct RegisterOptionalDataView: View {
     
     let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
+    
+    func postSignUp() async {
+        guard let url = URL(string: "https://sintocheck-backend.vercel.app/signup/patient") else { fatalError("Invalid URL") }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        
+        /* let parameters = ["name": nombre, "phone": phone, "password": pass, "birthdate": birthDate, "height": height, "weight": weight, "medicine": medicine, "medicalBackground": background]
+        do{
+            urlRequest.httpBody = try JSONEncoder().encode(parameters)
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        } */
+    }
+    
     var body: some View {
             VStack (spacing: 0){
                 HStack{
@@ -61,10 +77,10 @@ struct RegisterOptionalDataView: View {
                             .padding(.top, 25)
                             .padding(.bottom, 15)
                         HStack{
-                            TextField("Estatura", text: $height)
+                            TextField("Estatura", text: $heightS)
                                 .frame(height: 5)
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 4).stroke(height != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
+                                .background(RoundedRectangle(cornerRadius: 4).stroke(heightS != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                                 .keyboardType(.numberPad)
                             Text("m")
                         }
@@ -74,10 +90,10 @@ struct RegisterOptionalDataView: View {
                             .padding(.top, 25)
                             .padding(.bottom, 15)
                         HStack{
-                            TextField("Peso", text: $weight)
+                            TextField("Peso", text: $weightS)
                                 .frame(height: 5)
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 4).stroke(weight != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
+                                .background(RoundedRectangle(cornerRadius: 4).stroke(weightS != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                                 .keyboardType(.numberPad)
                             Text("kg")
                         }
@@ -114,6 +130,6 @@ struct RegisterOptionalDataView: View {
 
 struct RegisterOptionalData_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterOptionalDataView(nombre : "", phone : "", pass : "", ConfirmPass : "")
+        RegisterOptionalDataView(heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: "", phone: "", pass: "", ConfirmPass: "")
     }
 }
