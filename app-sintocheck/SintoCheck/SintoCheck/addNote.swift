@@ -101,6 +101,8 @@ struct addNote: View {
                 
                 
             
+        }.onTapGesture {
+            UIApplication.shared.endEditing()
         }
         
     }

@@ -97,7 +97,14 @@ struct MedicalLinkView: View {
                 Spacer()
             }
             .navigationTitle("Enlace con su medico")
+        }.onTapGesture {
+            UIApplication.shared.endEditing()
         }
+    }
+}
+extension UIApplication {
+    func endEditing() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
 
