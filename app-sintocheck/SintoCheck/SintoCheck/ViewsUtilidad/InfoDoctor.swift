@@ -11,7 +11,7 @@ struct InfoDoctor: View {
     let name: String
     //supongo que posicion de medicina
     //este valor no viene del API entonces no estoy seguro de que hacer con el ahora, tal vez switch case de si es un doctor o algo asi? o cambiar el api y ya
-    let medicine: String = "Placeholder"
+    let medicine: String = "Medico"
     //especialidad
     let medicalBackground: String
     //agrego numero de telefono porque creo que falta pero tal vez lo quitaron, string porque tal vez tiene +52 o algo raro.

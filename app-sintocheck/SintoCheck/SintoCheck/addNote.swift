@@ -66,6 +66,7 @@ struct addNote: View {
     var body: some View {
         VStack {
             Spacer()
+            Spacer()
             HStack {
                 //cambiar tipografia de titulo
                 Text("Titulo: ")
@@ -77,10 +78,18 @@ struct addNote: View {
             Text("Contenido:")
 
                 //tal vez ponerle algo como overlay para que se vea mejor.
-            TextField("Introducir el contenido de tu nota", text: $contenido, axis: .vertical)
-    //                .textFieldStyle(MyTextFieldStyle())
-                .textFieldStyle(.roundedBorder)
-                .padding(.horizontal, 20)
+//            TextField("Introducir el contenido de tu nota", text: $contenido, axis: .vertical)
+//    //                .textFieldStyle(MyTextFieldStyle())
+//                .textFieldStyle(.roundedBorder)
+//                .padding(.horizontal, 20)
+                TextEditor(text: $contenido)
+                    .frame(height:150)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.black, lineWidth: 2))
+//                    .foregroundColor(.red)
+                    .padding()
+                
+            
             Spacer()
             Button {
                 addNoteAPI(title: titulo, content: contenido) { note in

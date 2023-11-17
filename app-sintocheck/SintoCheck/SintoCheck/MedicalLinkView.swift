@@ -11,7 +11,7 @@ import SwiftUI
 
 func makeLink(doctorCodigo: String, completion: @escaping (Doctor?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
-    guard let url = URL(string: "http://localhost:3000/doctorPatientRelationship") else {return}
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
     request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGVhMDlmZDlmYjc5MWI0YjdmMDg3YyIsIm5hbWUiOiJQYWNpZW50ZSBDZXJvIiwicGhvbmUiOiIwOTg3NjU0MzIxIiwiaWF0IjoxNjk5NjUxODE4LCJleHAiOjE3MDA4NjE0MTh9.Z_WvGy2TCsvFr9_eW_V3ModNnupaUr1_B9QtNG7I97A", forHTTPHeaderField: "Authorization")
