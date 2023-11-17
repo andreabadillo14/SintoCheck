@@ -8,11 +8,54 @@
 import SwiftUI
 
 struct LoginView: View {
-     @State var phone = ""
-     @State var pass = ""
+    @State var phone = ""
+    @State var pass = ""
     @State var mostrarRegistro = false
-     let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
+    
+    @State private var showAlert = false
+    @State private var loginSuccessful = false 
+    
+    let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
+    
+    func postLogin() async {
+           guard let url = URL(string: "https://sintocheck-backend.vercel.app/login/patient") else { fatalError("Invalid URL") }
+
+           var urlRequest = URLRequest(url: url)
+           urlRequest.httpMethod = "POST"
+
+           let parameters = ["phone": phone, "password": pass]
+           do {
+               urlRequest.httpBody = try JSONEncoder().encode(parameters)
+               urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+           } catch {
+               print("Error: \(error)")
+           }
+
+           do {
+               let (data, response) = try await URLSession.shared.data(for: urlRequest)
+               guard let httpResponse = response as? HTTPURLResponse else { fatalError("Error while fetching data") }
+
+               if httpResponse.statusCode == 200 {
+                   let patientData = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
+                   // Handle the decoded data as needed
+                   self.loginSuccessful = true
+                   
+                   // Store information in sandbox
+                   let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("loginResponse", conformingTo: .json)
+                   try? data.write(to: fileURL)
+                   
+               } else {
+                   // If the login fails, show an alert
+                   self.showAlert = true
+               }
+           } catch {
+               print("Error: \(error)")
+               // If there's an error, show an alert
+               self.showAlert = true
+           }
+       }
+
     
     var body: some View {
         VStack (spacing: 0){
@@ -39,7 +82,9 @@ struct LoginView: View {
                 .background(RoundedRectangle(cornerRadius: 4).stroke(pass != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                 .padding(.bottom, 25)
             Button(action: {
-                
+                Task {
+                    await postLogin()
+                }
             }){
                 Text("Iniciar Sesion")
                     .foregroundColor(.white)
@@ -49,6 +94,12 @@ struct LoginView: View {
             .background(azul)
             .cornerRadius(10)
             .padding(.top, 25)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Error"), message: Text("Telefono o Contraseña Incorrecta"), dismissButton: .default(Text("Entendido")))
+            }
+            .fullScreenCover(isPresented: $loginSuccessful) {
+                ContentView()
+            }
             HStack{
                 Text("No tienes una cuenta?")
                 Button(action: {

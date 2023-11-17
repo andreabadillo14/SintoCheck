@@ -54,6 +54,7 @@ struct RegisterOptionalDataView: View {
                 DatePicker("Fecha de Nacimiento", selection: $birthDate, displayedComponents: .date)
                     .datePickerStyle(CompactDatePickerStyle())
                     .padding(.top, 25)
+                
                 HStack{
                     VStack{
                         Text("Estatura")

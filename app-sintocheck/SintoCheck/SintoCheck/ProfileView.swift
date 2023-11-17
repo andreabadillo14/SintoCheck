@@ -8,12 +8,57 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var name = "Hermenegildo Pérez"
-    @State var phoneNumber = "81-1254-0017"
+    @State var patientData : AuthenticationResponse?
 
-    var patients = [
+     var patients = [
         Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
     ]
+    
+    enum FileReaderError: Error {
+        case fileNotFound
+        case fileReadError
+    }
+    
+    func getPatientData() throws -> AuthenticationResponse {
+        // Retrieve the file URL
+        let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+        // Check if the file exists
+        let fileManager = FileManager.default
+        
+        if !fileManager.fileExists(atPath: fileURL.path) {
+            // File does not exist, handle this case accordingly
+            fatalError("Could not find login response file")
+        }
+
+        // Read the file contents
+        if let data = fileManager.contents(atPath: fileURL.path) {
+            // Decode the JSON data into a PatientSignupResponse object
+            let decodedData = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
+            return decodedData
+        } else {
+            // Handle the error if the file cannot be read
+            //fatalError("Error reading login response file")
+            
+            throw FileReaderError.fileNotFound        }
+    }
+
+    func handlePatientData() {
+           do {
+            patientData = try getPatientData()
+           } catch let error as FileReaderError {
+               switch error {
+               case .fileNotFound:
+                   print("File not found")
+               case .fileReadError:
+                   print("Error reading file")
+               }
+           } catch {
+               print("An unknown error occurred: \(error)")
+           }
+       }
+
     
     var body: some View {
         NavigationView {
@@ -26,12 +71,15 @@ struct ProfileView: View {
                             .frame(width: 90)
                             .padding(.leading, -60)
                         
-                        VStack(alignment: .leading) { // esto sigue hardcordeado
-                            Text("\(name)")
-                            Text("\(phoneNumber)")
+                        VStack(alignment: .leading) {
+                            if let patientData = patientData {
+                                Text("\(patientData.name)")
+                                Text("\(patientData.phone)")
+                            } else {
+                                Text("Cargando...")
+                            }
                         }
                         .padding(.leading)
-                        
                     }
                     Spacer()
                     
@@ -77,6 +125,9 @@ struct ProfileView: View {
                 
             }
             
+            .onAppear {
+                handlePatientData()
+            }
             .background(Color.clear)
             //.navigationTitle("Mi perfil")
             
