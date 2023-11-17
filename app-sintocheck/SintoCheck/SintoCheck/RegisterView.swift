@@ -12,10 +12,12 @@ struct RegisterView: View {
     @State var phone = ""
     @State var pass = ""
     @State var ConfirmPass = ""
+    
     @State var mostrarLogin = false
     @State var mostrarDatosAdicionales = false
     @State var missingData = false
     @State var unmatchedPasswords = false
+    
     let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
     var body: some View {
@@ -58,7 +60,7 @@ struct RegisterView: View {
             SecureField("Contraseña", text: $ConfirmPass)
                 .frame(height: 5)
                 .padding()
-                .background(RoundedRectangle(cornerRadius: 4).stroke(pass != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
+                .background(RoundedRectangle(cornerRadius: 4).stroke(ConfirmPass != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                 .padding(.bottom, 25)
             Button(action: {
                 
@@ -82,7 +84,7 @@ struct RegisterView: View {
             .alert("Por favor llena todos los datos", isPresented : $missingData, actions: {})
             .alert("Las contraseñas no coinciden", isPresented : $unmatchedPasswords, actions: {})
             .fullScreenCover(isPresented: $mostrarDatosAdicionales){
-                    RegisterOptionalDataView()
+                RegisterOptionalDataView(nombre : nombre, phone : phone, pass : pass, ConfirmPass : ConfirmPass)
                 }
             .background(azul)
             .cornerRadius(10)

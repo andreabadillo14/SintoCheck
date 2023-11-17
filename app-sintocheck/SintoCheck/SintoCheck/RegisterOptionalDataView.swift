@@ -15,6 +15,11 @@ struct RegisterOptionalDataView: View {
     @State var background = ""
     @State var mostrarRegistro = false
     
+    var nombre : String
+    var phone : String
+    var pass : String
+    var ConfirmPass : String
+    
     let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
     var body: some View {
@@ -28,13 +33,15 @@ struct RegisterOptionalDataView: View {
                             .foregroundColor(azul)
                     }
                     .fullScreenCover(isPresented: $mostrarRegistro){
-                        RegisterView()
+                        RegisterView(nombre: nombre, phone: phone, pass: pass, ConfirmPass : ConfirmPass)
                     }
                     .foregroundColor(azul)
                     Spacer()
                 }
-                Image("Logo")
-                    .frame(width: 100, height: 150)
+                Image("Logo Chiquito")
+                    //.resizable()
+                    .frame(width: 200, height: 200)
+                    //.padding(.bottom, 20)
                 Text("Registro")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -99,7 +106,6 @@ struct RegisterOptionalDataView: View {
                 }
                 .background(azul)
                 .cornerRadius(10)
-                .padding(.top, 25)
             }
             .padding(.horizontal, 25)
         }
@@ -107,6 +113,6 @@ struct RegisterOptionalDataView: View {
 
 struct RegisterOptionalData_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterOptionalDataView()
+        RegisterOptionalDataView(nombre : "", phone : "", pass : "", ConfirmPass : "")
     }
 }
