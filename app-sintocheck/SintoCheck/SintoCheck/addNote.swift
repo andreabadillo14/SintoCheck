@@ -70,14 +70,15 @@ struct addNote: View {
             HStack {
                 //cambiar tipografia de titulo
                 Text("Titulo: ")
+                    .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
                 TextField("titulo", text: $titulo)
                     .textFieldStyle(.roundedBorder)
             }.padding(.horizontal, 20)
             
             Spacer()
             Text("Contenido:")
+                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
 
-                //tal vez ponerle algo como overlay para que se vea mejor.
 //            TextField("Introducir el contenido de tu nota", text: $contenido, axis: .vertical)
 //    //                .textFieldStyle(MyTextFieldStyle())
 //                .textFieldStyle(.roundedBorder)
@@ -98,9 +99,9 @@ struct addNote: View {
             } label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .foregroundColor(Color.blue)
+                        .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                     Text("Registrar Nota")
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         .bold()
                 }
             }

@@ -19,7 +19,7 @@ func makeLink(doctorCodigo: String, completion: @escaping (Doctor?) -> Void) {
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     let bodyData = [
         //tomar doctorId como parametro a la funcion
-        "doctorCodigo" : doctorCodigo,
+        "doctorCode" : doctorCodigo,
         "patientId" : "654ea09fd9fb791b4b7f087c"
     ]
     do {
@@ -81,7 +81,7 @@ struct MedicalLinkView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height:50)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         HStack {
                             TextField("A", text: $Strings[0])
                                 .focused($focusedField, equals: .field1)
@@ -96,6 +96,9 @@ struct MedicalLinkView: View {
                             
                                 .frame(width:20)
                                 .font(.system(size: 36))
+                                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
+                            //color blanco Color(red: 236/255, green: 239/255, blue: 235/255)
+                            //color negro Color(red: 48/255, green: 48/255, blue: 48/255)
     //                            .background(Color.red)
                         }.padding(.trailing, 3)
                         
@@ -106,7 +109,7 @@ struct MedicalLinkView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height:50)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         HStack {
                             TextField("B", text: $Strings[1])
                                 .focused($focusedField, equals: .field2)
@@ -120,6 +123,7 @@ struct MedicalLinkView: View {
                                             }
                                 .frame(width:20)
                                 .font(.system(size: 36))
+                                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
                         }.padding(.trailing, 3)
                         
                         
@@ -127,7 +131,7 @@ struct MedicalLinkView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height:50)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         HStack {
                             TextField("C", text: $Strings[2])
                                 .focused($focusedField, equals: .field3)
@@ -141,6 +145,7 @@ struct MedicalLinkView: View {
                                             }
                                 .frame(width:20)
                                 .font(.system(size: 36))
+                                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
                         }.padding(.trailing, 3)
                         
                         
@@ -149,7 +154,7 @@ struct MedicalLinkView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height:50)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         HStack {
                             TextField("D", text: $Strings[3])
                                 .focused($focusedField, equals: .field4)
@@ -163,6 +168,7 @@ struct MedicalLinkView: View {
                                             }
                                 .frame(width:20)
                                 .font(.system(size: 36))
+                                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
                         }.padding(.trailing, 3)
                         
                         
@@ -170,7 +176,7 @@ struct MedicalLinkView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height:50)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         HStack {
                             TextField("E", text: $Strings[4])
                                 .focused($focusedField, equals: .field5)
@@ -184,6 +190,7 @@ struct MedicalLinkView: View {
                                             }
                                 .frame(width:20)
                                 .font(.system(size: 36))
+                                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
                         }.padding(.trailing, 3)
                         
                         
@@ -191,7 +198,7 @@ struct MedicalLinkView: View {
                     ZStack {
                         RoundedRectangle(cornerRadius: 10)
                             .frame(height:50)
-                            .foregroundColor(Color.gray)
+                            .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                         HStack {
                             TextField("F", text: $Strings[5])
                                 .focused($focusedField, equals: .field6)
@@ -205,6 +212,7 @@ struct MedicalLinkView: View {
                                             }
                                 .frame(width:20)
                                 .font(.system(size: 36))
+                                .foregroundColor(Color(red: 48/255, green: 48/255, blue: 48/255))
                         }.padding(.trailing, 3)
                     }
                     
@@ -230,9 +238,9 @@ struct MedicalLinkView: View {
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color.blue)
+                                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                             Text("Registrar doctor")
-                                .foregroundColor(Color.white)
+                                .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
                                 .bold()
                         }
                     }
