@@ -67,7 +67,7 @@ struct ProfileView: View {
                                     Text("Detalles de médico")
                                 }
                                 NavigationLink(destination: DoctorDetailsView()) {
-                                    Image(systemName: "paperplane.circle.fill")
+                                    Image(systemName: "person.crop.circle.badge.plus")
                                         .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                     Text("Enlazar a un médico")
                                 }
