@@ -13,36 +13,6 @@ struct ProfileView: View {
         PatientSignupRequest(id: UUID(), name: "Hermenegildo Perez", phone: "81-1234-1234", password: "mundo", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
     ]
     
-//    func getMedicalData() async {
-//        guard let url = URL(string: "https://sintocheck-backend.vercel.app/login/patient") else { fatalError("Error") }
-//        
-//        // Create the request with the URL
-//        var urlRequest = URLRequest(url: url)
-//        
-//        // Specify the HTTP method
-//        urlRequest.httpMethod = "POST"
-//        
-//        // Create the JSON data with the phone and password parameters
-//        let jsonData = try? JSONSerialization.data(withJSONObject: ["phone": "0123456789", "password": "mundo"])
-//        
-//        // Set the HTTP body with the JSON data
-//        urlRequest.httpBody = jsonData
-//        
-//        do {
-//            // Use async/await to perform the network request
-//            let (data, _) = try await URLSession.shared.data(for: urlRequest)
-//            
-////            guard (response as? HTTPURLResponse)?.statusCode == 200 else { fatalError("Error while fetching data") }
-//            
-//            let decodedData = try JSONDecoder().decode(PatientSignupRequest.self, from: data)
-//            
-//            // Handle the decoded data as needed
-//        } catch {
-//            print("Error: \(error)")
-//        }
-//    }
-    
-    
     var body: some View {
         NavigationView {
             ZStack {
@@ -60,7 +30,7 @@ struct ProfileView: View {
                             Image(systemName: "person.circle.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 90)
+                                .frame(width: 73)
                                 .padding(.leading, -60)
                             
                             VStack(alignment: .leading) { // esto sigue hardcordeado
@@ -76,9 +46,13 @@ struct ProfileView: View {
                         Section {
                             List(patients) { patient in
                                 NavigationLink(destination: MedicalDataView(APatient: patient)) {
+                                    Image(systemName: "aqi.medium")
+                                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                     Text("Detalles personales médicos")
                                 }
                                 NavigationLink(destination: HealthDataDetails()) {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                     Text("Detalles de datos de salud")
                                 }
 
@@ -88,21 +62,48 @@ struct ProfileView: View {
                         Section {
                             List {
                                 NavigationLink(destination: DoctorDetailsView()) {
+                                    Image(systemName: "book.pages")
+                                        .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                     Text("Detalles de médico")
+                                }
+                                NavigationLink(destination: DoctorDetailsView()) {
+                                    Image(systemName: "paperplane.circle.fill")
+                                        .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                    Text("Enlazar a un médico")
                                 }
                                 
                             }
                             
                         }
                         
-                        Section {
-                            List {
-                                NavigationLink(destination: DoctorDetailsView()) {
-                                    Text("Enlazar a un médico")
-                                }
-                                
-                            }
-                        }
+//                        Section {
+//                            List {
+//                                
+//                                
+//                            }
+//                        }
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()        
                         Spacer()
                         Spacer()
                         Spacer()
