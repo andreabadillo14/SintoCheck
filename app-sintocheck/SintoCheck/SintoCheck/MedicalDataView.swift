@@ -10,7 +10,6 @@ import SwiftUI
 struct MedicalDataView: View {
     var APatient : Patient
     
-    
     var body: some View {
         Section {
             Text("Detalles Personales Médicos")

@@ -93,8 +93,17 @@ struct addNote: View {
             
             Spacer()
             Button {
-                addNoteAPI(title: titulo, content: contenido) { note in
-                    self.note = note
+                if (titulo != "" && contenido != "") {
+                    addNoteAPI(title: titulo, content: contenido) { note in
+                        self.note = note
+                    }
+                } else {
+                    if (titulo == "") {
+                        
+                    }
+                    if (contenido == "") {
+                        
+                    }
                 }
             } label: {
                 ZStack {
