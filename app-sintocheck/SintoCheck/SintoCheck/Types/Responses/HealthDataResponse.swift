@@ -8,11 +8,21 @@
 import Foundation
 
 class HealthDataResponse: Codable {
-    var id: Int
+    var id: String
     var name: String
     var quantitative: Bool
-    var patientId: Int?
+    var patientId: String?
     var rangeMin: Double
     var rangeMax: Double
     var unit: String
+    
+    init(id: String, name: String, quantitative: Bool, patientId: String? = nil, rangeMin: Double, rangeMax: Double, unit: String) {
+        self.id = id
+        self.name = name
+        self.quantitative = quantitative
+        self.patientId = patientId
+        self.rangeMin = rangeMin
+        self.rangeMax = rangeMax
+        self.unit = unit
+    }
 }

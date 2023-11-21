@@ -8,12 +8,12 @@
 import Foundation
 
 class HealthDataRecordRequest: Codable {
-    var patientId: Int
-    var healthDataId: Int
+    var patientId: String
+    var healthDataId: String
     var value: Double
     var note: String
     
-    init(patientId: Int, healthDataId: Int, value: Double, note: String) {
+    init(patientId: String, healthDataId: String, value: Double, note: String) {
         self.patientId = patientId
         self.healthDataId = healthDataId
         self.value = value
