@@ -31,16 +31,13 @@
 		6E5219BA2ADF6D1900220B6E /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5219B92ADF6D1900220B6E /* ProfileView.swift */; };
 		6E5219BC2ADF6D3800220B6E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5219BB2ADF6D3800220B6E /* SettingsView.swift */; };
 		6E5219BE2ADF6D5000220B6E /* AddHealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5219BD2ADF6D5000220B6E /* AddHealthDataView.swift */; };
-		6E6154922B0C32B3006D7C36 /* PatientSignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6154912B0C32B3006D7C36 /* PatientSignUpRequest.swift */; };
 		6E6154962B0C377E006D7C36 /* SwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6154952B0C377E006D7C36 /* SwitchView.swift */; };
 		6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */; };
 		6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */; };
 		6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9D4B12AE06E7700740DFF /* HealthData.swift */; };
 		FB1793942B019C07006CF12C /* RegisterOptionalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */; };
-		FB6149762B082321003E14AF /* PatientSignupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6149752B082321003E14AF /* PatientSignupResponse.swift */; };
 		FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */; };
 		FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */; };
-		FBB909DA2B080BA800AC276C /* AuthenticationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBB909D92B080BA800AC276C /* AuthenticationResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,16 +66,13 @@
 		6E5219B92ADF6D1900220B6E /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6E5219BB2ADF6D3800220B6E /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6E5219BD2ADF6D5000220B6E /* AddHealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHealthDataView.swift; sourceTree = "<group>"; };
-		6E6154912B0C32B3006D7C36 /* PatientSignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientSignUpRequest.swift; sourceTree = "<group>"; };
 		6E6154952B0C377E006D7C36 /* SwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchView.swift; sourceTree = "<group>"; };
 		6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataDetails.swift; sourceTree = "<group>"; };
 		6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDataView.swift; sourceTree = "<group>"; };
 		6EB9D4B12AE06E7700740DFF /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
 		FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterOptionalDataView.swift; sourceTree = "<group>"; };
-		FB6149752B082321003E14AF /* PatientSignupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientSignupResponse.swift; sourceTree = "<group>"; };
 		FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		FBB909D92B080BA800AC276C /* AuthenticationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +148,6 @@
 				6E5219B92ADF6D1900220B6E /* ProfileView.swift */,
 				6E4B38C02AFDC82700D93CD5 /* Types */,
 				6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */,
-				FB6149752B082321003E14AF /* PatientSignupResponse.swift */,
 				6E41DA712AE21E1500BC3ECD /* Patient.swift */,
 				6EB9D4B12AE06E7700740DFF /* HealthData.swift */,
 				6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */,
@@ -163,10 +156,8 @@
 				6E5219BB2ADF6D3800220B6E /* SettingsView.swift */,
 				6E5219BD2ADF6D5000220B6E /* AddHealthDataView.swift */,
 				FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */,
-				FBB909D92B080BA800AC276C /* AuthenticationResponse.swift */,
 				FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */,
 				FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */,
-				6E6154912B0C32B3006D7C36 /* PatientSignUpRequest.swift */,
 				6E5219AF2ADF6CFB00220B6E /* Assets.xcassets */,
 				6E5219B12ADF6CFB00220B6E /* Preview Content */,
 			);
@@ -254,7 +245,6 @@
 				6E5219AE2ADF6CFA00220B6E /* ContentView.swift in Sources */,
 				6E4B38D52AFDC82700D93CD5 /* HealthDataResponse.swift in Sources */,
 				6E5219BC2ADF6D3800220B6E /* SettingsView.swift in Sources */,
-				FBB909DA2B080BA800AC276C /* AuthenticationResponse.swift in Sources */,
 				6E4B38D62AFDC82700D93CD5 /* DoctorPatientRelationshipResponse.swift in Sources */,
 				6E41CFC22AE2F823007BD83B /* DoctorDetailsView.swift in Sources */,
 				6E41DA722AE21E1500BC3ECD /* Patient.swift in Sources */,
@@ -263,8 +253,6 @@
 				6E6154962B0C377E006D7C36 /* SwitchView.swift in Sources */,
 				FB1793942B019C07006CF12C /* RegisterOptionalDataView.swift in Sources */,
 				6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */,
-				FB6149762B082321003E14AF /* PatientSignupResponse.swift in Sources */,
-				6E6154922B0C32B3006D7C36 /* PatientSignUpRequest.swift in Sources */,
 				6E5219BE2ADF6D5000220B6E /* AddHealthDataView.swift in Sources */,
 				6E4B38D92AFDC82700D93CD5 /* PersonalizedHealthDataRequest.swift in Sources */,
 				6E4B38D12AFDC82700D93CD5 /* PatientSignupResponse.swift in Sources */,
