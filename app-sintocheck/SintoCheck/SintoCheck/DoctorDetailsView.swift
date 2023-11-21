@@ -18,3 +18,4 @@ struct DoctorDetailsView_Previews: PreviewProvider {
         DoctorDetailsView()
     }
 }
+

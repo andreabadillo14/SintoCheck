@@ -8,7 +8,7 @@
 import Foundation
 
 class PatientSignupResponse: Codable {
-    var id: Int
+    var id: String
     var name: String
     var phone: String
     var birthdate: String
