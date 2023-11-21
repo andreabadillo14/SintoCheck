@@ -19,6 +19,11 @@ struct RegisterOptionalDataView: View {
     @State var mostrarRegistro = false
     @State var dateFormatter = DateFormatter()
     @State var registerSuccessful = false
+    @State var showAlert = false
+    @State var alertMessage = ""
+    
+    let maxMedicineLength = 120
+    let maxBackgroundLength = 120
     
     var nombre : String
     var phone : String
@@ -65,6 +70,12 @@ struct RegisterOptionalDataView: View {
                 // If there's an error, show an alert
             }
         }
+    
+    private func validateText(_ text: inout String, maxLength: Int) {
+        if text.count > maxLength {
+            text = String(text.prefix(maxLength))
+        }
+    }
     
     var body: some View {
             VStack (spacing: 0){
@@ -134,6 +145,9 @@ struct RegisterOptionalDataView: View {
                     .frame(height: 5)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 4).stroke(medicine != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
+                    .onChange(of: medicine) { _ in validateText(&medicine, maxLength: maxMedicineLength)
+                    }
+                    
                 Text("Antecedentes")
                     .padding(.top, 25)
                     .padding(.bottom, 15)
@@ -142,13 +156,28 @@ struct RegisterOptionalDataView: View {
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 4).stroke(background != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                     .padding(.bottom, 25)
+                    .onChange(of: background) {_ in validateText(&background, maxLength: maxBackgroundLength)
+                    }
                 Button(action: {
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-                    height = Float(heightS) ?? 0.0
-                    weight = Float(weightS) ?? 0.0
+                    guard let heightValue = Float(heightS), let weightValue = Float(weightS) else {
+                        showAlert = true
+                        alertMessage = "Ingresa valores númericos"
+                        return
+                    }
+                    
+                    if heightValue < 0 || heightValue > 3 || weightValue < 1 || weightValue > 300 {
+                        showAlert = true
+                        alertMessage = "Ingresa valores dentro del rango"
+                    } else {
+                        height = heightValue
+                        weight = weightValue
+                    }
+//                    height = Float(heightS) ?? 0.0
+//                    weight = Float(weightS) ?? 0.0
                     
                     Task {
-                        print("dentro de task")
+                        //print("dentro de task")
                         await postSignUp()
                     }
                 }){
@@ -160,7 +189,7 @@ struct RegisterOptionalDataView: View {
                 .background(azul)
                 .cornerRadius(10)
                 .fullScreenCover(isPresented: $registerSuccessful, content: {
-                    LoginView()
+                    ContentView()
                 })
             }
             .padding(.horizontal, 25)
