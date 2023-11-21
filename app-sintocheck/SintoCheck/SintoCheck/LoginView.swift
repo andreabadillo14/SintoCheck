@@ -98,7 +98,7 @@ struct LoginView: View {
                 Alert(title: Text("Error"), message: Text("Telefono o Contraseña Incorrecta"), dismissButton: .default(Text("Entendido")))
             }
             .fullScreenCover(isPresented: $loginSuccessful) {
-                ContentView()
+                SwitchView()
             }
             HStack{
                 Text("No tienes una cuenta?")

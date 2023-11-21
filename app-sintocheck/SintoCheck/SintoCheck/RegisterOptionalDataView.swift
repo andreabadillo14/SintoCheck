@@ -9,6 +9,7 @@ import SwiftUI
 
 struct RegisterOptionalDataView: View {
     @State var birthDate : Date = Date()
+    @State var birthDateS : String
     @State var heightS : String
     @State var weightS : String
     @State var height : Float
@@ -16,6 +17,8 @@ struct RegisterOptionalDataView: View {
     @State var medicine : String
     @State var background : String
     @State var mostrarRegistro = false
+    @State var dateFormatter = DateFormatter()
+    @State var registerSuccessful = false
     
     var nombre : String
     var phone : String
@@ -31,12 +34,37 @@ struct RegisterOptionalDataView: View {
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "POST"
         
-        /* let parameters = ["name": nombre, "phone": phone, "password": pass, "birthdate": birthDate, "height": height, "weight": weight, "medicine": medicine, "medicalBackground": background]
-        do{
+        let parameters = PatientSignupRequest(
+            name: nombre,
+            phone: phone,
+            password: pass,
+            birthdate: dateFormatter.string(from: birthDate),
+            height: height,
+            weight: weight,
+            medicine: medicine,
+            medicalBackground: background
+        )
+        do {
             urlRequest.httpBody = try JSONEncoder().encode(parameters)
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        } */
-    }
+        } catch {
+            print("Error: \(error)")
+        }
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            guard let httpResponse = response as? HTTPURLResponse else { fatalError("Error while fetching data") }
+            
+            if httpResponse.statusCode == 200 {
+                let patientData = try JSONDecoder().decode(PatientSignupResponse.self, from: data)
+                
+                registerSuccessful = true
+            }
+        }catch {
+                print("Error: \(error)")
+                // If there's an error, show an alert
+            }
+        }
     
     var body: some View {
             VStack (spacing: 0){
@@ -81,7 +109,7 @@ struct RegisterOptionalDataView: View {
                                 .frame(height: 5)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 4).stroke(heightS != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
-                                .keyboardType(.numberPad)
+                                .keyboardType(.decimalPad)
                             Text("m")
                         }
                     }
@@ -94,7 +122,7 @@ struct RegisterOptionalDataView: View {
                                 .frame(height: 5)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 4).stroke(weightS != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
-                                .keyboardType(.numberPad)
+                                .keyboardType(.decimalPad)
                             Text("kg")
                         }
                     }
@@ -115,6 +143,14 @@ struct RegisterOptionalDataView: View {
                     .background(RoundedRectangle(cornerRadius: 4).stroke(background != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                     .padding(.bottom, 25)
                 Button(action: {
+                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+                    height = Float(heightS) ?? 0.0
+                    weight = Float(weightS) ?? 0.0
+                    
+                    Task {
+                        print("dentro de task")
+                        await postSignUp()
+                    }
                 }){
                     Text("Registrar")
                         .foregroundColor(.white)
@@ -123,6 +159,9 @@ struct RegisterOptionalDataView: View {
                 }
                 .background(azul)
                 .cornerRadius(10)
+                .fullScreenCover(isPresented: $registerSuccessful, content: {
+                    LoginView()
+                })
             }
             .padding(.horizontal, 25)
         }
@@ -130,6 +169,6 @@ struct RegisterOptionalDataView: View {
 
 struct RegisterOptionalData_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterOptionalDataView(heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: "", phone: "", pass: "", ConfirmPass: "")
+        RegisterOptionalDataView(birthDateS: "", heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: "", phone: "", pass: "", ConfirmPass: "")
     }
 }

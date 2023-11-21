@@ -85,7 +85,7 @@ struct RegisterView: View {
             .alert("Por favor llena todos los datos", isPresented : $missingData, actions: {})
             .alert("Las contraseñas no coinciden", isPresented : $unmatchedPasswords, actions: {})
             .fullScreenCover(isPresented: $mostrarDatosAdicionales){
-                RegisterOptionalDataView(heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: nombre, phone: phone, pass: pass, ConfirmPass: pass)
+                RegisterOptionalDataView(birthDateS: "", heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: nombre, phone: phone, pass: pass, ConfirmPass: pass)
                 }
             .background(azul)
             .cornerRadius(10)
