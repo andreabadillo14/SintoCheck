@@ -8,11 +8,6 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var patientData : AuthenticationResponse?
-
-     var patients = [
-        Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
-    ]
     
     enum FileReaderError: Error {
         case fileNotFound
@@ -58,71 +53,112 @@ struct ProfileView: View {
                print("An unknown error occurred: \(error)")
            }
        }
-
-    
+}   
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
+                Color("Backgrounds")
+                    .ignoresSafeArea()
                 VStack {
-                    HStack(alignment: .center) {
-                        Image(systemName: "person.circle.fill")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 90)
-                            .padding(.leading, -60)
-                        
-                        VStack(alignment: .leading) {
-                            if let patientData = patientData {
-                                Text("\(patientData.name)")
-                                Text("\(patientData.phone)")
-                            } else {
-                                Text("Cargando...")
+                    VStack {
+                        Text("Mi perfil")
+                            .bold()
+                            .font(.largeTitle)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+                            
+                        HStack(alignment: .center) {
+                            Image(systemName: "person.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 73)
+                                .padding(.leading, -60)
+                            
+                            VStack(alignment: .leading) { // esto sigue hardcordeado
+                                Text(patients[0].name)
+                                Text(patients[0].phone)
                             }
+                            .padding(.leading)
+                            
+                            
                         }
-                        .padding(.leading)
-                    }
-                    Spacer()
-                    
-                    Section {
-                        List(patients) { patient in
-                            NavigationLink(destination: MedicalDataView(APatient: patient)) {
-                                Text("Detalles personales médicos")
-                            }
-                            NavigationLink(destination: HealthDataDetails()) {
-                                Text("Detalles de datos de salud")
-                            }
+                        Spacer()
+                        
+                        Section {
+                            List(patients) { patient in
+                                NavigationLink(destination: MedicalDataView(APatient: patient)) {
+                                    Image(systemName: "aqi.medium")
+                                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                    Text("Detalles personales médicos")
+                                }
+                                NavigationLink(destination: HealthDataDetails()) {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                    Text("Detalles de datos de salud")
+                                }
 
+                            }
+                            
                         }
-                        
-                    }
-                    Section {
-                        List {
-                            NavigationLink(destination: DoctorDetailsView()) {
-                                Text("Detalles de médico")
+                        Section {
+                            List {
+                                NavigationLink(destination: DoctorDetailsView()) {
+                                    Image(systemName: "book.pages")
+                                        .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                    Text("Detalles de médico")
+                                }
+                                NavigationLink(destination: DoctorDetailsView()) {
+                                    Image(systemName: "person.crop.circle.badge.plus")
+                                        .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                    Text("Enlazar a un médico")
+                                }
+                                
                             }
                             
                         }
                         
+//                        Section {
+//                            List {
+//                                
+//                                
+//                            }
+//                        }
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()        
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
                     }
+                    .padding()
                     
-                    Section {
-                        List {
-                            NavigationLink(destination: HealthDataDetails()) {
-                                Text("Enlazar a un médico")
-                            }
-                            
-                        }
-                    }
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Spacer()
+                    // 124,152,159
+                    //.navigationTitle("Mi perfil")
+                    //.foregroundColor(Color(red: 124/255, green: 152/255, blue: 159/255))
+                    
                 }
-                .padding()
-                // 124,152,159
-                .navigationTitle("Mi perfil")
-                //.foregroundColor(Color(red: 124/255, green: 152/255, blue: 159/255))
                 
+                .background(Color.clear)
             }
             
             .onAppear {
@@ -130,11 +166,14 @@ struct ProfileView: View {
             }
             .background(Color.clear)
             //.navigationTitle("Mi perfil")
+//            .task {
+//                await getMedicalData()
+//            }
             
         }
         
     }
-}
+
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
