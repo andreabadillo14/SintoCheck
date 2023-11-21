@@ -15,6 +15,8 @@ struct MedicalLinkView: View {
     @Binding var mensajeLink : String
     @State var doctor: Doctor?
     @State var doctorNombre = ""
+    @State private var alertValidation = false
+    @State private var alertValidationMessage = ""
     
     private enum Field: Int, CaseIterable {
         case field1, field2, field3, field4, field5, field6, field7, field8
@@ -22,8 +24,7 @@ struct MedicalLinkView: View {
     private func textFieldDidChange(_ text: String, for field: Field) {
       if text.isEmpty {
           focusedField = Field(rawValue: field.rawValue - 1)
-      } else if text.count > 0 {
-          
+      } else if text.count > 1 {
           focusedField = Field(rawValue: field.rawValue + 1)
       }
     }
@@ -40,18 +41,24 @@ struct MedicalLinkView: View {
                 HStack {
                     Spacer()
                     Button  {
-                        makeLink(doctorCodigo: doctorCode) { doctor in
-                            self.doctor = doctor
-                            //checar si existe el doctor que obtuve
-                            if let doctor = doctor {
-                                exito = true
-                                mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
-                            } else {
-                                exito = true
-                                mensajeLink = "No se pudo registrar el doctor"
+                        if (doctorCode != "") {
+                            makeLink(doctorCodigo: doctorCode) { doctor in
+                                self.doctor = doctor
+                                //checar si existe el doctor que obtuve
+                                if let doctor = doctor {
+                                    exito = true
+                                    mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
+                                } else {
+                                    exito = true
+                                    mensajeLink = "No se pudo registrar el doctor"
+                                }
                             }
+                            dismiss()
+                        } else {
+                            alertValidation = true
+                            alertValidationMessage = "introduce un codigo"
                         }
-                        dismiss()
+                        
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
@@ -63,6 +70,9 @@ struct MedicalLinkView: View {
                     }
                     .padding()
                     .frame(height:80)
+                    .alert(alertValidationMessage, isPresented: $alertValidation, actions: {
+                        
+                    })
                     Spacer()
                 }
                 Spacer()

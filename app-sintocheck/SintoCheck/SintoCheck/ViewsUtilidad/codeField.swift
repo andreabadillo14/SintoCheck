@@ -6,14 +6,22 @@
 //
 
 import SwiftUI
+import Combine
 
+extension String {
+    var isAlphanumeric: Bool {
+        print(!isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil)
+        return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
+    }
+}
 struct codeField: View {
     @Binding var text: String
     var field: fullCodeField.Field
     var focused: FocusState<fullCodeField.Field?>.Binding
     var textFieldDidChange: (String, fullCodeField.Field) -> Void
     @Environment(\.colorScheme) var colorScheme
-
+    
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
@@ -21,15 +29,14 @@ struct codeField: View {
                 .foregroundColor(colorScheme == .light ? Color(red: 236/255, green: 239/255, blue: 235/255) : Color(red: 48/255, green: 48/255, blue: 48/255))
             HStack {
                 TextField("A", text: $text)
-                    .focused(focused, equals: field)
+                    .focused(focused, equals: field)                    
                     .onChange(of: $text.wrappedValue) { oldValue, newValue in
                         textFieldDidChange(newValue, field)
+                        if text.count > 1 {
+                            text = String(text.prefix(1))
+                        }
                     }
-                    .onChange(of: $text.wrappedValue) { oldValue, newValue in
-                                    if text.count > 1 {
-                                        text = String(text.prefix(1))
-                                    }
-                                }
+                   
                 
                     .frame(width:20)
                     .font(.system(size: 36))
