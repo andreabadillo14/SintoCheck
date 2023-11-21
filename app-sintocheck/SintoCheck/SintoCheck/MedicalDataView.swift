@@ -74,7 +74,7 @@ struct MedicalDataView: View {
                             Text("Fecha de nacimiento")
                             Spacer()
                             if let patientData = patientData {
-                                Text(patientData.birthdate)
+                                Text(patientData.birthdate ?? "")
                                     .opacity(0.8)
                             }
                             
@@ -84,7 +84,7 @@ struct MedicalDataView: View {
                             Text("Altura")
                             Spacer()
                             if let patientData = patientData {
-                                Text(String(format: "%.2f", patientData.height))
+                                Text(String(format: "%.2f", patientData.height ?? ""))
                                     .opacity(0.8)
                                 Text("cm")
                                     .opacity(0.8)
@@ -96,7 +96,7 @@ struct MedicalDataView: View {
                             Text("Peso")
                             Spacer()
                             if let patientData = patientData {
-                                Text(String(format: "%.1f", patientData.weight))
+                                Text(String(format: "%.1f", patientData.weight ?? ""))
                                 Text("kg")
                                     .opacity(0.8)
                             }
@@ -107,7 +107,7 @@ struct MedicalDataView: View {
                             Text("Medicina")
                             Spacer()
                             if let patientData = patientData {
-                                Text(patientData.medicine)
+                                Text(patientData.medicine ?? "")
                                     .opacity(0.8)
                             }
                             
@@ -117,7 +117,7 @@ struct MedicalDataView: View {
                             Text("Antecedentes")
                             Spacer()
                             if let patientData = patientData {
-                                Text(patientData.medicalBackground)
+                                Text(patientData.medicalBackground ?? "")
                                     .opacity(0.8)
                             }
                             
