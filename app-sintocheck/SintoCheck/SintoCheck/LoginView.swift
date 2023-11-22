@@ -1,20 +1,19 @@
 //
-//  ContentView.swift
-//  perfil-SintoCheck
+//  LoginView.swift
+//  SintoCheck
 //
-//  Created by Andrea Badillo on 10/16/23.
+//  Created by Alumno on 23/10/23.
 //
 
 import SwiftUI
 
-struct ContentView: View {
-   
+struct LoginView: View {
     @State var phone = ""
     @State var pass = ""
     @State var mostrarRegistro = false
     
     @State private var showAlert = false
-    @State private var loginSuccessful = false
+    @State private var loginSuccessful = false 
     
     let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
@@ -62,15 +61,15 @@ struct ContentView: View {
         VStack (spacing: 0){
             Image("Logo")
                 .frame(width: 100, height: 150)
-            Text("Iniciar Sesión")
+            Text("Iniciar Sesion")
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
                 .padding(.top, 35)
-            Text("Teléfono")
+            Text("Telefono")
                 .padding(.top, 25)
                 .padding(.bottom, 15)
-            TextField("Teléfono", text: $phone)
+            TextField("Telefono", text: $phone)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 4).stroke(phone != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                 .keyboardType(.numberPad)
@@ -87,7 +86,7 @@ struct ContentView: View {
                     await postLogin()
                 }
             }){
-                Text("Iniciar Sesión")
+                Text("Iniciar Sesion")
                     .foregroundColor(.white)
                     .padding(.vertical)
                     .frame(width: UIScreen.main.bounds.width - 50)
@@ -102,7 +101,7 @@ struct ContentView: View {
                 SwitchView()
             }
             HStack{
-                Text("¿No tienes una cuenta?")
+                Text("No tienes una cuenta?")
                 Button(action: {
                     mostrarRegistro = true
                 }){
@@ -120,13 +119,8 @@ struct ContentView: View {
     }
 }
 
-
-struct ContentView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        LoginView()
     }
 }
-
-//#Preview {
-//    ContentView()
-//}

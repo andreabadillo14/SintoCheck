@@ -7,19 +7,17 @@
 
 import Foundation
 
-class PatientSignupRequest: Codable, Identifiable {
-    var id : UUID = UUID()
+class PatientSignupRequest: Codable {
     var name: String
     var phone: String
     var password: String
     var birthdate: String
-    var height: Double
-    var weight: Double
+    var height: Float
+    var weight: Float
     var medicine: String
     var medicalBackground: String
     
-    init(id: UUID, name: String, phone: String, password: String, birthdate: String, height: Double, weight: Double, medicine: String, medicalBackground: String) {
-        self.id = id
+    init(name: String, phone: String, password: String, birthdate: String, height: Float, weight: Float, medicine: String, medicalBackground: String) {
         self.name = name
         self.phone = phone
         self.password = password
