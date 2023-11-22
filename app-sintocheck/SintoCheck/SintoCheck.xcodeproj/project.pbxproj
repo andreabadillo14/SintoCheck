@@ -42,10 +42,10 @@
 		9E64DB3A2B0B3EE900C21C83 /* codeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64DB392B0B3EE900C21C83 /* codeField.swift */; };
 		9E64DB3C2B0B3EF500C21C83 /* fullCodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64DB3B2B0B3EF500C21C83 /* fullCodeField.swift */; };
 		9E6F8E372B0B459F00138EE8 /* requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F8E362B0B459F00138EE8 /* requests.swift */; };
+		FB03170E2B0C2643000F9A97 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03170D2B0C2643000F9A97 /* utils.swift */; };
 		FB1793942B019C07006CF12C /* RegisterOptionalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */; };
 		FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */; };
 		FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */; };
-		FB03170E2B0C2643000F9A97 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03170D2B0C2643000F9A97 /* utils.swift */; };
 		FBD7FC372B0BF848007A6943 /* RegisterHealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7FC362B0BF848007A6943 /* RegisterHealthDataView.swift */; };
 /* End PBXBuildFile section */
 
@@ -86,10 +86,10 @@
 		9E64DB392B0B3EE900C21C83 /* codeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codeField.swift; sourceTree = "<group>"; };
 		9E64DB3B2B0B3EF500C21C83 /* fullCodeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fullCodeField.swift; sourceTree = "<group>"; };
 		9E6F8E362B0B459F00138EE8 /* requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requests.swift; sourceTree = "<group>"; };
+		FB03170D2B0C2643000F9A97 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterOptionalDataView.swift; sourceTree = "<group>"; };
 		FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		FB03170D2B0C2643000F9A97 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		FBD7FC362B0BF848007A6943 /* RegisterHealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHealthDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -455,7 +455,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 754TW48D53;
+				DEVELOPMENT_TEAM = KRKLSWBZVJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -485,7 +485,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SintoCheck/Preview Content\"";
-				DEVELOPMENT_TEAM = 754TW48D53;
+				DEVELOPMENT_TEAM = KRKLSWBZVJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
