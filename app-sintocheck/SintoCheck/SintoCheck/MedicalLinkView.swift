@@ -41,7 +41,7 @@ struct MedicalLinkView: View {
                 HStack {
                     Spacer()
                     Button  {
-                        if (doctorCode != "") {
+                        if (doctorCode != "" && doctorCode.isAlphanumeric) {
                             makeLink(doctorCodigo: doctorCode) { doctor in
                                 self.doctor = doctor
                                 //checar si existe el doctor que obtuve
@@ -55,8 +55,14 @@ struct MedicalLinkView: View {
                             }
                             dismiss()
                         } else {
-                            alertValidation = true
-                            alertValidationMessage = "introduce un codigo"
+                            if (doctorCode == "") {
+                                alertValidation = true
+                                alertValidationMessage = "introduce un codigo"
+                            } else if (!doctorCode.isAlphanumeric) {
+                                alertValidation = true
+                                alertValidationMessage = "introduce un código valido"
+                            }
+                            
                         }
                         
                     } label: {

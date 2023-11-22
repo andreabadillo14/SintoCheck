@@ -10,7 +10,6 @@ import Combine
 
 extension String {
     var isAlphanumeric: Bool {
-        print(!isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil)
         return !isEmpty && range(of: "[^a-zA-Z0-9]", options: .regularExpression) == nil
     }
 }
@@ -29,7 +28,8 @@ struct codeField: View {
                 .foregroundColor(colorScheme == .light ? Color(red: 236/255, green: 239/255, blue: 235/255) : Color(red: 48/255, green: 48/255, blue: 48/255))
             HStack {
                 TextField("A", text: $text)
-                    .focused(focused, equals: field)                    
+                    .multilineTextAlignment(.center)
+                    .focused(focused, equals: field)
                     .onChange(of: $text.wrappedValue) { oldValue, newValue in
                         textFieldDidChange(newValue, field)
                         if text.count > 1 {
@@ -38,7 +38,9 @@ struct codeField: View {
                     }
                    
                 
-                    .frame(width:20)
+//                    .frame(width:20)
+//                    .background(Color.red)
+                    .padding(.leading, 4)
                     .font(.system(size: 36))
                     .foregroundColor(colorScheme == .light ? Color(red: 48/255, green: 48/255, blue: 48/255) : Color(red: 236/255, green: 239/255, blue: 235/255))
 //                            .background(Color.red)
