@@ -76,7 +76,7 @@ struct RegisterHealthDataView: View {
                                     HStack {
                                         TextField("Valor", value: $value, format: .number)
                                             .textFieldStyle(.roundedBorder)
-                                        Text(healthData.unit)
+                                       // Text(healthData.unit)
                                     }
                                     .frame(width: 150)
                                 }

@@ -35,10 +35,11 @@
 		6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */; };
 		6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */; };
 		6EB9D4B22AE06E7700740DFF /* HealthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9D4B12AE06E7700740DFF /* HealthData.swift */; };
+		FB03170E2B0C2643000F9A97 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03170D2B0C2643000F9A97 /* utils.swift */; };
 		FB1793942B019C07006CF12C /* RegisterOptionalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */; };
+		FB50E6BA2B0DB57B006E5BF0 /* ModifyHealthDataListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB50E6B92B0DB57B006E5BF0 /* ModifyHealthDataListView.swift */; };
 		FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */; };
 		FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */; };
-		FB03170E2B0C2643000F9A97 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03170D2B0C2643000F9A97 /* utils.swift */; };
 		FBD7FC372B0BF848007A6943 /* RegisterHealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7FC362B0BF848007A6943 /* RegisterHealthDataView.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,10 +73,11 @@
 		6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataDetails.swift; sourceTree = "<group>"; };
 		6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDataView.swift; sourceTree = "<group>"; };
 		6EB9D4B12AE06E7700740DFF /* HealthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthData.swift; sourceTree = "<group>"; };
+		FB03170D2B0C2643000F9A97 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterOptionalDataView.swift; sourceTree = "<group>"; };
+		FB50E6B92B0DB57B006E5BF0 /* ModifyHealthDataListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyHealthDataListView.swift; sourceTree = "<group>"; };
 		FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
-		FB03170D2B0C2643000F9A97 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		FBD7FC362B0BF848007A6943 /* RegisterHealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHealthDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,6 +161,7 @@
 				6E4B38DF2AFDDB2100D93CD5 /* HealthDataDetailView.swift */,
 				6E5219BB2ADF6D3800220B6E /* SettingsView.swift */,
 				6E5219BD2ADF6D5000220B6E /* AddHealthDataView.swift */,
+				FB50E6B92B0DB57B006E5BF0 /* ModifyHealthDataListView.swift */,
 				FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */,
 				FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */,
 				FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */,
@@ -256,6 +259,7 @@
 				6E41CFC22AE2F823007BD83B /* DoctorDetailsView.swift in Sources */,
 				6E41DA722AE21E1500BC3ECD /* Patient.swift in Sources */,
 				6E4B38D72AFDC82700D93CD5 /* DoctorSignupResponse.swift in Sources */,
+				FB50E6BA2B0DB57B006E5BF0 /* ModifyHealthDataListView.swift in Sources */,
 				6E5219BA2ADF6D1900220B6E /* ProfileView.swift in Sources */,
 				6E6154962B0C377E006D7C36 /* SwitchView.swift in Sources */,
 				FB1793942B019C07006CF12C /* RegisterOptionalDataView.swift in Sources */,
