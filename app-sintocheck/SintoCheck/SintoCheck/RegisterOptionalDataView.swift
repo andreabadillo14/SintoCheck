@@ -101,7 +101,7 @@ struct RegisterOptionalDataView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
-                Text("Introduce tu Informacion")
+                Text("Introduce tu Información")
                     .font(.title3)
                 Text("Opcional")
                     .font(.caption)
