@@ -14,6 +14,7 @@ struct ModifyHealthDataListView: View {
     @State var standardList : [HealthDataResponse]?
     @State var getSuccessful = false
     @State var showErrorAlert = false
+    @State var selectedItems: Set<Int> = [] // Conjunto de IDs seleccionados
     
     enum FileReaderError: Error {
         case fileNotFound
@@ -52,39 +53,48 @@ struct ModifyHealthDataListView: View {
 
     
     var body: some View {
-        VStack{
-            if let standardList = standardList, !standardList.isEmpty {
-                List(standardList, id: \.id) { healthData in
-                    HStack {
-                        Text(healthData.name) // Suponiendo que existe 'name' en HealthDataResponse
-                        // Puedes agregar más vistas aquí si quieres mostrar más información
+        ZStack{
+            Color("Backgrounds")
+                .ignoresSafeArea()
+            VStack{
+                Text("Modificar Lista de Datos")
+                    .padding(.top, 20)
+                    .font(.largeTitle)
+                if let standardList = standardList, !standardList.isEmpty {
+                    List(standardList, id: \.id) { healthData in
+                        HStack {
+                            Text(healthData.name)
+                            Spacer()
+                            Image(systemName: "star.fill")
+                                
+                        }
                     }
-                }
-            } else {
-                Text("No hay datos disponibles.")
-            }
-        }
-        .onAppear {
-            Task{
-                do {
-                    patientData = try getPatientData()
-                    let healthData = try await loadListData()
-                    standardList = healthData
-                    getSuccessful = true
-                } catch let error as FileReaderError {
-                    print(error)
-                    switch error {
-                    case .fileNotFound:
-                        print("not found")
-                    case .fileReadError:
-                        print("read error")
-                    }
-                } catch {
-                    print("unknown: \(error)")
+                } else {
+                    Text("No hay datos disponibles.")
                 }
             }
+            .onAppear {
+                Task{
+                    do {
+                        patientData = try getPatientData()
+                        let healthData = try await loadListData()
+                        standardList = healthData
+                        getSuccessful = true
+                    } catch let error as FileReaderError {
+                        print(error)
+                        switch error {
+                        case .fileNotFound:
+                            print("not found")
+                        case .fileReadError:
+                            print("read error")
+                        }
+                    } catch {
+                        print("unknown: \(error)")
+                    }
+                }
+            }
+            .background(Color.clear)
         }
-        .background(Color.clear)
     }
 }
 

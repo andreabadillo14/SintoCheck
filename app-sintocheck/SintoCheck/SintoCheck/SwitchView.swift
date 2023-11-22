@@ -20,7 +20,7 @@ struct SwitchView: View {
                         }
                         .tag(0)
                     
-                    AddHealthDataView()
+                    NoTrackedHealthDataView()
                     .tabItem {
                         Image(systemName: "plus")
                         Text("Añadir registro")
