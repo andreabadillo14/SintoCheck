@@ -20,4 +20,19 @@ class AuthenticationResponse: Codable {
     var doctorIds : [String]?
     var createdAt : String
     var token: String
+    
+    init(id: String = "", name: String = "", phone: String = "", password: String = "", birthdate: String? = nil, height: Float? = nil, weight: Float? = nil, medicine: String? = nil, medicalBackground: String? = nil, doctorIds: [String]? = nil, createdAt: String = "", token: String = "") {
+        self.id = id
+        self.name = name
+        self.phone = phone
+        self.password = password
+        self.birthdate = birthdate
+        self.height = height
+        self.weight = weight
+        self.medicine = medicine
+        self.medicalBackground = medicalBackground
+        self.doctorIds = doctorIds
+        self.createdAt = createdAt
+        self.token = token
+    }
 }

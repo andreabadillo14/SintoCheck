@@ -20,8 +20,11 @@ struct HealthDataDetailView: View {
                 LineMark(x: .value("Dato de salud", AHealthData.name),
                          y: .value("Dato de salud", AHealthData.rangeMax))
             }
-            .frame(height: 300)
+            .frame(height: 270)
             .padding()
+            
+            Text("Notas")
+                .bold()
         }
     }
 }
