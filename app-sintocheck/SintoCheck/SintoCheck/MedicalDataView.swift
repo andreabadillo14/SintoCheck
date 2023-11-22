@@ -58,7 +58,6 @@ struct MedicalDataView: View {
         }
     }
     
-    
     var body: some View {
         ZStack {
             Color("Backgrounds")
