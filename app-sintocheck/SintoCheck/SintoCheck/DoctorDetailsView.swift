@@ -23,6 +23,26 @@ struct DoctorDetailsView: View {
     @State var doctor: Doctor?
     @State private var showSure: Bool = false
     @State private var currentDoctorId: String = ""
+    @State var patientData : AuthenticationResponse?
+    
+    
+    
+    func handlePatientData() {
+        do {
+            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                // File does not exist, handle this case accordingly
+                print("Login response file not found")
+                return
+            }
+            
+            patientData = try getPatientData()
+        } catch let error {
+            print("An error occurred while retrieving patient data: \(error)")
+        }
+    }
     
     var body: some View {
         
@@ -52,12 +72,16 @@ struct DoctorDetailsView: View {
                             secondaryButton: .destructive(
                                 Text("Eliminar"),
                                 action: {
-                                    deleteDoctor(doctorId: currentDoctorId) { doctor in
-                                        self.doctor = doctor
-                                        fetchDoctor { doctors in
-                                            self.doctors = doctors
+                                    if let patientData = patientData {
+                                        deleteDoctor(doctorId: currentDoctorId, patientId: patientData.id, patientToken: patientData.token) { doctor in
+                                            self.doctor = doctor
+                                            fetchDoctor(patientId: patientData.id, patientToken: patientData.token) { doctors in
+                                                self.doctors = doctors
+                                            }
+                                            
                                         }
                                     }
+                                    
                                     
                                 }
                             )
@@ -76,9 +100,13 @@ struct DoctorDetailsView: View {
             }
             .navigationTitle("Doctores registrados")
             .onAppear(perform: {
-                fetchDoctor { doctors in
-                    self.doctors = doctors
+                handlePatientData()
+                if let patientData = patientData {
+                    fetchDoctor(patientId: patientData.id, patientToken: patientData.token) { doctors in
+                        self.doctors = doctors
+                    }
                 }
+                
             })
         }
         

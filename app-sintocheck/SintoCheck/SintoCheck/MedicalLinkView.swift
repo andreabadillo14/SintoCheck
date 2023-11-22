@@ -5,6 +5,8 @@
 //  Created by Sebastian on 08/11/23.
 //
 
+//TODO: hacer que patientData se pueda correr en todos lados
+
 import SwiftUI
 
 struct MedicalLinkView: View {
@@ -17,6 +19,26 @@ struct MedicalLinkView: View {
     @State var doctorNombre = ""
     @State private var alertValidation = false
     @State private var alertValidationMessage = ""
+    @State var patientData : AuthenticationResponse?
+    
+    
+    
+    func handlePatientData() {
+        do {
+            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                // File does not exist, handle this case accordingly
+                print("Login response file not found")
+                return
+            }
+            
+            patientData = try getPatientData()
+        } catch let error {
+            print("An error occurred while retrieving patient data: \(error)")
+        }
+    }
     
     private enum Field: Int, CaseIterable {
         case field1, field2, field3, field4, field5, field6, field7, field8
@@ -42,17 +64,20 @@ struct MedicalLinkView: View {
                     Spacer()
                     Button  {
                         if (doctorCode != "" && doctorCode.isAlphanumeric) {
-                            makeLink(doctorCodigo: doctorCode) { doctor in
-                                self.doctor = doctor
-                                //checar si existe el doctor que obtuve
-                                if let doctor = doctor {
-                                    exito = true
-                                    mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
-                                } else {
-                                    exito = true
-                                    mensajeLink = "No se pudo registrar el doctor"
+                            if let patientData = patientData {
+                                makeLink(doctorCodigo: doctorCode, patientId: patientData.id, patientToken: patientData.token) { doctor in
+                                    self.doctor = doctor
+                                    //checar si existe el doctor que obtuve
+                                    if let doctor = doctor {
+                                        exito = true
+                                        mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
+                                    } else {
+                                        exito = true
+                                        mensajeLink = "No se pudo registrar el doctor"
+                                    }
                                 }
                             }
+                            
                             dismiss()
                         } else {
                             if (doctorCode == "") {
@@ -78,6 +103,9 @@ struct MedicalLinkView: View {
                     .frame(height:80)
                     .alert(alertValidationMessage, isPresented: $alertValidation, actions: {
                         
+                    })
+                    .onAppear(perform: {
+                        handlePatientData()
                     })
                     Spacer()
                 }

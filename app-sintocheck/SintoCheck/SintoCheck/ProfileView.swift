@@ -243,9 +243,12 @@ struct ProfileView: View {
                 .onAppear {
                     handlePatientData()
                     //obtener el url del endpoint para paciente luego
-                    fetchImage() { url in
-                        self.url = url
+                    if let patientData = patientData {
+                        fetchImage(patientId: patientData.id, patientToken: patientData.token) { url in
+                            self.url = url
+                        }
                     }
+                    
                 }
                 .background(Color.clear)
                 .alert("\(mensajeEnlace)", isPresented: $seRegistroDoctor, actions: {})
@@ -255,13 +258,16 @@ struct ProfileView: View {
                         if let photosPickerItem,
                            let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
                             if let image = UIImage(data: data) {
-                                sendImage(image: image) {
-                                    fetchImage() { url in
-                                        DispatchQueue.main.async {
-                                                self.url = url
+                                if let patientData = patientData {
+                                    sendImage(image: image, patientId: patientData.id, patientToken: patientData.token) {
+                                        fetchImage(patientId: patientData.id, patientToken: patientData.token) { url in
+                                            DispatchQueue.main.async {
+                                                    self.url = url
+                                            }
                                         }
                                     }
                                 }
+                                
                             }
                         }
                     }
