@@ -191,6 +191,9 @@ struct RegisterOptionalDataView: View {
                 .fullScreenCover(isPresented: $registerSuccessful, content: {
                     ContentView()
                 })
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Invalid Input"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
             }
             .padding(.horizontal, 25)
         }
