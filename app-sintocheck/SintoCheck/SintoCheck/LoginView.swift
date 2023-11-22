@@ -39,6 +39,7 @@ struct LoginView: View {
                if httpResponse.statusCode == 200 {
                    let patientData = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
                    // Handle the decoded data as needed
+                   print(patientData.token)
                    self.loginSuccessful = true
                    
                    // Store information in sandbox

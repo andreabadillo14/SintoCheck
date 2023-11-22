@@ -7,14 +7,14 @@
 
 import Foundation
 
-class HealthDataResponse: Codable {
+class HealthDataResponse: Decodable{
     var id: String
     var name: String
     var quantitative: Bool
     var patientId: String?
-    var rangeMin: Double
-    var rangeMax: Double
-    var unit: String
+    var rangeMin: Double?
+    var rangeMax: Double?
+    var unit: String?
     
     init(id: String, name: String, quantitative: Bool, patientId: String? = nil, rangeMin: Double, rangeMax: Double, unit: String) {
         self.id = id
