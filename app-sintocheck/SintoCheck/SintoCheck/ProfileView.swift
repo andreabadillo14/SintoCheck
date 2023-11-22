@@ -21,6 +21,7 @@ struct ProfileView: View {
     @State var showPhotosPicker: Bool = false
     @State private var photosPickerItem: PhotosPickerItem?
     @State private var url:ImageAPI?
+    @Environment(\.colorScheme) var colorScheme
 
     
     enum FileReaderError: Error {
@@ -114,7 +115,7 @@ struct ProfileView: View {
 //                                    }
 //                                }
 //                                .padding(.leading)
-//                                
+//
 //                            }
                             HStack(alignment: .center) {
                                 Menu {
@@ -130,22 +131,27 @@ struct ProfileView: View {
                                                 .frame(width: 100, height: 100)
                                                 .clipShape(.circle)
                                         } placeholder: {
-                                            Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
+                                            Image(systemName: "person.crop.circle.fill")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
                                                 .frame(width: 100, height: 100)
                                                 .clipShape(.circle)
+//                                                .foregroundColor(Color.blue)
+//                                                .background(Color.blue)
                                         }
                                         
                                     } else {
-                                        Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
+                                        Image(systemName: "person.crop.circle.fill")
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 100, height: 100)
                                             .clipShape(.circle)
+//                                            .foregroundColor(Color.blue)
+//                                            .background(Color.blue)
                                     }
-                                    
-                                }.foregroundColor(Color.black)
+                                    //hacer lo de foregroundColor cambie de color en light y dark mode.
+                                }.foregroundColor(colorScheme == .light ? Color.black : Color.white)
+//                                    .background(Color.red)
                                 
                                 
                                 VStack(alignment: .leading) { // esto sigue hardcordeado

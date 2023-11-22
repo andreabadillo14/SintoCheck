@@ -75,7 +75,7 @@ struct addNote: View {
             Button {
                 if (titulo != "" && contenido != "") {
                     if let patientData = patientData{
-                        addNoteAPI(title: titulo, content: contenido) { note in
+                        addNoteAPI(title: titulo, content: contenido, patientId: patientData.id, patientToken: patientData.token) { note in
                             self.note = note
                         }
                     }
