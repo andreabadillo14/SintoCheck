@@ -60,7 +60,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack (spacing: 0){
-            Image("Logo")
+            Image("Logo Chiquito")
                 .frame(width: 100, height: 150)
             Text("Iniciar Sesión")
                 .font(.largeTitle)
