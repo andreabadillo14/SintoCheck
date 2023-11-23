@@ -146,7 +146,7 @@ struct RegisterHealthDataView: View {
 
 struct RegisterHealthDataView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterHealthDataView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""))
+        RegisterHealthDataView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""))
     }
 }
 

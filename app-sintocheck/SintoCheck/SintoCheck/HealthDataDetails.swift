@@ -9,91 +9,95 @@ import SwiftUI
 
 struct HealthDataDetails: View {
     
-    @State var patientData : AuthenticationResponse?
+    @State var patientData = AuthenticationResponse()
+    @State var trackedHealthDataList : [HealthDataResponse]?
+    @State var getSuccessful = false
     
     enum FileReaderError: Error {
         case fileNotFound
         case fileReadError
     }
     
-    func getPatientData() throws -> AuthenticationResponse {
-        // Retrieve the file URL
-        let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
-        
-        // Check if the file exists
-        let fileManager = FileManager.default
-        
-        if !fileManager.fileExists(atPath: fileURL.path) {
-            // File does not exist, handle this case accordingly
-            fatalError("Could not find login response file")
+    func getHealthDataTrackedList() async throws -> [HealthDataResponse] {
+        guard let url = URL(string: "https://sintocheck-backend.vercel.app/trackedHealthData/\(patientData.id)") else {
+            fatalError("Invalid URL")
         }
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(patientData.token, forHTTPHeaderField: "Authorization")
         
-        // Read the file contents
-        if let data = fileManager.contents(atPath: fileURL.path) {
-            // Decode the JSON data into a PatientSignupResponse object
-            let decodedData = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
-            return decodedData
-        } else {
-            // Handle the error if the file cannot be read
-            //fatalError("Error reading login response file")
-            
-            throw FileReaderError.fileNotFound        }
-    }
-    
-    func handlePatientData() {
-        do {
-            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
-
-            if !FileManager.default.fileExists(atPath: fileURL.path) {
-                // File does not exist, handle this case accordingly
-                print("Login response file not found")
-                return
+        let (data, response) = try await URLSession.shared.data(for: urlRequest)
+        if let httpResponse = response as? HTTPURLResponse {
+            print("HTTP Status Code:", httpResponse.statusCode)
+            if httpResponse.statusCode != 200 {
+                print("Response Data:", String(data: data, encoding: .utf8) ?? "No data")
+                throw FileReaderError.fileReadError
             }
-
-            patientData = try getPatientData()
-        } catch let error {
-            print("An error occurred while retrieving patient data: \(error)")
+        } else {
+            throw FileReaderError.fileReadError
         }
+        let healthDataResponse = try JSONDecoder().decode([HealthDataResponse].self, from: data)
+        print(healthDataResponse)
+        return healthDataResponse
     }
-    
-    var healthData = [
-        PersonalizedHealthDataRequest(id: UUID(), name: "Tos", quantitative: false, patientId: 1, rangeMin: 1, rangeMax: 10, unit: "n/a"),
-        PersonalizedHealthDataRequest(id: UUID(), name: "Fiebre", quantitative: true, patientId: 1, rangeMin: 35, rangeMax: 42, unit: "C"),
-        PersonalizedHealthDataRequest(id: UUID(), name: "Glucosa", quantitative: true, patientId: 1, rangeMin: 80, rangeMax: 150, unit: "mg/dL")
-    ]
-    
     
     var body: some View {
-        ZStack {
-            Color("Backgrounds")
-                .ignoresSafeArea()
-            VStack {
-                Section {
-                    Text("Datos de salud")
-                        .bold()
-                        .font(.largeTitle)
-                        .padding(.top, 20)
-                }
-                
-                List(healthData) { data in
-                    NavigationLink {
-                        HealthDataDetailView(AHealthData: data)
-                    } label: {
-                        Cell(oneHealthData: data)
+        NavigationView {
+            ZStack {
+                Color("Backgrounds")
+                    .ignoresSafeArea()
+                VStack {
+                    
+                    if getSuccessful {
+                        // Show your list and other content when successful
+                        Section {
+                            Text("Datos de salud")
+                                .bold()
+                                .font(.largeTitle)
+                                .padding(.top, 20)
+                        }
+
+                        List(trackedHealthDataList!, id: \.id) { data in
+                            NavigationLink {
+                                HealthDataDetailView(AHealthData: data)
+                            } label: {
+                                Cell(oneHealthData: data)
+                            }
+                        }
+                    } else {
+                        // Show another view when not successful
+                        NoTrackedHealthDataView()
                     }
+                    
                 }
+                .onAppear {
+                    Task{
+                        do {
+                            patientData = try getPatientData()
+                            let healthData = try await getHealthDataTrackedList()
+                            trackedHealthDataList = healthData
+                            getSuccessful = true
+                        } catch let error as FileReaderError {
+                            print(error)
+                            switch error {
+                            case .fileNotFound:
+                                print("not found")
+                            case .fileReadError:
+                                print("read error")
+                            }
+                        } catch {
+                            print("unknown: \(error)")
+                            }
+                        }
+                    }
             }
-//            .onAppear {
-//                handlePatientData()
-//            }
         }
     }
 }
 
 struct Cell: View {
-    var oneHealthData : PersonalizedHealthDataRequest
+    var oneHealthData : HealthDataResponse
     
     var body: some View {
         VStack {

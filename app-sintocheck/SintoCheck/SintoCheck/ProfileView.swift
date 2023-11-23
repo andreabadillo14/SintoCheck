@@ -87,6 +87,15 @@ struct ProfileView: View {
                         .ignoresSafeArea()
                     VStack {
                         VStack {
+                            
+                            Image("Logo Chiquito")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+ 
+                            Divider()
+                                .background(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                .frame(width: .infinity, height: 1)
+                                
                             Text("Mi perfil")
                                 .bold()
                                 .font(.largeTitle)
@@ -143,38 +152,7 @@ struct ProfileView: View {
                                 
                             }
                             
-                            //                        Section {
-                            //                            List {
-                            //
-                            //
-                            //                            }
-                            //                        }
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
+                            Spacer(minLength: 195)
                         }
                         .padding()
                         

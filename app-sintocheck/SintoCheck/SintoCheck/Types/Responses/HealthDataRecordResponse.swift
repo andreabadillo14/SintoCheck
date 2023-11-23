@@ -7,10 +7,11 @@
 
 import Foundation
 
-class HealthDataRecordResponse: Codable {
-    var id: Int
-    var patientId: Int
-    var healthDataId: Int
+class HealthDataRecordResponse: Decodable {
+    var id: String
+    var patientId: String
+    var healthDataId: String
     var value: Double
     var note: String
+    var createdAt: String
 }
