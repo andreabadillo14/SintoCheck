@@ -100,7 +100,16 @@ struct Cell: View {
     var oneHealthData : HealthDataResponse
     
     var body: some View {
-        VStack {
+        HStack {
+            if oneHealthData.quantitative {
+                // Display an icon for quantitative data
+                Image(systemName: "heart.circle.fill")
+                    .foregroundColor(.blue) // You can customize the color
+                    .padding(.trailing, 4)
+            } else {
+                Image(systemName: "heart.square.fill")
+            }
+
             Text(oneHealthData.name)
         }
     }
