@@ -3,23 +3,25 @@
 //  SintoCheck
 //
 //  Created by Sebastian on 20/11/23.
-//
+
+
+// TODO: obtener patientID y token del paciente del request en ProfileView
 
 import Foundation
 import SwiftUI
 //para view de MedicalLinkView
-func makeLink(doctorCodigo: String, completion: @escaping (Doctor?) -> Void) {
+func makeLink(doctorCodigo: String, patientId: String, patientToken: String, completion: @escaping (Doctor?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
     guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWQyZTY1ZmUyMmVmNjViODNjOTRlMCIsIm5hbWUiOiJwYWNpZW50ZSBQcnVlYmEiLCJwaG9uZSI6IjEyMzQ0MzIxIiwiaWF0IjoxNzAwNjA1NTUwLCJleHAiOjE3MDE4MTUxNTB9.54PgoD0Vd8xLPWltOAXSDW7iCJGFaRUo-TQANmrPw9k", forHTTPHeaderField: "Authorization")
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     let bodyData = [
         //tomar doctorId como parametro a la funcion
         "doctorCode" : doctorCodigo,
-        "patientId" : "655d2e65fe22ef65b83c94e0"
+        "patientId" : patientId
     ]
     do {
         request.httpBody = try JSONSerialization.data(withJSONObject: bodyData, options: [])
@@ -53,12 +55,12 @@ func makeLink(doctorCodigo: String, completion: @escaping (Doctor?) -> Void) {
 //para view de addNotes.
 
 //estoy seguro que todos estos requests se pueden manejar como una sola funcion en lugar de estar haciendo copy paste como lo hago, pero no se como tomar el tipo de dato como parametro entonces por ahora lo hago asi.
-func addNoteAPI(title: String, content: String, completion: @escaping (Note?) -> Void) {
+func addNoteAPI(title: String, content: String, patientId: String, patientToken: String, completion: @escaping (Note?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
     guard let url = URL(string: "https://sintocheck-backend.vercel.app/note") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWQyZTY1ZmUyMmVmNjViODNjOTRlMCIsIm5hbWUiOiJwYWNpZW50ZSBQcnVlYmEiLCJwaG9uZSI6IjEyMzQ0MzIxIiwiaWF0IjoxNzAwNjA1NTUwLCJleHAiOjE3MDE4MTUxNTB9.54PgoD0Vd8xLPWltOAXSDW7iCJGFaRUo-TQANmrPw9k", forHTTPHeaderField: "Authorization")
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     let bodyData = [
@@ -66,7 +68,7 @@ func addNoteAPI(title: String, content: String, completion: @escaping (Note?) ->
         "title" : title,
         "content" : content,
         //obtener del login no hardcodeado como ahora.
-        "patientId" : "655d2e65fe22ef65b83c94e0"
+        "patientId" : patientId
     ]
     do {
         request.httpBody = try JSONSerialization.data(withJSONObject: bodyData, options: [])
@@ -96,12 +98,12 @@ func addNoteAPI(title: String, content: String, completion: @escaping (Note?) ->
 }
 
 //para view DoctorDetailsView
-func fetchDoctor(completion: @escaping ([Doctor]?) -> Void) {
+func fetchDoctor(patientId: String, patientToken: String, completion: @escaping ([Doctor]?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
-    guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship/655d2e65fe22ef65b83c94e0") else {return}
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship/\(patientId)") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWQyZTY1ZmUyMmVmNjViODNjOTRlMCIsIm5hbWUiOiJwYWNpZW50ZSBQcnVlYmEiLCJwaG9uZSI6IjEyMzQ0MzIxIiwiaWF0IjoxNzAwNjA1NTUwLCJleHAiOjE3MDE4MTUxNTB9.54PgoD0Vd8xLPWltOAXSDW7iCJGFaRUo-TQANmrPw9k", forHTTPHeaderField: "Authorization")
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
     request.httpMethod = "GET"
 
     URLSession.shared.dataTask(with: request) { data, response, error in
@@ -125,19 +127,19 @@ func fetchDoctor(completion: @escaping ([Doctor]?) -> Void) {
     }.resume()
 }
 
-func deleteDoctor(doctorId: String, completion: @escaping (Doctor?) -> Void) {
+func deleteDoctor(doctorId: String, patientId: String, patientToken: String, completion: @escaping (Doctor?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
     guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWQyZTY1ZmUyMmVmNjViODNjOTRlMCIsIm5hbWUiOiJwYWNpZW50ZSBQcnVlYmEiLCJwaG9uZSI6IjEyMzQ0MzIxIiwiaWF0IjoxNzAwNjA1NTUwLCJleHAiOjE3MDE4MTUxNTB9.54PgoD0Vd8xLPWltOAXSDW7iCJGFaRUo-TQANmrPw9k", forHTTPHeaderField: "Authorization")
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
     request.httpMethod = "DELETE"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     let bodyData = [
         //tomar doctorId como parametro a la funcion?
         "doctorId" : doctorId,
         //obtener del login no hardcodeado como ahora.
-        "patientId" : "655d2e65fe22ef65b83c94e0",
+        "patientId" : patientId,
     ]
     do {
         request.httpBody = try JSONSerialization.data(withJSONObject: bodyData, options: [])
@@ -167,7 +169,7 @@ func deleteDoctor(doctorId: String, completion: @escaping (Doctor?) -> Void) {
 }
 
 //para view ProfileView
-func sendImage(image: UIImage, completion: @escaping () -> Void) {
+func sendImage(image: UIImage, patientId: String, patientToken: String, completion: @escaping () -> Void) {
     guard let url = URL(string: "https://api-text.vercel.app/image") else { return }
     let boundary = UUID().uuidString
     
@@ -175,7 +177,7 @@ func sendImage(image: UIImage, completion: @escaping () -> Void) {
     request.httpMethod = "POST"
     
     // Add Authorization Header
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NWQyZTY1ZmUyMmVmNjViODNjOTRlMCIsIm5hbWUiOiJwYWNpZW50ZSBQcnVlYmEiLCJwaG9uZSI6IjEyMzQ0MzIxIiwiaWF0IjoxNzAwNjA1NTUwLCJleHAiOjE3MDE4MTUxNTB9.54PgoD0Vd8xLPWltOAXSDW7iCJGFaRUo-TQANmrPw9k", forHTTPHeaderField: "Authorization")
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
     
 //    // Add Body
 //    let patientId = "655bfeae88807f60971b9d27"
@@ -188,7 +190,7 @@ func sendImage(image: UIImage, completion: @escaping () -> Void) {
     //agrego el id del paciente
     body.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
     body.append("Content-Disposition: form-data; name=\"patientId\"\r\n\r\n".data(using: .utf8)!)
-    body.append("655d2e65fe22ef65b83c94e0".data(using: .utf8)!)
+    body.append(patientId.data(using: .utf8)!)
     
     //agrego la imagen
     body.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
@@ -218,12 +220,12 @@ func sendImage(image: UIImage, completion: @escaping () -> Void) {
 }
 
 //cuando image url este en el api borrar esto y obtener el url del api
-func fetchImage(completion: @escaping (ImageAPI?) -> Void) {
+func fetchImage(patientId: String, patientToken: String, completion: @escaping (ImageAPI?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
-    guard let url = URL(string: "https://api-text.vercel.app/image") else {return}
+    guard let url = URL(string: "https://api-text.vercel.app/image/\(patientId)") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
-    request.addValue("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NGVhMDlmZDlmYjc5MWI0YjdmMDg3YyIsIm5hbWUiOiJQYWNpZW50ZSBDZXJvIiwicGhvbmUiOiIwOTg3NjU0MzIxIiwiaWF0IjoxNjk5NjUxODE4LCJleHAiOjE3MDA4NjE0MTh9.Z_WvGy2TCsvFr9_eW_V3ModNnupaUr1_B9QtNG7I97A", forHTTPHeaderField: "Authorization")
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
     request.httpMethod = "GET"
 
     URLSession.shared.dataTask(with: request) { data, response, error in
@@ -246,3 +248,4 @@ func fetchImage(completion: @escaping (ImageAPI?) -> Void) {
         }
     }.resume()
 }
+
