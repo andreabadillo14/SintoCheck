@@ -25,6 +25,7 @@ struct DoctorDetailsView: View {
     @State private var currentDoctorId: String = ""
     @Binding var isDismissed: Bool
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     
     @State var patientData : AuthenticationResponse?
 
@@ -63,6 +64,7 @@ struct DoctorDetailsView: View {
                             
                             
                     }
+                    .listRowBackground(colorScheme == .light ? Color(red: 236/255, green: 239/255, blue: 235/255) : Color(UIColor.secondarySystemGroupedBackground))
                     .alert(isPresented: $showSure) {
                         Alert(
                             title: Text("hola"), message: Text("Estas seguro que quieres eliminar al doctor?"),

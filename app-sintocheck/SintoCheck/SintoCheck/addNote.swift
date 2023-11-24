@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-//si quiero obtener cuando se creo la nota aqui se puede agregar.
 struct Note: Codable, Identifiable {
     let id: String
     let title: String

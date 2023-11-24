@@ -23,33 +23,43 @@ struct SwitchView: View {
     @State private var selectedTab = 0
     //en vez de state sacarlo de un viewModel
     @State var isDismissed: Bool = false
+    @Environment(\.colorScheme) var colorScheme
+    
+    
     
     var body: some View {
-        TabView(selection: $selectedTab.onUpdate{
+        TabView(
+            selection: $selectedTab.onUpdate{
             isDismissed.toggle()
             print(isDismissed)
-        }) {
-                    ProfileView(isDismissed: $isDismissed)
-                        .tabItem {
-                            Image(systemName: "person")
-                            Text("Perfil")
-                        }
-                        .tag(0)
-                    
-                    AddHealthDataView()
+        }
+        ) {
+            Group {
+                ProfileView(isDismissed: $isDismissed)
                     .tabItem {
-                        Image(systemName: "plus")
-                        Text("Añadir registro")
+                        Image(systemName: "person")
+                        Text("Perfil")
                     }
-                        .tag(1)
-                    
-                    SettingsView()
-                        .tabItem {
-                            Image(systemName: "gear")
-                            Text("Configuración")
-                        }
-                        .tag(2)
+                    .tag(0)
+                
+                AddHealthDataView()
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Añadir registro")
                 }
+                    .tag(1)
+                
+                SettingsView()
+                    .tabItem {
+                        Image(systemName: "gear")
+                        Text("Configuración")
+                    }
+                    .tag(2)
+            }
+            .toolbarBackground(colorScheme == .light ? Color(red: 236/255, green: 239/255, blue: 235/255) : Color(UIColor.secondarySystemGroupedBackground), for: .tabBar)
+            .toolbarBackground(.visible, for: .tabBar)
+        }
+        
                 .onAppear {
                     selectedTab = 0 // Set the default selected tab to be the profile view
                 }
