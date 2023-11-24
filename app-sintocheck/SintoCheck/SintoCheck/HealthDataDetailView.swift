@@ -59,16 +59,6 @@ struct HealthDataDetailView: View {
         return formattedDate(healthDataList[indexValue].createdAt)
     }
     
-//    func dateLabelForIndex(_ index: AxisValue, in healthDataList: [HealthDataRecordResponse]) -> String {
-//        print(index)
-//        guard let stringValue = index.as(String.self),
-//              let indexValue = Int(stringValue),
-//              indexValue >= 0 && indexValue < healthDataList.count else {
-//            return "vacío"
-//        }
-//        return formattedDate(healthDataList[indexValue].createdAt)
-//    }
-    
     var body: some View {
         ZStack {
             Color("Backgrounds")
@@ -82,13 +72,26 @@ struct HealthDataDetailView: View {
                     Image(systemName: "arrow.clockwise.heart.fill")
                         .resizable()
                         .frame(width:50, height: 50)
+                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255)).opacity(0.8)
                         .padding()
                     Text("Solo cuentas con un registro en este dato, por el momento no es posible mostrar la gráfica")
                         .padding()
                         .background(Color(red: 226/255, green: 195/255, blue: 145/255))
                         .cornerRadius(10)
                         .padding()
-                } else {
+                } else if (healthDataList?.isEmpty == true) {
+                    Image(systemName: "arrow.clockwise.heart.fill")
+                        .resizable()
+                        .frame(width:50, height: 50)
+                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255)).opacity(0.8)
+                        .padding()
+                    Text("No cuentas con ningún registro en este dato, por el momento no es posible mostrar la gráfica")
+                        .padding()
+                        .background(Color(red: 226/255, green: 195/255, blue: 145/255))
+                        .cornerRadius(10)
+                        .padding()
+                }
+                else {
                     Chart {
                         ForEach(healthDataList ?? [], id: \.id) { healthData in
                             LineMark(x: .value("Fecha de registro", (healthData.createdAt)),
@@ -119,9 +122,11 @@ struct HealthDataDetailView: View {
                     }
                 }
                 
-                Text("Notas")
-                    .bold()
-                    .font(.title2)
+                if healthDataList?.contains(where: { !$0.note.isEmpty }) == true {
+                    Text("Notas")
+                        .bold()
+                        .font(.title2)
+                }
                 
                 List {
                     ForEach(healthDataList ?? [], id: \.id) { healthData in
