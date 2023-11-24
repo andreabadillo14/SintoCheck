@@ -9,10 +9,8 @@ import SwiftUI
 
 struct HealthDataDetails: View {
     
-    var healthData = [
-        PersonalizedHealthDataRequest(id: UUID(), name: "Tos", quantitative: false, patientId: 1, rangeMin: 1, rangeMax: 10, unit: "n/a"),
-        PersonalizedHealthDataRequest(id: UUID(), name: "Fiebre", quantitative: true, patientId: 1, rangeMin: 35, rangeMax: 42, unit: "C"),
-        PersonalizedHealthDataRequest(id: UUID(), name: "Glucosa", quantitative: true, patientId: 1, rangeMin: 80, rangeMax: 150, unit: "mg/dL")
+     var healthData = [
+        PersonalizedHealthDataRequest(name: "Tos", quantitative: false, patientId: "", rangeMin: 1, rangeMax: 10, unit: "n/a")
     ]
     
     
@@ -28,13 +26,12 @@ struct HealthDataDetails: View {
                         .padding(.top, 20)
                 }
                 
-                List(healthData) { data in
+              /*/  List(healthData) { data in
                     NavigationLink {
                         HealthDataDetailView(AHealthData: data)
                     } label: {
                         Cell(oneHealthData: data)
-                    }
-                }
+                    } */
             }
         }
     }

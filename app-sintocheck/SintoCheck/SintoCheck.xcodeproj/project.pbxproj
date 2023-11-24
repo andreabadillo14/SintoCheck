@@ -41,6 +41,9 @@
 		FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */; };
 		FBD7FC372B0BF848007A6943 /* RegisterHealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD7FC362B0BF848007A6943 /* RegisterHealthDataView.swift */; };
 		FBE102472B0EA0E4002041A2 /* NoTrackedHealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE102462B0EA0E4002041A2 /* NoTrackedHealthDataView.swift */; };
+		FBE102492B0EAD0C002041A2 /* AddPersonalizedHealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE102482B0EAD0C002041A2 /* AddPersonalizedHealthDataView.swift */; };
+		FBE1024B2B0EBB6A002041A2 /* AddHealthDataRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1024A2B0EBB6A002041A2 /* AddHealthDataRecordView.swift */; };
+		FBE1024D2B0EC0EC002041A2 /* AddDataRecordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1024C2B0EC0EC002041A2 /* AddDataRecordListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +82,9 @@
 		FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		FBD7FC362B0BF848007A6943 /* RegisterHealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterHealthDataView.swift; sourceTree = "<group>"; };
 		FBE102462B0EA0E4002041A2 /* NoTrackedHealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoTrackedHealthDataView.swift; sourceTree = "<group>"; };
+		FBE102482B0EAD0C002041A2 /* AddPersonalizedHealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonalizedHealthDataView.swift; sourceTree = "<group>"; };
+		FBE1024A2B0EBB6A002041A2 /* AddHealthDataRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHealthDataRecordView.swift; sourceTree = "<group>"; };
+		FBE1024C2B0EC0EC002041A2 /* AddDataRecordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataRecordListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +157,7 @@
 				6E5219AB2ADF6CFA00220B6E /* SintoCheckApp.swift */,
 				6E5219AD2ADF6CFA00220B6E /* ContentView.swift */,
 				6E6154952B0C377E006D7C36 /* SwitchView.swift */,
+				FBE1024A2B0EBB6A002041A2 /* AddHealthDataRecordView.swift */,
 				6E5219B92ADF6D1900220B6E /* ProfileView.swift */,
 				6E4B38C02AFDC82700D93CD5 /* Types */,
 				6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */,
@@ -162,6 +169,8 @@
 				6E5219BB2ADF6D3800220B6E /* SettingsView.swift */,
 				FBE102462B0EA0E4002041A2 /* NoTrackedHealthDataView.swift */,
 				FB50E6B92B0DB57B006E5BF0 /* ModifyHealthDataListView.swift */,
+				FBE102482B0EAD0C002041A2 /* AddPersonalizedHealthDataView.swift */,
+				FBE1024C2B0EC0EC002041A2 /* AddDataRecordListView.swift */,
 				FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */,
 				FB9BE86C2AE72EF100CFEDAB /* RegisterView.swift */,
 				FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */,
@@ -274,7 +283,9 @@
 				6E4B38DD2AFDC82700D93CD5 /* PatientUpdateRequest.swift in Sources */,
 				FB03170E2B0C2643000F9A97 /* utils.swift in Sources */,
 				6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */,
+				FBE1024D2B0EC0EC002041A2 /* AddDataRecordListView.swift in Sources */,
 				FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */,
+				FBE102492B0EAD0C002041A2 /* AddPersonalizedHealthDataView.swift in Sources */,
 				FB9BE86D2AE72EF100CFEDAB /* RegisterView.swift in Sources */,
 				6E4B38D32AFDC82700D93CD5 /* HealthDataRecordResponse.swift in Sources */,
 				6E5219AC2ADF6CFA00220B6E /* SintoCheckApp.swift in Sources */,
@@ -283,6 +294,7 @@
 				6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */,
 				6E4B38E02AFDDB2100D93CD5 /* HealthDataDetailView.swift in Sources */,
 				6E4B38DB2AFDC82700D93CD5 /* NoteRequest.swift in Sources */,
+				FBE1024B2B0EBB6A002041A2 /* AddHealthDataRecordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

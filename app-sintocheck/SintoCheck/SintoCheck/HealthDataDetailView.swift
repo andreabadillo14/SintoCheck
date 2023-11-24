@@ -30,5 +30,5 @@ struct HealthDataDetailView: View {
 }
 
 #Preview {
-    HealthDataDetailView(AHealthData: PersonalizedHealthDataRequest(id: UUID(), name: "Tos", quantitative: false, patientId: 1, rangeMin: 1, rangeMax: 10, unit: "n/a"))
+    HealthDataDetailView(AHealthData: PersonalizedHealthDataRequest(name: "Tos", quantitative: false, patientId: "", rangeMin: 1, rangeMax: 10, unit: "n/a"))
 }
