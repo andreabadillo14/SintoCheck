@@ -104,10 +104,11 @@ struct Cell: View {
             if oneHealthData.quantitative {
                 // Display an icon for quantitative data
                 Image(systemName: "heart.circle.fill")
-                    .foregroundColor(.blue) // You can customize the color
+                    .foregroundColor(Color(red: 168/255, green: 183/255, blue: 171/255))
                     .padding(.trailing, 4)
             } else {
                 Image(systemName: "heart.square.fill")
+                    .foregroundColor(Color(red: 246/255, green: 226/255, blue: 127/255))
             }
 
             Text(oneHealthData.name)

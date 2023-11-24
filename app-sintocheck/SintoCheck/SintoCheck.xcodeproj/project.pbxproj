@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2B78302B0FD18F00DA027D /* HealthDataNoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B782F2B0FD18F00DA027D /* HealthDataNoteDetailView.swift */; };
 		6E41CFC22AE2F823007BD83B /* DoctorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */; };
 		6E41DA722AE21E1500BC3ECD /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E41DA712AE21E1500BC3ECD /* Patient.swift */; };
 		6E4B38D12AFDC82700D93CD5 /* PatientSignupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4B38C22AFDC82700D93CD5 /* PatientSignupResponse.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E2B782F2B0FD18F00DA027D /* HealthDataNoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataNoteDetailView.swift; sourceTree = "<group>"; };
 		6E41CFC12AE2F823007BD83B /* DoctorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorDetailsView.swift; sourceTree = "<group>"; };
 		6E41DA712AE21E1500BC3ECD /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
 		6E4B38C22AFDC82700D93CD5 /* PatientSignupResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientSignupResponse.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				6EB9D4B12AE06E7700740DFF /* HealthData.swift */,
 				6E87BF402ADFB3C200FEF0DA /* MedicalDataView.swift */,
 				6E87BF3E2ADFA52100FEF0DA /* HealthDataDetails.swift */,
+				6E2B782F2B0FD18F00DA027D /* HealthDataNoteDetailView.swift */,
 				6E4B38DF2AFDDB2100D93CD5 /* HealthDataDetailView.swift */,
 				6E5219BB2ADF6D3800220B6E /* SettingsView.swift */,
 				FBE102462B0EA0E4002041A2 /* NoTrackedHealthDataView.swift */,
@@ -271,6 +274,7 @@
 				6E4B38DA2AFDC82700D93CD5 /* PatientSignupRequest.swift in Sources */,
 				6E4B38DE2AFDC82700D93CD5 /* DoctorSignupRequest.swift in Sources */,
 				6E4B38D82AFDC82700D93CD5 /* DoctorPatientRelationshipRequest.swift in Sources */,
+				6E2B78302B0FD18F00DA027D /* HealthDataNoteDetailView.swift in Sources */,
 				6E4B38DD2AFDC82700D93CD5 /* PatientUpdateRequest.swift in Sources */,
 				FB03170E2B0C2643000F9A97 /* utils.swift in Sources */,
 				6E87BF3F2ADFA52100FEF0DA /* HealthDataDetails.swift in Sources */,
