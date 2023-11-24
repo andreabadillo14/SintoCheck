@@ -42,7 +42,7 @@ struct AddDataRecordListView: View {
                             })
                         }
                     } else {
-                        Text("No hay datos disponibles.")
+                        NoTrackedHealthDataView(standardList: $standardList, personalizedList: $personalizedList)
                     }
                 }
             }
