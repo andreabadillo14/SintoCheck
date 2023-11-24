@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterHealthDataView: View {
-    var healthData: HealthDataResponse
+    @Binding var healthData: HealthDataResponse
     @State var patientData = AuthenticationResponse()
     @Environment(\.dismiss) var dismissView
     
@@ -16,6 +16,11 @@ struct RegisterHealthDataView: View {
     @State var note = ""
     @State var registerSuccessful = false
     @State var showErrorAlert = false
+    
+    @State var previewHealthData: [HealthDataResponse]? = [
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+    ]
     
     func postRegisterData() async {
         print("ola")
@@ -47,7 +52,6 @@ struct RegisterHealthDataView: View {
             
             print(httpResponse.statusCode)
             if httpResponse.statusCode == 200 {
-                print("success")
                 self.registerSuccessful = true
             } else {
                 // If the login fails, show an alert
@@ -115,6 +119,9 @@ struct RegisterHealthDataView: View {
                                         await postRegisterData()
                                     }
                                 }
+                                .fullScreenCover(isPresented: $registerSuccessful, content: {
+                                    AddHealthDataRecordView(personalizedList:$previewHealthData, standardList: $previewHealthData )
+                                })
                             }
                             .padding()
                         }
@@ -146,11 +153,7 @@ struct RegisterHealthDataView: View {
 
 struct RegisterHealthDataView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterHealthDataView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""))
+        @State var previewHealthData = HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        RegisterHealthDataView(healthData: $previewHealthData)
     }
 }
-
-//#Preview {
-//    RegisterHealthDataView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""))
-//    RegisterHealthDataView(healthData: HealthDataResponse(id: 1, name: "Temperatura", quantitative: true, patientId: 1, rangeMin: 1, rangeMax: 10, unit: "C"))
-//}
