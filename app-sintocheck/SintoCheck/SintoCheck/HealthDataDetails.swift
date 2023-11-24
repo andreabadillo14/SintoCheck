@@ -11,6 +11,9 @@ struct HealthDataDetails: View {
     
     @State var patientData = AuthenticationResponse()
     @State var trackedHealthDataList : [HealthDataResponse]?
+    @Binding var personalizedList : [HealthDataResponse]?
+    @Binding var standardList : [HealthDataResponse]?
+    
     @State var getSuccessful = false
     
     enum FileReaderError: Error {
@@ -49,7 +52,7 @@ struct HealthDataDetails: View {
                     .ignoresSafeArea()
                 VStack {
                     
-                    if getSuccessful {
+                    if trackedHealthDataList?.isEmpty == false {
                         // Show your list and other content when successful
                         Section {
                             Text("Datos de salud")
@@ -67,7 +70,7 @@ struct HealthDataDetails: View {
                         }
                     } else {
                         // Show another view when not successful
-                        NoTrackedHealthDataView()
+                        NoTrackedHealthDataView(standardList: $standardList, personalizedList: $personalizedList)
                     }
                     
                 }
@@ -117,7 +120,12 @@ struct Cell: View {
 }
 
 struct HealthDataDetails_Previews: PreviewProvider {
+    @State static var previewHealthData: [HealthDataResponse]? = [
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
+    ]
+    
     static var previews: some View {
-        HealthDataDetails()
+        HealthDataDetails(personalizedList: $previewHealthData, standardList: $previewHealthData)
     }
 }

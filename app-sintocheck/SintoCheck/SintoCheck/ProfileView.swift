@@ -10,6 +10,8 @@ import SwiftUI
 struct ProfileView: View {
     
     @State var patientData : AuthenticationResponse?
+    @Binding var personalizedList : [HealthDataResponse]?
+    @Binding var standardList : [HealthDataResponse]?
     //@State var APatient : PatientSignupRequest
     
 //    var patients = [
@@ -126,7 +128,7 @@ struct ProfileView: View {
                                         .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                     Text("Detalles personales médicos")
                                 }
-                                    NavigationLink(destination: HealthDataDetails()) {
+                                    NavigationLink(destination: HealthDataDetails(personalizedList: $personalizedList, standardList: $standardList)) {
                                         Image(systemName: "heart.fill")
                                             .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                         Text("Detalles de datos de salud")
@@ -181,8 +183,13 @@ struct ProfileView: View {
 
 
 struct ProfileView_Previews: PreviewProvider {
+    @State static var previewHealthData: [HealthDataResponse]? = [
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
+    ]
+    
     static var previews: some View {
-        ProfileView()
+        ProfileView(personalizedList: $previewHealthData, standardList: $previewHealthData)
     }
 }
 

@@ -36,8 +36,10 @@ struct NoTrackedHealthDataView: View {
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width - 200)
                 }
+                .background(azul)
+                .cornerRadius(10)
                 .fullScreenCover(isPresented: $modifyList) {
-                    ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""), standardList: $standardList, personalizedList: $personalizedList)
+                    ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""), standardList: $standardList, personalizedList: $personalizedList)
                 }
             }
         }
@@ -46,8 +48,8 @@ struct NoTrackedHealthDataView: View {
 struct NoTrackedHealthDataView_Previews: PreviewProvider {
     static var previews: some View {
     @State var previewHealthData: [HealthDataResponse]? = [
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
     ]
         NoTrackedHealthDataView(standardList: $previewHealthData, personalizedList: $previewHealthData)
     }

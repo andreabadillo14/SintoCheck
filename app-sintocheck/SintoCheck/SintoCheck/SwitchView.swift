@@ -82,14 +82,14 @@ struct SwitchView : View {
     var body: some View {
         VStack{
             TabView(selection: $selectedTab) {
-                ProfileView()
+                ProfileView(personalizedList: $personalizedList, standardList: $standardList)
                     .tabItem {
                         Image(systemName: "person")
                         Text("Perfil")
                     }
                     .tag(0)
                 
-                AddDataRecordListView(standardList: $standardList, personalizedList: $personalizedList, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: ""))
+                AddDataRecordListView(standardList: $standardList, personalizedList: $personalizedList, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""))
                     .tabItem {
                         Image(systemName: "plus")
                         Text("Añadir registro")
@@ -103,6 +103,7 @@ struct SwitchView : View {
                     }
                     .tag(2)
             }
+            .accentColor(Color(red: 26/255, green: 26/255, blue: 102/255))
         }
         .onAppear {
                 selectedTab = 0 // Set the default selected tab to be the profile view

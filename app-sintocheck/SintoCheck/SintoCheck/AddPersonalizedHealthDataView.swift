@@ -223,5 +223,5 @@ struct AddPersonalizedHealthDataView: View {
 }
 
 #Preview {
-    AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, selectedOption: .cualitativo)
+    AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, selectedOption: .cualitativo)
 }
