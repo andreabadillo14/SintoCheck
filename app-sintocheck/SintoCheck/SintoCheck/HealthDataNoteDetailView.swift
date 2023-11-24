@@ -42,11 +42,19 @@ struct HealthDataNoteDetailView: View {
                     .padding(.trailing, 10)
             }
             
-            Text(note)
-                .padding()
-                .background(Color(red: 226/255, green: 195/255, blue: 145/255))
-                .cornerRadius(10)
-                .padding()
+            if (note == "") {
+                Text("La nota no tiene contenido :(")
+                    .padding()
+                    .background(Color(red: 226/255, green: 195/255, blue: 145/255))
+                    .cornerRadius(10)
+                    .padding()
+            } else {
+                Text(note)
+                    .padding()
+                    .background(Color(red: 226/255, green: 195/255, blue: 145/255))
+                    .cornerRadius(10)
+                    .padding()
+            }
             
             Spacer()
             Spacer()
