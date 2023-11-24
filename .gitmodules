@@ -1,3 +1,6 @@
 [submodule "SintoCheck-Backend"]
 	path = SintoCheck-Backend
 	url = https://github.com/Diego-HC/SintoCheck-Backend
+[submodule "SintoCheck-Web"]
+	path = SintoCheck-Web
+	url = https://github.com/Diego-HC/SintoCheck-Web.git
