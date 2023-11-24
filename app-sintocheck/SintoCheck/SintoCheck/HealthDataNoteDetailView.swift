@@ -44,7 +44,6 @@ struct HealthDataNoteDetailView: View {
             
             Text(note)
                 .padding()
-                //.background(Color.blue.opacity(0.2))
                 .background(Color(red: 226/255, green: 195/255, blue: 145/255))
                 .cornerRadius(10)
                 .padding()

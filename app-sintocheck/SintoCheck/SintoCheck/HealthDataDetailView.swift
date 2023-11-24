@@ -52,6 +52,23 @@ struct HealthDataDetailView: View {
         return String(dateString.prefix(10))
     }
     
+    func dateLabelForIndex(_ index: AxisValue, in healthDataList: [HealthDataRecordResponse]) -> String {
+        guard let indexValue = index.index as? Int, indexValue >= 0 && indexValue < healthDataList.count else {
+            return ""
+        }
+        return formattedDate(healthDataList[indexValue].createdAt)
+    }
+    
+//    func dateLabelForIndex(_ index: AxisValue, in healthDataList: [HealthDataRecordResponse]) -> String {
+//        print(index)
+//        guard let stringValue = index.as(String.self),
+//              let indexValue = Int(stringValue),
+//              indexValue >= 0 && indexValue < healthDataList.count else {
+//            return "vacío"
+//        }
+//        return formattedDate(healthDataList[indexValue].createdAt)
+//    }
+    
     var body: some View {
         ZStack {
             Color("Backgrounds")
@@ -61,31 +78,43 @@ struct HealthDataDetailView: View {
                     .font(.title)
                     .bold()
                 
-                Chart {
-                    ForEach(healthDataList ?? [], id: \.id) { healthData in
-                        LineMark(x: .value("Fecha de registro", (healthData.createdAt)),
-                                 y: .value("Dato de salud", healthData.value))
+                if healthDataList?.count ?? 0 == 1 {
+                    Image(systemName: "arrow.clockwise.heart.fill")
+                        .resizable()
+                        .frame(width:50, height: 50)
+                        .padding()
+                    Text("Solo cuentas con un registro en este dato, por el momento no es posible mostrar la gráfica")
+                        .padding()
+                        .background(Color(red: 226/255, green: 195/255, blue: 145/255))
+                        .cornerRadius(10)
+                        .padding()
+                } else {
+                    Chart {
+                        ForEach(healthDataList ?? [], id: \.id) { healthData in
+                            LineMark(x: .value("Fecha de registro", (healthData.createdAt)),
+                                     y: .value("Dato de salud", healthData.value))
+                            
+                        }
                         
                     }
-                    
-                }
-                .foregroundStyle(
-                    LinearGradient(colors: [
-                        Color(red: 168/255, green: 183/255, blue: 171/255),
-                        Color(red: 246/255, green: 226/255, blue: 127/255),
-                        Color(red: 155/255, green: 190/255, blue: 199/255)
-                        
-                    ],
-                    startPoint: .leading,
-                    endPoint: .trailing)
-                )
-                .frame(height: 270)
-                .padding()
-                .chartYScale(domain: [rangeMin, rangeMax])
-                .chartXAxis {
-                    AxisMarks {
-                        AxisValueLabel {
-                            Text(formattedDate(AHealthData.createdAt))
+                    .foregroundStyle(
+                        LinearGradient(colors: [
+                            Color(red: 168/255, green: 183/255, blue: 171/255),
+                            Color(red: 246/255, green: 226/255, blue: 127/255),
+                            Color(red: 155/255, green: 190/255, blue: 199/255)
+                            
+                        ],
+                        startPoint: .leading,
+                        endPoint: .trailing)
+                    )
+                    .frame(height: 270)
+                    .padding()
+                    .chartYScale(domain: [rangeMin, rangeMax])
+                    .chartXAxis {
+                        AxisMarks(position: .bottom) { index in
+                            AxisValueLabel {
+                                Text(dateLabelForIndex(index, in: healthDataList ?? []))
+                            }
                         }
                     }
                 }
@@ -142,12 +171,18 @@ struct HealthDataDetailView: View {
                         let healthData = try await getValuesOfHealthData(healthDataId: healthDataID)
                         healthDataList = healthData
                         
-                        rangeMin = AHealthData.rangeMin ?? 1
-                        rangeMax = AHealthData.rangeMax ?? 10
+                        if (AHealthData.quantitative) {
+                            rangeMin = AHealthData.rangeMin ?? 1
+                            rangeMax = AHealthData.rangeMax ?? 10
+                        } else if (AHealthData.quantitative == false) {
+                            rangeMin = 1
+                            rangeMax = 10
+                        }
                         
-                        let dateforr = AHealthData.createdAt
-                        let datefor = formattedDate(dateforr)
-                        print("fecha disque formateada \(datefor)")
+//                        let dateforr = AHealthData.createdAt
+//                        let datefor = formattedDate(dateforr)
+//                        print("fecha disque formateada \(datefor)")
+                        //print("aa \(healthDataList?[0].value ?? 0.0)")
                     } catch let error as FileReaderError {
                         print(error)
                         switch error {
