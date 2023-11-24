@@ -212,7 +212,7 @@ struct ProfileView: View {
                                 
                             }
                             
-                            Spacer(minLength: 195)
+                            Spacer(minLength: 175)
                         }
                         .padding()
                         

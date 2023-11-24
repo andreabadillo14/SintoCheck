@@ -58,6 +58,10 @@ struct MedicalDataView: View {
         }
     }
     
+    func formattedDate(_ dateString: String) -> String {
+        return String(dateString.prefix(10))
+    }
+    
     var body: some View {
         ZStack {
             Color("Backgrounds")
@@ -73,7 +77,8 @@ struct MedicalDataView: View {
                             Text("Fecha de nacimiento")
                             Spacer()
                             if let patientData = patientData {
-                                Text(patientData.birthdate ?? "")
+                                let birthdate = patientData.birthdate
+                                Text(formattedDate(birthdate ?? ""))
                                     .opacity(0.8)
                             }
                             
