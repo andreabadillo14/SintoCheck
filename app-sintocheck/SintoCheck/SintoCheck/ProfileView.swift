@@ -13,6 +13,13 @@ struct ImageAPI: Codable, Equatable {
     let url: String
 }
 
+var placeholderImage: some View {
+        Image(systemName: "person.crop.circle.fill")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 100, height: 100)
+            .clipShape(Circle())
+    }
 
 struct ProfileView: View {
     @State var patientData : AuthenticationResponse?
@@ -21,6 +28,9 @@ struct ProfileView: View {
     @State var showPhotosPicker: Bool = false
     @State private var photosPickerItem: PhotosPickerItem?
     @State private var url:ImageAPI?
+    @Environment(\.colorScheme) var colorScheme
+    @Binding var isDismissed: Bool
+
 
     
     enum FileReaderError: Error {
@@ -116,6 +126,7 @@ struct ProfileView: View {
 //                                .padding(.leading)
 //                                
 //                            }
+                            
                             HStack(alignment: .center) {
                                 Menu {
                                     Button("Cambiar foto de perfil") {
@@ -130,22 +141,14 @@ struct ProfileView: View {
                                                 .frame(width: 100, height: 100)
                                                 .clipShape(.circle)
                                         } placeholder: {
-                                            Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 100, height: 100)
-                                                .clipShape(.circle)
+                                            placeholderImage
                                         }
                                         
                                     } else {
-                                        Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 100, height: 100)
-                                            .clipShape(.circle)
+                                        placeholderImage
                                     }
                                     
-                                }.foregroundColor(Color.black)
+                                }.foregroundColor(colorScheme == .light ? Color.black : Color.white)
                                 
                                 
                                 VStack(alignment: .leading) { // esto sigue hardcordeado
@@ -165,12 +168,12 @@ struct ProfileView: View {
                             
                             Section {
                                 List {
-                                    NavigationLink(destination: MedicalDataView()) {
+                                    NavigationLink(destination: MedicalDataView(isDismissed: $isDismissed)) {
                                     Image(systemName: "aqi.medium")
                                         .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                     Text("Detalles personales médicos")
                                 }
-                                    NavigationLink(destination: HealthDataDetails()) {
+                                    NavigationLink(destination: HealthDataDetails(isDismissed: $isDismissed)) {
                                         Image(systemName: "heart.fill")
                                             .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                         Text("Detalles de datos de salud")
@@ -181,12 +184,12 @@ struct ProfileView: View {
                             }
                             Section {
                                 List {
-                                    NavigationLink(destination: DoctorDetailsView()) {
+                                    NavigationLink(destination: DoctorDetailsView(isDismissed: $isDismissed)) {
                                         Image(systemName: "book.pages")
                                             .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                         Text("Detalles de médico")
                                     }
-                                    NavigationLink(destination: MedicalLinkView(exito: $seRegistroDoctor, mensajeLink: $mensajeEnlace)) {
+                                    NavigationLink(destination: MedicalLinkView(exito: $seRegistroDoctor, mensajeLink: $mensajeEnlace, isDismissed: $isDismissed)) {
                                         Image(systemName: "person.crop.circle.badge.plus")
                                             .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                         Text("Enlazar a un médico")
@@ -243,9 +246,12 @@ struct ProfileView: View {
                 .onAppear {
                     handlePatientData()
                     //obtener el url del endpoint para paciente luego
-                    fetchImage() { url in
-                        self.url = url
+                    if let patientData = patientData {
+                        fetchImage(patientId: patientData.id, patientToken: patientData.token) { url in
+                            self.url = url
+                        }
                     }
+                    
                 }
                 .background(Color.clear)
                 .alert("\(mensajeEnlace)", isPresented: $seRegistroDoctor, actions: {})
@@ -255,13 +261,16 @@ struct ProfileView: View {
                         if let photosPickerItem,
                            let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
                             if let image = UIImage(data: data) {
-                                sendImage(image: image) {
-                                    fetchImage() { url in
-                                        DispatchQueue.main.async {
-                                                self.url = url
+                                if let patientData = patientData {
+                                    sendImage(image: image, patientId: patientData.id, patientToken: patientData.token) {
+                                        fetchImage(patientId: patientData.id, patientToken: patientData.token) { url in
+                                            DispatchQueue.main.async {
+                                                    self.url = url
+                                            }
                                         }
                                     }
                                 }
+                                
                             }
                         }
                     }
@@ -279,7 +288,7 @@ struct ProfileView: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(isDismissed: .constant(false))
     }
 }
 

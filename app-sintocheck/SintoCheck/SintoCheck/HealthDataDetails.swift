@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct HealthDataDetails: View {
-    
+    @Binding var isDismissed: Bool
+    @Environment(\.dismiss) var dismiss
+
     var healthData = [
         PersonalizedHealthDataRequest(id: UUID(), name: "Tos", quantitative: false, patientId: 1, rangeMin: 1, rangeMax: 10, unit: "n/a"),
         PersonalizedHealthDataRequest(id: UUID(), name: "Fiebre", quantitative: true, patientId: 1, rangeMin: 35, rangeMax: 42, unit: "C"),
@@ -36,6 +38,10 @@ struct HealthDataDetails: View {
                     }
                 }
             }
+        }.onChange(of: isDismissed) { oldValue, newValue in
+            if oldValue != newValue {
+                dismiss()
+            }
         }
     }
 }
@@ -52,6 +58,6 @@ struct Cell: View {
 
 struct HealthDataDetails_Previews: PreviewProvider {
     static var previews: some View {
-        HealthDataDetails()
+        HealthDataDetails(isDismissed: .constant(false))
     }
 }

@@ -24,6 +24,26 @@ struct addNote: View {
     @State private var alertValidation = false
     @State private var alertValidationMessage = ""
     @State var note: Note?
+    
+    @State var patientData : AuthenticationResponse?
+
+    func handlePatientData() {
+        do {
+            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                // File does not exist, handle this case accordingly
+                print("Login response file not found")
+                return
+            }
+
+            patientData = try getPatientData()
+        } catch let error {
+            print("An error occurred while retrieving patient data: \(error)")
+        }
+    }
+    
     var body: some View {
         VStack {
             Spacer()
@@ -55,9 +75,12 @@ struct addNote: View {
             Spacer()
             Button {
                 if (titulo != "" && contenido != "") {
-                    addNoteAPI(title: titulo, content: contenido) { note in
-                        self.note = note
+                    if let patientData = patientData {
+                        addNoteAPI(title: titulo, content: contenido, patientId: patientData.id, patientToken: patientData.token) { note in
+                            self.note = note
+                        }
                     }
+                    
                 } else {
                     if (titulo == "" && contenido == "") {
                         alertValidation = true
@@ -91,6 +114,8 @@ struct addNote: View {
             
         }.onTapGesture {
             UIApplication.shared.endEditing()
+        }.onAppear {
+            handlePatientData()
         }
         
     }

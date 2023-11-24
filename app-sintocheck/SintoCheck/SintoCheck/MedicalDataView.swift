@@ -11,7 +11,8 @@ struct MedicalDataView: View {
     //var APatient : Patient
     //var APatient : PatientSignupRequest
     @State var patientData : AuthenticationResponse?
-    
+    @Environment(\.dismiss) var dismiss
+    @Binding var isDismissed: Bool
     
     enum FileReaderError: Error {
         case fileNotFound
@@ -129,6 +130,10 @@ struct MedicalDataView: View {
                 //Task {
                     handlePatientData()
                 //}
+            }.onChange(of: isDismissed) { oldValue, newValue in
+                if oldValue != newValue {
+                    dismiss()
+                }
             }
         }
 
@@ -138,6 +143,6 @@ struct MedicalDataView: View {
 struct MedicalDataView_Previews: PreviewProvider {
     static var previews: some View {
 //        MedicalDataView(APatient: PatientSignupRequest(name: "Hermenegildo",phone: "81-1234-1234", password: "mundo", birthdate: "1934-04-23", height: 1.65, weight: 0, medicine: "no", medicalBackground: "no"))
-        MedicalDataView()
+        MedicalDataView(isDismissed: .constant(false))
     }
 }

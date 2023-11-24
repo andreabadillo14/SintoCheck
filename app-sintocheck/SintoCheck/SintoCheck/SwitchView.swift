@@ -7,13 +7,29 @@
 
 import SwiftUI
 
+
+extension Binding {
+    func onUpdate(_ closure: @escaping () -> Void) -> Binding<Value> {
+        Binding(get: {
+            wrappedValue
+        }, set: { newValue in
+            wrappedValue = newValue
+            closure()
+        })
+    }
+}
+
 struct SwitchView: View {
-    
     @State private var selectedTab = 0
+    //en vez de state sacarlo de un viewModel
+    @State var isDismissed: Bool = false
     
     var body: some View {
-        TabView(selection: $selectedTab) {
-                    ProfileView()
+        TabView(selection: $selectedTab.onUpdate{
+            isDismissed.toggle()
+            print(isDismissed)
+        }) {
+                    ProfileView(isDismissed: $isDismissed)
                         .tabItem {
                             Image(systemName: "person")
                             Text("Perfil")

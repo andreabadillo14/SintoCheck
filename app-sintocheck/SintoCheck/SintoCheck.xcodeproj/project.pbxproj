@@ -42,6 +42,7 @@
 		9E64DB3A2B0B3EE900C21C83 /* codeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64DB392B0B3EE900C21C83 /* codeField.swift */; };
 		9E64DB3C2B0B3EF500C21C83 /* fullCodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E64DB3B2B0B3EF500C21C83 /* fullCodeField.swift */; };
 		9E6F8E372B0B459F00138EE8 /* requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E6F8E362B0B459F00138EE8 /* requests.swift */; };
+		9EBB9B162B105ED2000976F1 /* isDismissedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EBB9B152B105ED2000976F1 /* isDismissedViewModel.swift */; };
 		FB03170E2B0C2643000F9A97 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB03170D2B0C2643000F9A97 /* utils.swift */; };
 		FB1793942B019C07006CF12C /* RegisterOptionalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */; };
 		FB9BE86B2AE72ECC00CFEDAB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */; };
@@ -86,6 +87,7 @@
 		9E64DB392B0B3EE900C21C83 /* codeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = codeField.swift; sourceTree = "<group>"; };
 		9E64DB3B2B0B3EF500C21C83 /* fullCodeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fullCodeField.swift; sourceTree = "<group>"; };
 		9E6F8E362B0B459F00138EE8 /* requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = requests.swift; sourceTree = "<group>"; };
+		9EBB9B152B105ED2000976F1 /* isDismissedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isDismissedViewModel.swift; sourceTree = "<group>"; };
 		FB03170D2B0C2643000F9A97 /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		FB1793932B019C07006CF12C /* RegisterOptionalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterOptionalDataView.swift; sourceTree = "<group>"; };
 		FB9BE86A2AE72ECC00CFEDAB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 		6E5219AA2ADF6CFA00220B6E /* SintoCheck */ = {
 			isa = PBXGroup;
 			children = (
+				9EBB9B152B105ED2000976F1 /* isDismissedViewModel.swift */,
 				6E5219AB2ADF6CFA00220B6E /* SintoCheckApp.swift */,
 				6E5219AD2ADF6CFA00220B6E /* ContentView.swift */,
 				6E6154952B0C377E006D7C36 /* SwitchView.swift */,
@@ -319,6 +322,7 @@
 				6E5219AC2ADF6CFA00220B6E /* SintoCheckApp.swift in Sources */,
 				9E3956F02AFD8E5800BE4298 /* DoctorDetails.swift in Sources */,
 				6E4B38DC2AFDC82700D93CD5 /* HealthDataRecordRequest.swift in Sources */,
+				9EBB9B162B105ED2000976F1 /* isDismissedViewModel.swift in Sources */,
 				6E4B38D22AFDC82700D93CD5 /* AuthenticationResponse.swift in Sources */,
 				6E87BF412ADFB3C200FEF0DA /* MedicalDataView.swift in Sources */,
 				6E4B38E02AFDDB2100D93CD5 /* HealthDataDetailView.swift in Sources */,
