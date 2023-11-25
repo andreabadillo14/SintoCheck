@@ -2,19 +2,33 @@
 //  ProfileView.swift
 //  perfil-SintoCheck
 //
-//  Created by Andrea Badillo on 10/16/23.
+//  Created by Andrea Badillo
+//on 10/16/23.
 //
 
 import SwiftUI
+import PhotosUI
+
+struct ImageAPI: Codable, Equatable {
+    let url: String
+}
+
 
 struct ProfileView: View {
-    
     @State var patientData : AuthenticationResponse?
+    @Binding var personalizedList : [HealthDataResponse]?
+    @Binding var standardList : [HealthDataResponse]?
     //@State var APatient : PatientSignupRequest
     
 //    var patients = [
 //        Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
 //    ]
+    @State var seRegistroDoctor = false
+    @State var mensajeEnlace = ""
+    @State var showPhotosPicker: Bool = false
+    @State private var photosPickerItem: PhotosPickerItem?
+    @State private var url:ImageAPI?
+
     
     enum FileReaderError: Error {
         case fileNotFound
@@ -87,27 +101,82 @@ struct ProfileView: View {
                         .ignoresSafeArea()
                     VStack {
                         VStack {
+                            
+                            Image("Logo Chiquito")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+ 
+                            Divider()
+                                .background(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                .frame(width: .infinity, height: 1)
+                                
                             Text("Mi perfil")
                                 .bold()
                                 .font(.largeTitle)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             
                             
+//                            HStack(alignment: .center) {
+//                                Image(systemName: "person.circle.fill")
+//                                    .resizable()
+//                                    .aspectRatio(contentMode: .fit)
+//                                    .frame(width: 73)
+//                                    .padding(.leading, -60)
+//                                
+//                                VStack(alignment: .leading) {
+//                                    if let patientData = patientData{
+//                                        Text("\(patientData.name)")
+//                                        Text("\(patientData.phone)")
+//                                    }
+//                                }
+//                                .padding(.leading)
+//                                
+//                            }
                             HStack(alignment: .center) {
-                                Image(systemName: "person.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 73)
-                                    .padding(.leading, -60)
+                                Menu {
+                                    Button("Cambiar foto de perfil") {
+                                        showPhotosPicker = true
+                                    }
+                                } label: {
+                                    if let url = url {
+                                        AsyncImage(url: URL(string: url.url)) { image in
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 100, height: 100)
+                                                .clipShape(.circle)
+                                        } placeholder: {
+                                            Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fill)
+                                                .frame(width: 100, height: 100)
+                                                .clipShape(.circle)
+                                        }
+                                        
+                                    } else {
+                                        Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fill)
+                                            .frame(width: 100, height: 100)
+                                            .clipShape(.circle)
+                                    }
+                                    
+                                }.foregroundColor(Color.black)
                                 
-                                VStack(alignment: .leading) {
+                                
+                                VStack(alignment: .leading) { // esto sigue hardcordeado
                                     if let patientData = patientData{
                                         Text("\(patientData.name)")
                                         Text("\(patientData.phone)")
                                     }
                                 }
                                 .padding(.leading)
-                            }
+                                Spacer()
+                            }.padding(.leading, 20)
+                            
+                            
+                            
+                            
                             Spacer()
                             
                             Section {
@@ -117,7 +186,7 @@ struct ProfileView: View {
                                         .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                     Text("Detalles personales médicos")
                                 }
-                                    NavigationLink(destination: HealthDataDetails()) {
+                                    NavigationLink(destination: HealthDataDetails(personalizedList: $personalizedList, standardList: $standardList)) {
                                         Image(systemName: "heart.fill")
                                             .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                         Text("Detalles de datos de salud")
@@ -133,7 +202,7 @@ struct ProfileView: View {
                                             .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                         Text("Detalles de médico")
                                     }
-                                    NavigationLink(destination: DoctorDetailsView()) {
+                                    NavigationLink(destination: MedicalLinkView(exito: $seRegistroDoctor, mensajeLink: $mensajeEnlace)) {
                                         Image(systemName: "person.crop.circle.badge.plus")
                                             .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                         Text("Enlazar a un médico")
@@ -143,38 +212,7 @@ struct ProfileView: View {
                                 
                             }
                             
-                            //                        Section {
-                            //                            List {
-                            //
-                            //
-                            //                            }
-                            //                        }
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
-                            Spacer()
+                            Spacer(minLength: 175)
                         }
                         .padding()
                         
@@ -189,8 +227,30 @@ struct ProfileView: View {
                 
                 .onAppear {
                     handlePatientData()
+                    //obtener el url del endpoint para paciente luego
+                    fetchImage() { url in
+                        self.url = url
+                    }
                 }
                 .background(Color.clear)
+                .alert("\(mensajeEnlace)", isPresented: $seRegistroDoctor, actions: {})
+                .photosPicker(isPresented: $showPhotosPicker, selection: $photosPickerItem, matching: .images)
+                .onChange(of: photosPickerItem) { _, _ in
+                    Task {
+                        if let photosPickerItem,
+                           let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
+                            if let image = UIImage(data: data) {
+                                sendImage(image: image) {
+                                    fetchImage() { url in
+                                        DispatchQueue.main.async {
+                                                self.url = url
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
                 //.navigationTitle("Mi perfil")
                 //            .task {
                 //                await getMedicalData()
@@ -203,8 +263,13 @@ struct ProfileView: View {
 
 
 struct ProfileView_Previews: PreviewProvider {
+    @State static var previewHealthData: [HealthDataResponse]? = [
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
+    ]
+    
     static var previews: some View {
-        ProfileView()
+        ProfileView(personalizedList: $previewHealthData, standardList: $previewHealthData)
     }
 }
 

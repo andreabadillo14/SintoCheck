@@ -29,7 +29,7 @@ struct RegisterView: View {
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .foregroundColor(Color.black)
-            Text("Introduce tu Informacion")
+            Text("Introduce tu Información")
                 .font(.title3)
             Text("Nombre")
                 .padding(.top, 25)
@@ -39,10 +39,10 @@ struct RegisterView: View {
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 4).stroke(phone != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
                 
-            Text("Telefono")
+            Text("Teléfono")
                 .padding(.top, 25)
                 .padding(.bottom, 15)
-            TextField("Telefono", text: $phone)
+            TextField("Teléfono", text: $phone)
                 .frame(height: 5)
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 4).stroke(phone != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
@@ -91,7 +91,7 @@ struct RegisterView: View {
             .cornerRadius(10)
             .padding(.top, 25)
             HStack{
-                Text("Ya tienes una cuenta?")
+                Text("¿Ya tienes una cuenta?")
                 Button(action: {
                     mostrarLogin = true
                 }){

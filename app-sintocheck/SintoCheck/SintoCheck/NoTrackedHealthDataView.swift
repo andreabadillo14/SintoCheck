@@ -15,7 +15,9 @@ struct NoTrackedHealthDataView: View {
         let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
         let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
         let verde = Color(red: 168/255, green: 183/255, blue: 171/255)
+    
         @State var modifyList = false
+    
         var body: some View {
             VStack{
                 Image(systemName: "pin.circle.fill")
@@ -34,12 +36,11 @@ struct NoTrackedHealthDataView: View {
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width - 200)
                 }
-                .fullScreenCover(isPresented: $modifyList) {
-                    ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""), standardList: $standardList, personalizedList: $personalizedList)
-                }
                 .background(azul)
                 .cornerRadius(10)
-                .padding(.top, 25)
+                .fullScreenCover(isPresented: $modifyList) {
+                    ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""), standardList: $standardList, personalizedList: $personalizedList)
+                }
             }
         }
     }
@@ -47,8 +48,8 @@ struct NoTrackedHealthDataView: View {
 struct NoTrackedHealthDataView_Previews: PreviewProvider {
     static var previews: some View {
     @State var previewHealthData: [HealthDataResponse]? = [
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
     ]
         NoTrackedHealthDataView(standardList: $previewHealthData, personalizedList: $previewHealthData)
     }

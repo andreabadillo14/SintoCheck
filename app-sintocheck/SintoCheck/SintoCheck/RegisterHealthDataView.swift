@@ -18,8 +18,8 @@ struct RegisterHealthDataView: View {
     @State var showErrorAlert = false
     
     @State var previewHealthData: [HealthDataResponse]? = [
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
     ]
     
     func postRegisterData() async {
@@ -153,7 +153,7 @@ struct RegisterHealthDataView: View {
 
 struct RegisterHealthDataView_Previews: PreviewProvider {
     static var previews: some View {
-        @State var previewHealthData = HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        @State var previewHealthData = HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
         RegisterHealthDataView(healthData: $previewHealthData)
     }
 }

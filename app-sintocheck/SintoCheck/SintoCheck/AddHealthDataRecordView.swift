@@ -53,7 +53,7 @@ struct AddHealthDataRecordView: View {
                 if listEmpty{
                     NoTrackedHealthDataView(standardList: $standardList, personalizedList: $personalizedList)
                 } else {
-                    AddDataRecordListView(standardList: $standardList, personalizedList: $personalizedList, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: ""))
+                    AddDataRecordListView(standardList: $standardList, personalizedList: $personalizedList, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""))
                 }
             }
         
@@ -83,8 +83,8 @@ struct AddHealthDataRecordView: View {
 struct AddHealthDataRecordListView_Previews: PreviewProvider {
     static var previews: some View {
     @State var previewHealthData: [HealthDataResponse]? = [
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
     ]
         AddHealthDataRecordView(personalizedList: $previewHealthData, standardList: $previewHealthData)
     }

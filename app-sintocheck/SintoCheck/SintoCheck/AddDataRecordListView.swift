@@ -49,7 +49,7 @@ struct AddDataRecordListView: View {
             .navigationBarItems(trailing: Button("Editar") {
                 editView = true
             }.fullScreenCover(isPresented: $editView, content: {
-                ModifyHealthDataListView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""), standardList: $standardList, personalizedList: $personalizedList)
+                ModifyHealthDataListView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""), standardList: $standardList, personalizedList: $personalizedList)
             }))
             .navigationBarItems(leading: Button("Regresar"){
                backView = true
@@ -63,12 +63,12 @@ struct AddDataRecordListView: View {
 
 struct AddDataRecordListView_Previews: PreviewProvider {
     @State static var previewHealthData: [HealthDataResponse]? = [
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
     ]
 
     static var previews: some View {
-        AddDataRecordListView(standardList: $previewHealthData, personalizedList: $previewHealthData, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: ""))
+        AddDataRecordListView(standardList: $previewHealthData, personalizedList: $previewHealthData, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""))
     }
 }
 

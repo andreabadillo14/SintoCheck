@@ -281,7 +281,7 @@ struct ModifyHealthDataListView: View {
                         Text("No hay datos disponibles.")
                     }
                     List{
-                        NavigationLink(destination: AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, selectedOption: .cualitativo)) { Text("Otro: ") }
+                        NavigationLink(destination: AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, selectedOption: .cualitativo)) { Text("Otro: ") }
                     }
                 }
             }
@@ -318,11 +318,11 @@ struct ModifyHealthDataListView: View {
 
 struct ModifyHealthDataListView_Previews: PreviewProvider {
     @State static var previewHealthData: [HealthDataResponse]? = [
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""),
-        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "")
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
+        HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: "")
     ]
 
     static var previews: some View {
-        ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: ""), standardList: $previewHealthData, personalizedList: $previewHealthData)
+        ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""), standardList: $previewHealthData, personalizedList: $previewHealthData)
     }
 }

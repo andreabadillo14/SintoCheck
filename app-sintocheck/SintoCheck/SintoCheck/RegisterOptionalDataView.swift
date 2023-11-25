@@ -101,7 +101,7 @@ struct RegisterOptionalDataView: View {
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(Color.black)
-                Text("Introduce tu Informacion")
+                Text("Introduce tu Información")
                     .font(.title3)
                 Text("Opcional")
                     .font(.caption)
@@ -191,6 +191,9 @@ struct RegisterOptionalDataView: View {
                 .fullScreenCover(isPresented: $registerSuccessful, content: {
                     ContentView()
                 })
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Invalid Input"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                }
             }
             .padding(.horizontal, 25)
         }
