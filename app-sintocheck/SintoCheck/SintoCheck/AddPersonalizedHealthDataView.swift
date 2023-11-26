@@ -19,6 +19,10 @@ struct AddPersonalizedHealthDataView: View {
     @State var rangeMax : Double
     @State var quantitative : Bool
     @State var registerSuccessful : Bool
+    @State var showAlert : Bool
+    
+    @State var alertTitle = ""
+    @State var alertText = ""
     
     let azul = Color(red: 26/255, green: 26/255, blue: 102/255)
     
@@ -28,8 +32,6 @@ struct AddPersonalizedHealthDataView: View {
     }
     
     @State var selectedOption: PickerOption
-    
-    
     
     func postHealthData() async throws -> HealthDataResponse{
         print("Entre aqui")
@@ -178,6 +180,11 @@ struct AddPersonalizedHealthDataView: View {
             rangeMax = Double(rangoSuperior) ?? 0.0
             if selectedOption == .cuantitativo{
                 quantitative = true
+                if  name == "" || rangoInferior == "" || rangoSuperior == "" || unidades == "" {
+                    showAlert = true
+                    alertText = "Por favor introduce todos los datos"
+                    return
+                }
             }
             Task {
                 do {
@@ -196,6 +203,7 @@ struct AddPersonalizedHealthDataView: View {
                 .padding(.vertical)
                 .frame(width: UIScreen.main.bounds.width - 50)
         }
+        .alert(alertText, isPresented : $showAlert, actions: {})   
         .fullScreenCover(isPresented: $registerSuccessful, content: {
             RegisterHealthDataView(healthData: $healthData)
         })
@@ -223,5 +231,5 @@ struct AddPersonalizedHealthDataView: View {
 }
 
 #Preview {
-    AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, selectedOption: .cualitativo)
+    AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, showAlert: false, alertTitle: "", alertText: "", selectedOption: .cuantitativo)
 }

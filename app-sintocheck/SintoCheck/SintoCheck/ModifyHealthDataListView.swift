@@ -51,9 +51,12 @@ struct ModifyHealthDataListView: View {
     }
 
     func handleStarTap(for tappedHealthData: HealthDataResponse) {
-        if let index = personalizedList?.firstIndex(where: { $0.name == tappedHealthData.name }) {
+        if let index = personalizedList?.firstIndex(where: {
+            $0.name == tappedHealthData.name }) {
             // Si la estrella está rellena, cambiar a no rellena y llamar a untrackHealthData
-            personalizedList?.remove(at: index)
+            DispatchQueue.main.async {
+                self.personalizedList?.remove(at: index)
+            }
             combineAndRemoveDuplicates()
             Task {
                 do {
@@ -64,7 +67,9 @@ struct ModifyHealthDataListView: View {
             }
         } else {
             // Si la estrella no está rellena, cambiar a rellena y llamar a postHealthData o trackHealthData
-            personalizedList?.append(tappedHealthData)
+            DispatchQueue.main.async {
+                       self.personalizedList?.append(tappedHealthData)
+                   }
             combineAndRemoveDuplicates()
             Task {
                 do {
@@ -281,7 +286,7 @@ struct ModifyHealthDataListView: View {
                         Text("No hay datos disponibles.")
                     }
                     List{
-                        NavigationLink(destination: AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, selectedOption: .cualitativo)) { Text("Otro: ") }
+                        NavigationLink(destination: AddPersonalizedHealthDataView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""), name: "", rangoInferior: "", rangoSuperior: "", unidades: "", rangeMin: 0.0, rangeMax: 0.0, quantitative: false, registerSuccessful: false, showAlert: false, alertTitle: "", alertText: "", selectedOption: .cuantitativo)) { Text("Otro: ") }
                     }
                 }
             }
