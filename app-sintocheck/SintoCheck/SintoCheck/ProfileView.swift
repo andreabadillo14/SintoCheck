@@ -80,7 +80,6 @@ struct ProfileView: View {
         }
     }
 
-    
 //    func handlePatientData() {
 //        do {
 //            patientData = try getPatientData()
@@ -95,7 +94,6 @@ struct ProfileView: View {
 //            print("An unknown error occurred: \(error)")
 //        }
 //    }
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -194,6 +192,17 @@ struct ProfileView: View {
                                             .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                         Text("Enlazar a un médico")
                                     }
+                                    NavigationLink(destination: viewNotes()) {
+                                        Image(systemName: "person.crop.circle.badge.plus")
+                                            .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                        Text("Enlazar a un médico")
+                                    }
+                                    NavigationLink(destination: addNote()) {
+                                        Image(systemName: "person.crop.circle.badge.plus")
+                                            .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                        Text("Enlazar a un médico")
+                                    }
+
                                     
                                 }
                                 

@@ -23,6 +23,7 @@ struct addNote: View {
     @State private var alertValidation = false
     @State private var alertValidationMessage = ""
     @State var note: Note?
+    @State var noteWasAdded: Bool = false
     
     @State var patientData : AuthenticationResponse?
 
@@ -45,6 +46,10 @@ struct addNote: View {
     
     var body: some View {
         VStack {
+            
+            Text("Registrar una nota")
+                .font(.largeTitle)
+                .bold()
             Spacer()
             Spacer()
             HStack {
@@ -77,6 +82,7 @@ struct addNote: View {
                     if let patientData = patientData {
                         addNoteAPI(title: titulo, content: contenido, patientId: patientData.id, patientToken: patientData.token) { note in
                             self.note = note
+                            noteWasAdded = true
                         }
                     }
                     
@@ -115,6 +121,8 @@ struct addNote: View {
             UIApplication.shared.endEditing()
         }.onAppear {
             handlePatientData()
+        }.alert(isPresented: $noteWasAdded) {
+            Alert(title: Text("Se registro la nota exitosamente"))
         }
         
     }

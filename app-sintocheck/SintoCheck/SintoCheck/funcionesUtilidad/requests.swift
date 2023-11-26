@@ -249,3 +249,60 @@ func fetchImage(patientId: String, patientToken: String, completion: @escaping (
     }.resume()
 }
 
+func fetchNote(patientId: String, patientToken: String, completion: @escaping ([Note]?) -> Void) {
+    //obtener id del usuario que inicio sesion esta hardcodeado ahora
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/notes/\(patientId)") else {return}
+    var request = URLRequest(url: url)
+    //obtener token del inicio de sesion esta hardcodeado ahora.
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
+    request.httpMethod = "GET"
+
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        if let error = error {
+            print("Error: \(error)")
+        }
+        if let response = response {
+            print("Response: \(response)")
+        }
+        if let data = data {
+            do {
+                let decoder = JSONDecoder()
+                let doctoresAPI = try decoder.decode([Note].self, from: data)
+                print("Data: \(doctoresAPI)")
+                completion(doctoresAPI)
+            } catch {
+                print("Error decoding data: \(error)")
+                completion(nil)
+            }
+        }
+    }.resume()
+}
+
+func deleteNote(noteId: String, patientToken: String, completion: @escaping (Note?) -> Void) {
+    //obtener id del usuario que inicio sesion esta hardcodeado ahora https://sintocheck-backend-git-bcrypt-diego-hc.vercel.app/patient/
+    guard let url = URL(string: "https://sintocheck-backend-git-bcrypt-diego-hc.vercel.app/note/\(noteId)") else {return}
+    var request = URLRequest(url: url)
+    //obtener token del inicio de sesion esta hardcodeado ahora.
+    request.addValue(patientToken, forHTTPHeaderField: "Authorization")
+    request.httpMethod = "DELETE"
+
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        if let error = error {
+            print("Error: \(error)")
+        }
+        if let response = response {
+            print("Response: \(response)")
+        }
+        if let data = data {
+            do {
+                let decoder = JSONDecoder()
+                let doctoresAPI = try decoder.decode(Note.self, from: data)
+                print("Data: \(doctoresAPI)")
+                completion(doctoresAPI)
+            } catch {
+                print("Error decoding data: \(error)")
+                completion(nil)
+            }
+        }
+    }.resume()
+}

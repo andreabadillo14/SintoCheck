@@ -54,7 +54,6 @@ struct DoctorDetailsView: View {
                 List (doctors ?? doctorVacia) { doctor in
                     InfoDoctor(name: doctor.name,  medicalBackground: doctor.speciality ?? "", phoneNumber: doctor.phone).swipeActions {
                         Button {
-                            //al hacer click quiero que se haga una alerta que pregunte si estas seguro y si le picas eliminar otra vez en la alerta se elimina al doctor completamente.
                             showSure = true
                             currentDoctorId = doctor.id
                             
