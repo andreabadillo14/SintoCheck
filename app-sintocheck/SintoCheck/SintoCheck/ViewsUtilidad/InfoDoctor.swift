@@ -11,7 +11,7 @@ struct InfoDoctor: View {
     let name: String
     //supongo que posicion de medicina
     //este valor no viene del API entonces no estoy seguro de que hacer con el ahora, tal vez switch case de si es un doctor o algo asi? o cambiar el api y ya
-    let medicine: String = "Medico"
+    let medicine: String = "Médico"
     //especialidad
     let medicalBackground: String
     //agrego numero de telefono porque creo que falta pero tal vez lo quitaron, string porque tal vez tiene +52 o algo raro.
@@ -24,7 +24,7 @@ struct InfoDoctor: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 90)
-            
+                .padding()
             VStack(alignment: .leading) { // esto sigue hardcordeado
                 Text(medicine)
                     .foregroundColor(Color.gray)
@@ -34,6 +34,7 @@ struct InfoDoctor: View {
                     Text(phoneNumber)
                     Image(systemName: "phone.fill")
                         .scaleEffect(x: -1, y: 1)
+                        .foregroundStyle(Color(red: 168/255, green: 183/255, blue: 171/255))
                 }
                 HStack {
                     Text("Especialidad: ")

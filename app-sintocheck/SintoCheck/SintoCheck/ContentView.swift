@@ -97,7 +97,7 @@ struct ContentView: View {
             .cornerRadius(10)
             .padding(.top, 25)
             .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"), message: Text("Telefono o Contraseña Incorrecta"), dismissButton: .default(Text("Entendido")))
+                Alert(title: Text("Error"), message: Text("Teléfono o Contraseña Incorrecta"), dismissButton: .default(Text("Entendido")))
             }
             .fullScreenCover(isPresented: $loginSuccessful) {
                 SwitchView()

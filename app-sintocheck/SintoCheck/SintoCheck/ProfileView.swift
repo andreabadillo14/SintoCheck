@@ -20,9 +20,6 @@ struct ProfileView: View {
     @Binding var standardList : [HealthDataResponse]?
     //@State var APatient : PatientSignupRequest
     
-//    var patients = [
-//        Patient(id: UUID(), name: "Hermenegildo", lastname: "Pérez", birthdate: "1945-03-25", height: 1.78, weight: 65.4, medicine: "Vitaminas de calcio", medicalBackground: "Genética de diabetes")
-//    ]
     @State var seRegistroDoctor = false
     @State var mensajeEnlace = ""
     @State var showPhotosPicker: Bool = false
@@ -107,13 +104,14 @@ struct ProfileView: View {
                                 .frame(width: 50, height: 50)
  
                             Divider()
-                                .background(Color(red: 148/255, green: 28/255, blue: 47/255))
-                                .frame(width: .infinity, height: 1)
+                                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                .frame(width: 390, height: 1)
                                 
                             Text("Mi perfil")
                                 .bold()
                                 .font(.largeTitle)
                                 .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
                             
                             
 //                            HStack(alignment: .center) {
@@ -143,13 +141,13 @@ struct ProfileView: View {
                                             image
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .frame(width: 100, height: 100)
+                                                .frame(width: 80, height: 80)
                                                 .clipShape(.circle)
                                         } placeholder: {
                                             Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .frame(width: 100, height: 100)
+                                                .frame(width: 80, height: 80)
                                                 .clipShape(.circle)
                                         }
                                         
@@ -157,14 +155,14 @@ struct ProfileView: View {
                                         Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
-                                            .frame(width: 100, height: 100)
+                                            .frame(width: 90, height: 90)
                                             .clipShape(.circle)
                                     }
                                     
                                 }.foregroundColor(Color.black)
                                 
                                 
-                                VStack(alignment: .leading) { // esto sigue hardcordeado
+                                VStack(alignment: .leading) {
                                     if let patientData = patientData{
                                         Text("\(patientData.name)")
                                         Text("\(patientData.phone)")

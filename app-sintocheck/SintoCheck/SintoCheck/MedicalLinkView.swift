@@ -34,6 +34,17 @@ struct MedicalLinkView: View {
     var body: some View {
         NavigationView {
             VStack {
+                Image("Logo Chiquito")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+
+                Divider()
+                    .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                    .frame(width: 390, height: 1)
+                
+                Text("Enlace con su médico")
+                    .bold()
+                    .font(.title)
                 Spacer()
                 fullCodeField(codeString: $doctorCode)
                 .padding(.horizontal, 20)
@@ -83,7 +94,7 @@ struct MedicalLinkView: View {
                 }
                 Spacer()
             }
-            .navigationTitle("Enlace con su medico")
+            //.navigationTitle("Enlace con su medico")
         }.onTapGesture {
             UIApplication.shared.endEditing()
         }
