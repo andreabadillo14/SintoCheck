@@ -12,7 +12,7 @@ import SwiftUI
 //para view de MedicalLinkView
 func makeLink(doctorCodigo: String, patientId: String, patientToken: String, completion: @escaping (Doctor?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
-    guard let url = URL(string: "https://sinto-check-backend.vercel.app/doctorPatientRelationship") else {return}
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
     request.addValue(patientToken, forHTTPHeaderField: "Authorization")
