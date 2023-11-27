@@ -47,60 +47,62 @@ struct HealthDataDetails: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color("Backgrounds")
-                    .ignoresSafeArea()
-                VStack {
-                    
-                    if trackedHealthDataList?.isEmpty == false {
-                        Image("Logo Chiquito")
-                            .resizable()
-                            .frame(width: 50, height: 50)
+            GeometryReader { geometry in
+                ZStack {
+                    Color("Backgrounds")
+                        .ignoresSafeArea()
+                    VStack {
+                        
+                        if trackedHealthDataList?.isEmpty == false {
+                            Image("Logo Chiquito")
+                                .resizable()
+                                .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.08)
 
-                        Divider()
-                            .background(Color(red: 26/255, green: 26/255, blue: 102/255))
-                            .frame(width: 390, height: 1)
-                        // Show your list and other content when successful
-                        Section {
-                            Text("Datos de salud")
-                                .bold()
-                                .font(.largeTitle)
-                                .padding(.top, 20)
+                            Divider()
+                                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                .frame(width: geometry.size.width * 1, height: 1)
+                            // Show your list and other content when successful
+                            Section {
+                                Text("Datos de salud")
+                                    .bold()
+                                    .font(.largeTitle)
+                                    .padding(.top, 20)
+                            }
+
+                            List(trackedHealthDataList!, id: \.id) { data in
+                                NavigationLink {
+                                    HealthDataDetailView(AHealthData: data)
+                                } label: {
+                                    Cell(oneHealthData: data)
+                                }
+                            }
+                        } else {
+                            // Show another view when not successful
+                            NoTrackedHealthDataView(standardList: $standardList, personalizedList: $personalizedList)
                         }
-
-                        List(trackedHealthDataList!, id: \.id) { data in
-                            NavigationLink {
-                                HealthDataDetailView(AHealthData: data)
-                            } label: {
-                                Cell(oneHealthData: data)
+                        
+                    }
+                    .onAppear {
+                        Task{
+                            do {
+                                patientData = try getPatientData()
+                                let healthData = try await getHealthDataTrackedList()
+                                trackedHealthDataList = healthData
+                                getSuccessful = true
+                            } catch let error as FileReaderError {
+                                print(error)
+                                switch error {
+                                case .fileNotFound:
+                                    print("not found")
+                                case .fileReadError:
+                                    print("read error")
+                                }
+                            } catch {
+                                print("unknown: \(error)")
+                                }
                             }
                         }
-                    } else {
-                        // Show another view when not successful
-                        NoTrackedHealthDataView(standardList: $standardList, personalizedList: $personalizedList)
-                    }
-                    
                 }
-                .onAppear {
-                    Task{
-                        do {
-                            patientData = try getPatientData()
-                            let healthData = try await getHealthDataTrackedList()
-                            trackedHealthDataList = healthData
-                            getSuccessful = true
-                        } catch let error as FileReaderError {
-                            print(error)
-                            switch error {
-                            case .fileNotFound:
-                                print("not found")
-                            case .fileReadError:
-                                print("read error")
-                            }
-                        } catch {
-                            print("unknown: \(error)")
-                            }
-                        }
-                    }
             }
         }
     }

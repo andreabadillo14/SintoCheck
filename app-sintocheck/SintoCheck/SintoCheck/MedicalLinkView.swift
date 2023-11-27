@@ -33,66 +33,71 @@ struct MedicalLinkView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                Image("Logo Chiquito")
-                    .resizable()
-                    .frame(width: 50, height: 50)
+            GeometryReader { geometry in
+                VStack {
+                    Image("Logo Chiquito")
+                        .resizable()
+                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.08)
 
-                Divider()
-                    .background(Color(red: 26/255, green: 26/255, blue: 102/255))
-                    .frame(width: 390, height: 1)
-                
-                Text("Enlace con su médico")
-                    .bold()
-                    .font(.title)
-                Spacer()
-                fullCodeField(codeString: $doctorCode)
-                .padding(.horizontal, 20)
-                Spacer()
-                HStack {
+                    Divider()
+                        .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                        .frame(width: geometry.size.width * 1, height: 1)
+                    
+                    Text("Enlace con su médico")
+                        .bold()
+                        .font(.title)
+                        .padding(.horizontal, geometry.size.width * 0.05)
                     Spacer()
-                    Button  {
-                        if (doctorCode != "" && doctorCode.isAlphanumeric) {
-                            makeLink(doctorCodigo: doctorCode) { doctor in
-                                self.doctor = doctor
-                                //checar si existe el doctor que obtuve
-                                if let doctor = doctor {
-                                    exito = true
-                                    mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
-                                } else {
-                                    exito = true
-                                    mensajeLink = "No se pudo registrar el doctor"
+                    fullCodeField(codeString: $doctorCode)
+                        .padding(.horizontal, geometry.size.width * 0.05)
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Button  {
+                            if (doctorCode != "" && doctorCode.isAlphanumeric) {
+                                makeLink(doctorCodigo: doctorCode) { doctor in
+                                    self.doctor = doctor
+                                    //checar si existe el doctor que obtuve
+                                    if let doctor = doctor {
+                                        exito = true
+                                        mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
+                                    } else {
+                                        exito = true
+                                        mensajeLink = "No se pudo registrar el doctor"
+                                    }
                                 }
-                            }
-                            dismiss()
-                        } else {
-                            if (doctorCode == "") {
-                                alertValidation = true
-                                alertValidationMessage = "introduce un codigo"
-                            } else if (!doctorCode.isAlphanumeric) {
-                                alertValidation = true
-                                alertValidationMessage = "introduce un código valido"
+                                dismiss()
+                            } else {
+                                if (doctorCode == "") {
+                                    alertValidation = true
+                                    alertValidationMessage = "introduce un codigo"
+                                } else if (!doctorCode.isAlphanumeric) {
+                                    alertValidation = true
+                                    alertValidationMessage = "introduce un código valido"
+                                }
+                                
                             }
                             
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                    .frame(width: geometry.size.width * 0.55, height: geometry.size.height * 0.065)
+                                Text("Registrar doctor")
+                                    .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
+                                    .bold()
+                                    .frame(width: geometry.size.width * 0.55, height: geometry.size.height * 0.055, alignment: .center)
+                            }
                         }
-                        
-                    } label: {
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
-                            Text("Registrar doctor")
-                                .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
-                                .bold()
-                        }
+                        .padding()
+                        //.frame(height:80)
+                        .alert(alertValidationMessage, isPresented: $alertValidation, actions: {
+                            
+                        })
+                        Spacer()
                     }
-                    .padding()
-                    .frame(height:80)
-                    .alert(alertValidationMessage, isPresented: $alertValidation, actions: {
-                        
-                    })
                     Spacer()
                 }
-                Spacer()
             }
             //.navigationTitle("Enlace con su medico")
         }.onTapGesture {

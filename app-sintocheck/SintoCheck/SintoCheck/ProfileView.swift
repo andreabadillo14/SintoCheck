@@ -102,7 +102,7 @@ struct ProfileView: View {
                                 
                                 Image("Logo Chiquito")
                                     .resizable()
-                                    .frame(width: 50, height: 50)
+                                    .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.08)
      
                                 Divider()
                                     .background(Color(red: 26/255, green: 26/255, blue: 102/255))
