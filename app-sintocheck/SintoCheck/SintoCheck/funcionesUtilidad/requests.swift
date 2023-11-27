@@ -12,7 +12,7 @@ import SwiftUI
 //para view de MedicalLinkView
 func makeLink(doctorCodigo: String, patientId: String, patientToken: String, completion: @escaping (Doctor?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
-    guard let url = URL(string: "https://api-text.vercel.app/doctorPatientRelationship") else {return}
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/doctorPatientRelationship") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
     request.addValue(patientToken, forHTTPHeaderField: "Authorization")
@@ -170,7 +170,7 @@ func deleteDoctor(doctorId: String, patientId: String, patientToken: String, com
 
 //para view ProfileView
 func sendImage(image: UIImage, patientId: String, patientToken: String, completion: @escaping () -> Void) {
-    guard let url = URL(string: "https://api-text.vercel.app/patient/image") else { return }
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/image/patient") else { return }
     let boundary = UUID().uuidString
     
     var request = URLRequest(url: url)
@@ -222,7 +222,7 @@ func sendImage(image: UIImage, patientId: String, patientToken: String, completi
 //cuando image url este en el api borrar esto y obtener el url del api
 func fetchImage(patientId: String, patientToken: String, completion: @escaping (ImageAPI?) -> Void) {
     //obtener id del usuario que inicio sesion esta hardcodeado ahora
-    guard let url = URL(string: "https://sintocheck-backend.vercel.app/patient/image/\(patientId)") else {return}
+    guard let url = URL(string: "https://sintocheck-backend.vercel.app/image/patient/\(patientId)") else {return}
     var request = URLRequest(url: url)
     //obtener token del inicio de sesion esta hardcodeado ahora.
     request.addValue(patientToken, forHTTPHeaderField: "Authorization")
