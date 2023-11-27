@@ -13,9 +13,11 @@ struct RegisterHealthDataView: View {
     @Environment(\.dismiss) var dismissView
     
     @State var value = 5.0
+    @State var TextValue = ""
     @State var note = ""
     @State var registerSuccessful = false
     @State var showErrorAlert = false
+    @State var alertText = ""
     
     @State var previewHealthData: [HealthDataResponse]? = [
         HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""),
@@ -92,8 +94,9 @@ struct RegisterHealthDataView: View {
                                 
                                 if healthData.quantitative {
                                     HStack {
-                                        TextField("Valor", value: $value, format: .number)
+                                        TextField("Valor", text: $TextValue)
                                             .textFieldStyle(.roundedBorder)
+                                            .keyboardType(.decimalPad)
                                        // Text(healthData.unit)
                                     }
                                     .frame(width: 150)
@@ -129,10 +132,24 @@ struct RegisterHealthDataView: View {
                                 }
                                 Button("Confirmar") {
                                     //validate
+                                    if TextValue == "" {
+                                        alertText = "Introduce el valor"
+                                        showErrorAlert = true
+                                        return
+                                    }
+                                    else{
+                                        value = Double(TextValue) ?? 0.0
+                                        if value < healthData.rangeMin ?? 0.0 || value > healthData.rangeMax ?? 0.0{
+                                            alertText = "Valor fuera de rango"
+                                            showErrorAlert = true
+                                            return
+                                        }
+                                    }
                                     Task {
                                         await postRegisterData()
                                     }
                                 }
+                                .alert(alertText, isPresented : $showErrorAlert, actions: {})
                                 .fullScreenCover(isPresented: $registerSuccessful, content: {
                                     AddHealthDataRecordView(personalizedList:$previewHealthData, standardList: $previewHealthData )
                                 })

@@ -20,7 +20,9 @@ struct RegisterOptionalDataView: View {
     @State var dateFormatter = DateFormatter()
     @State var registerSuccessful = false
     @State var showAlert = false
-    @State var alertMessage = ""
+    @State var alertTitle = ""
+    @State var alertText = ""
+    
     
     let maxMedicineLength = 120
     let maxBackgroundLength = 120
@@ -59,12 +61,23 @@ struct RegisterOptionalDataView: View {
         do {
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             guard let httpResponse = response as? HTTPURLResponse else { fatalError("Error while fetching data") }
+            print(httpResponse)
             
             if httpResponse.statusCode == 200 {
+                alertTitle = "Registro Exitoso"
+                alertText = "Bienvenido a SintoCheck!"
+                registerSuccessful = true
+                showAlert = true
+                
                 let patientData = try JSONDecoder().decode(PatientSignupResponse.self, from: data)
                 
-                registerSuccessful = true
+            } else if httpResponse.statusCode == 400 {
+                alertTitle = "Telefono Ya Existente"
+                alertText = "El telefono introducido ya esta vinculado a una cuenta"
+                showAlert = true
+                return
             }
+            
         }catch {
                 print("Error: \(error)")
                 // If there's an error, show an alert
@@ -160,22 +173,41 @@ struct RegisterOptionalDataView: View {
                     }
                 Button(action: {
                     dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-                    guard let heightValue = Float(heightS), let weightValue = Float(weightS) else {
-                        showAlert = true
-                        alertMessage = "Ingresa valores númericos"
-                        return
-                    }
                     
-                    if heightValue < 0 || heightValue > 3 || weightValue < 1 || weightValue > 300 {
-                        showAlert = true
-                        alertMessage = "Ingresa valores dentro del rango"
-                    } else {
+                    if heightS != "" {
+                        guard let heightValue = Float(heightS) else {
+                            showAlert = true
+                            alertTitle = "Datos Incorrectos"
+                            alertText = "Ingresa valores númericos"
+                            return
+                        }
+                        if heightValue < 0 || heightValue > 3  {
+                            showAlert = true
+                            alertTitle = "Datos Incorrectos"
+                            alertText = "Ingresa valores dentro del rango"
+                        }
+                        else {
                         height = heightValue
-                        weight = weightValue
+                        }
                     }
-//                    height = Float(heightS) ?? 0.0
-//                    weight = Float(weightS) ?? 0.0
                     
+                    if weightS != "" {
+                        guard let weightValue = Float(weightS) else {
+                            showAlert = true
+                            alertTitle = "Datos Incorrectos"
+                            alertText = "Ingresa valores númericos"
+                            return
+                        }
+                        if weightValue < 0 || weightValue > 250  {
+                            showAlert = true
+                            alertTitle = "Datos Incorrectos"
+                            alertText = "Ingresa valores dentro del rango"
+                        }
+                        else {
+                        weight = weightValue
+                        }
+                    }
+
                     Task {
                         //print("dentro de task")
                         await postSignUp()
@@ -186,21 +218,19 @@ struct RegisterOptionalDataView: View {
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width - 50)
                 }
+                .fullScreenCover(isPresented: $registerSuccessful, content: {
+                        ContentView()
+                })
                 .background(azul)
                 .cornerRadius(10)
-                .fullScreenCover(isPresented: $registerSuccessful, content: {
-                    ContentView()
-                })
-                .alert(isPresented: $showAlert) {
-                    Alert(title: Text("Invalid Input"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+                .alert(alertText, isPresented : $showAlert, actions: {})
+                        }
+                        .padding(.horizontal, 25)
+                    }
                 }
-            }
-            .padding(.horizontal, 25)
-        }
-    }
 
-struct RegisterOptionalData_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterOptionalDataView(birthDateS: "", heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: "", phone: "", pass: "", ConfirmPass: "")
-    }
-}
+                struct RegisterOptionalData_Previews: PreviewProvider {
+                    static var previews: some View {
+                        RegisterOptionalDataView(birthDateS: "", heightS: "", weightS: "", height: 0.0, weight: 0.0, medicine: "", background: "", nombre: "", phone: "", pass: "", ConfirmPass: "")
+                    }
+                }

@@ -61,7 +61,8 @@ struct LoginView: View {
     var body: some View {
         VStack (spacing: 0){
             Image("Logo")
-                .frame(width: 100, height: 150)
+                .resizable()
+                .frame(width: 200, height: 200)
             Text("Iniciar Sesion")
                 .font(.largeTitle)
                 .fontWeight(.bold)
@@ -106,7 +107,7 @@ struct LoginView: View {
                 Button(action: {
                     mostrarRegistro = true
                 }){
-                    Text("Registrarme")
+                    Text("Registro")
                         .foregroundColor(azul)
                 }
                 .fullScreenCover(isPresented: $mostrarRegistro){
