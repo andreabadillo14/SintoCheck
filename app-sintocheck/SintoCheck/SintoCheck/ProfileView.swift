@@ -189,6 +189,11 @@ struct ProfileView: View {
                                                 .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
                                             Text("Detalles de datos de salud")
                                         }
+                                        NavigationLink(destination: viewNotes()) {
+                                            Image(systemName: "note.text")
+                                                .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                            Text("agregar notas de salud")
+                                        }
                                         
                                     }
                                     
@@ -204,6 +209,11 @@ struct ProfileView: View {
                                             Image(systemName: "person.crop.circle.badge.plus")
                                                 .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
                                             Text("Enlazar a un médico")
+                                        }
+                                        NavigationLink(destination: addNote()) {
+                                            Image(systemName: "note.text.badge.plus")
+                                                .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                            Text("Escribir una nota de salud")
                                         }
                                         
                                     }
@@ -226,8 +236,10 @@ struct ProfileView: View {
                     .onAppear {
                         handlePatientData()
                         //obtener el url del endpoint para paciente luego
-                        fetchImage() { url in
-                            self.url = url
+                        if let patientData = patientData {
+                            fetchImage(patientId: patientData.id, patientToken: patientData.token) { url in
+                                self.url = url
+                            }
                         }
                     }
                     .background(Color.clear)
@@ -238,10 +250,12 @@ struct ProfileView: View {
                             if let photosPickerItem,
                                let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
                                 if let image = UIImage(data: data) {
-                                    sendImage(image: image) {
-                                        fetchImage() { url in
-                                            DispatchQueue.main.async {
-                                                    self.url = url
+                                    if let patientData = patientData {
+                                        sendImage(image: image, patientId: patientData.id, patientToken: patientData.token) {
+                                            fetchImage(patientId: patientData.id, patientToken: patientData.token) { url in
+                                                DispatchQueue.main.async {
+                                                        self.url = url
+                                                }
                                             }
                                         }
                                     }

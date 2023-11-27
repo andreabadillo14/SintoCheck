@@ -18,6 +18,28 @@ struct MedicalLinkView: View {
     @State private var alertValidation = false
     @State private var alertValidationMessage = ""
     
+    //los tenia como binding, ahorita si esot hace todo lo que quiera regresarlo a binding
+    @State var patientData : AuthenticationResponse?
+
+
+
+    func handlePatientData() {
+        do {
+            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                // File does not exist, handle this case accordingly
+                print("Login response file not found")
+                return
+            }
+
+            patientData = try getPatientData()
+        } catch let error {
+            print("An error occurred while retrieving patient data: \(error)")
+        }
+    }
+    
     private enum Field: Int, CaseIterable {
         case field1, field2, field3, field4, field5, field6, field7, field8
     }
@@ -33,29 +55,17 @@ struct MedicalLinkView: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
-                VStack {
-                    Image("Logo Chiquito")
-                        .resizable()
-                        .frame(width: geometry.size.width * 0.15, height: geometry.size.height * 0.08)
-
-                    Divider()
-                        .background(Color(red: 26/255, green: 26/255, blue: 102/255))
-                        .frame(width: geometry.size.width * 1, height: 1)
-                    
-                    Text("Enlace con su médico")
-                        .bold()
-                        .font(.title)
-                        .padding(.horizontal, geometry.size.width * 0.05)
+            VStack {
+                Spacer()
+                fullCodeField(codeString: $doctorCode)
+                .padding(.horizontal, 20)
+                Spacer()
+                HStack {
                     Spacer()
-                    fullCodeField(codeString: $doctorCode)
-                        .padding(.horizontal, geometry.size.width * 0.05)
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Button  {
-                            if (doctorCode != "" && doctorCode.isAlphanumeric) {
-                                makeLink(doctorCodigo: doctorCode) { doctor in
+                    Button  {
+                        if (doctorCode != "" && doctorCode.isAlphanumeric) {
+                            if let patientData = patientData {
+                                makeLink(doctorCodigo: doctorCode, patientId: patientData.id, patientToken: patientData.token) { doctor in
                                     self.doctor = doctor
                                     //checar si existe el doctor que obtuve
                                     if let doctor = doctor {
@@ -67,41 +77,42 @@ struct MedicalLinkView: View {
                                     }
                                 }
                                 dismiss()
-                            } else {
-                                if (doctorCode == "") {
-                                    alertValidation = true
-                                    alertValidationMessage = "introduce un codigo"
-                                } else if (!doctorCode.isAlphanumeric) {
-                                    alertValidation = true
-                                    alertValidationMessage = "introduce un código valido"
-                                }
-                                
                             }
                             
-                        } label: {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
-                                    .frame(width: geometry.size.width * 0.55, height: geometry.size.height * 0.065)
-                                Text("Registrar doctor")
-                                    .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
-                                    .bold()
-                                    .frame(width: geometry.size.width * 0.55, height: geometry.size.height * 0.055, alignment: .center)
+                        } else {
+                            if (doctorCode == "") {
+                                alertValidation = true
+                                alertValidationMessage = "introduce un codigo"
+                            } else if (!doctorCode.isAlphanumeric) {
+                                alertValidation = true
+                                alertValidationMessage = "introduce un código valido"
                             }
+                            
                         }
-                        .padding()
-                        //.frame(height:80)
-                        .alert(alertValidationMessage, isPresented: $alertValidation, actions: {
-                            
-                        })
-                        Spacer()
+                        
+                    } label: {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                            Text("Registrar doctor")
+                                .foregroundColor(Color(red: 236/255, green: 239/255, blue: 235/255))
+                                .bold()
+                        }
                     }
+                    .padding()
+                    .frame(height:80)
+                    .alert(alertValidationMessage, isPresented: $alertValidation, actions: {
+                        
+                    })
                     Spacer()
                 }
+                Spacer()
             }
-            //.navigationTitle("Enlace con su medico")
+            .navigationTitle("Enlace con su medico")
         }.onTapGesture {
             UIApplication.shared.endEditing()
+        }.onAppear {
+            handlePatientData()
         }
     }
 }

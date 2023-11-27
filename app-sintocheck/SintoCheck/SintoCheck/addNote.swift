@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-//si quiero obtener cuando se creo la nota aqui se puede agregar.
 struct Note: Codable, Identifiable {
     let id: String
     let title: String
@@ -24,8 +23,33 @@ struct addNote: View {
     @State private var alertValidation = false
     @State private var alertValidationMessage = ""
     @State var note: Note?
+    @State var noteWasAdded: Bool = false
+    
+    @State var patientData : AuthenticationResponse?
+
+    func handlePatientData() {
+        do {
+            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                // File does not exist, handle this case accordingly
+                print("Login response file not found")
+                return
+            }
+
+            patientData = try getPatientData()
+        } catch let error {
+            print("An error occurred while retrieving patient data: \(error)")
+        }
+    }
+    
     var body: some View {
         VStack {
+            
+            Text("Registrar una nota")
+                .font(.largeTitle)
+                .bold()
             Spacer()
             Spacer()
             HStack {
@@ -55,9 +79,13 @@ struct addNote: View {
             Spacer()
             Button {
                 if (titulo != "" && contenido != "") {
-                    addNoteAPI(title: titulo, content: contenido) { note in
-                        self.note = note
+                    if let patientData = patientData {
+                        addNoteAPI(title: titulo, content: contenido, patientId: patientData.id, patientToken: patientData.token) { note in
+                            self.note = note
+                            noteWasAdded = true
+                        }
                     }
+                    
                 } else {
                     if (titulo == "" && contenido == "") {
                         alertValidation = true
@@ -91,6 +119,10 @@ struct addNote: View {
             
         }.onTapGesture {
             UIApplication.shared.endEditing()
+        }.onAppear {
+            handlePatientData()
+        }.alert(isPresented: $noteWasAdded) {
+            Alert(title: Text("Se registro la nota exitosamente"))
         }
         
     }
