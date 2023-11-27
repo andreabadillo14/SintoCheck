@@ -61,9 +61,10 @@ struct AddPersonalizedHealthDataView: View {
             
             if let httpResponse = response as? HTTPURLResponse {
                 print("HTTP Status Code:", httpResponse.statusCode)
-                if httpResponse.statusCode != 201 {
+                if httpResponse.statusCode == 400 {
                     print("Response Data:", String(data: data, encoding: .utf8) ?? "No data")
-                    throw FileReaderError.fileReadError
+                        alertText = "El dato de salud introducido ya existe"
+                        showAlert = true
                 }
                 
                 if httpResponse.statusCode == 201 {
