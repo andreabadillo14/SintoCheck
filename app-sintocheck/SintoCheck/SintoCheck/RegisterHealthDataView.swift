@@ -132,17 +132,19 @@ struct RegisterHealthDataView: View {
                                 }
                                 Button("Confirmar") {
                                     //validate
-                                    if TextValue == "" {
-                                        alertText = "Introduce el valor"
-                                        showErrorAlert = true
-                                        return
-                                    }
-                                    else{
-                                        value = Double(TextValue) ?? 0.0
-                                        if value < healthData.rangeMin ?? 0.0 || value > healthData.rangeMax ?? 0.0{
-                                            alertText = "Valor fuera de rango"
+                                    if healthData.quantitative{
+                                        if TextValue == "" {
+                                            alertText = "Introduce el valor"
                                             showErrorAlert = true
                                             return
+                                        }
+                                        else{
+                                            value = Double(TextValue) ?? 0.0
+                                            if value < healthData.rangeMin ?? 0.0 || value > healthData.rangeMax ?? 0.0{
+                                                alertText = "Valor fuera de rango"
+                                                showErrorAlert = true
+                                                return
+                                            }
                                         }
                                     }
                                     Task {

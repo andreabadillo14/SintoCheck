@@ -74,8 +74,13 @@ struct RegisterView: View {
                 if nombre != "" &&
                    phone != "" &&
                     pass != "" &&
-                    ConfirmPass != "" && pass == ConfirmPass && validarPassword(pass) == true{
+                    ConfirmPass != "" && pass == ConfirmPass && validarPassword(pass) == true && phone.count == 10{
                     mostrarDatosAdicionales = true
+                    return
+                }
+                if phone.count != 10{
+                    showAlert = true
+                    AlertText = "Introduce un telefono valido (10 digitos)"
                     return
                 }
                 if nombre == "" ||
@@ -94,11 +99,6 @@ struct RegisterView: View {
                 if pass != ConfirmPass {
                     showAlert = true
                     AlertText = "Las contraseñas no coinciden"
-                    return
-                }
-                if phone.count != 10{
-                    showAlert = true
-                    AlertText = "Introduce un telefono valido (10 digitos)"
                     return
                 }
             }){

@@ -23,11 +23,21 @@ struct SettingsView: View {
         .alert("¿Cerrar sesión?", isPresented: $mostrarAlertaCerrarSesion) {
             Button("Cancelar", role: .cancel) {}
             Button("Aceptar", role: .destructive) {
+                Task {
+                    do {
+                        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("loginResponse", conformingTo: .json)
+
+                        try FileManager.default.removeItem(at: fileURL)
+                    } catch {
+                        print("error")
+                    }
+                }
                 cerrarSesion = true
             }
         } message: {
             Text("¿Estás seguro de que quieres cerrar sesión?")
         }
+
         .fullScreenCover(isPresented: $cerrarSesion) {
             LoginView()
         }

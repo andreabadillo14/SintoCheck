@@ -11,7 +11,7 @@ class PatientSignupRequest: Codable {
     var name: String
     var phone: String
     var password: String
-    var birthdate: String
+    var birthdate: String?
     var height: Float
     var weight: Float
     var medicine: String

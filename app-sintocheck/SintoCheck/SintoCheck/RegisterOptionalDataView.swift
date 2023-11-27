@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RegisterOptionalDataView: View {
     @State var birthDate : Date = Date()
-    @State var birthDateS : String
+    @State var birthDateS: String?
     @State var heightS : String
     @State var weightS : String
     @State var height : Float
@@ -45,7 +45,7 @@ struct RegisterOptionalDataView: View {
             name: nombre,
             phone: phone,
             password: pass,
-            birthdate: dateFormatter.string(from: birthDate),
+            birthdate: birthDateS!,
             height: height,
             weight: weight,
             medicine: medicine,
@@ -65,15 +65,15 @@ struct RegisterOptionalDataView: View {
             
             if httpResponse.statusCode == 200 {
                 alertTitle = "Registro Exitoso"
-                alertText = "Bienvenido a SintoCheck!"
-                registerSuccessful = true
+                alertText = "¡Bienvenido a SintoCheck!"
                 showAlert = true
+                registerSuccessful = true
                 
                 let patientData = try JSONDecoder().decode(PatientSignupResponse.self, from: data)
                 
             } else if httpResponse.statusCode == 400 {
-                alertTitle = "Telefono Ya Existente"
-                alertText = "El telefono introducido ya esta vinculado a una cuenta"
+                alertTitle = "Teléfono Ya Existente"
+                alertText = "El teléfono introducido ya está vinculado a una cuenta"
                 showAlert = true
                 return
             }
@@ -172,7 +172,18 @@ struct RegisterOptionalDataView: View {
                     .onChange(of: background) {_ in validateText(&background, maxLength: maxBackgroundLength)
                     }
                 Button(action: {
-                    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+                    print(birthDate)
+                    let actualDate = Date.now
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let actualDateS = dateFormatter.string(from: actualDate)
+                    birthDateS = dateFormatter.string(from: birthDate)
+                    
+                    if birthDateS == actualDateS {
+                        birthDateS = ""
+                    } else {
+                        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+                        birthDateS = dateFormatter.string(from: birthDate)
+                    }
                     
                     if heightS != "" {
                         guard let heightValue = Float(heightS) else {
@@ -218,12 +229,12 @@ struct RegisterOptionalDataView: View {
                         .padding(.vertical)
                         .frame(width: UIScreen.main.bounds.width - 50)
                 }
+                .alert(alertText, isPresented : $showAlert, actions: {})
                 .fullScreenCover(isPresented: $registerSuccessful, content: {
                         LoginView()
                 })
                 .background(azul)
                 .cornerRadius(10)
-                .alert(alertText, isPresented : $showAlert, actions: {})
                         }
                         .padding(.horizontal, 25)
                     }
