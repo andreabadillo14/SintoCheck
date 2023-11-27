@@ -23,36 +23,49 @@ struct DoctorDetailsView: View {
     @State var doctor: Doctor?
     @State private var showSure: Bool = false
     @State private var currentDoctorId: String = ""
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
+    
+    @State var patientData : AuthenticationResponse?
+
+    func handlePatientData() {
+        do {
+            let sandboxURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileURL = sandboxURL.appendingPathComponent("loginResponse.json")
+
+            if !FileManager.default.fileExists(atPath: fileURL.path) {
+                // File does not exist, handle this case accordingly
+                print("Login response file not found")
+                return
+            }
+
+            patientData = try getPatientData()
+        } catch let error {
+            print("An error occurred while retrieving patient data: \(error)")
+        }
+    }
     
     var body: some View {
         
         NavigationView {
             
-            VStack() {
-                Image("Logo Chiquito")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-
-                Divider()
-                    .background(Color(red: 26/255, green: 26/255, blue: 102/255))
-                    .frame(width: 390, height: 1)
-                Text("Doctores registrados")
-                    .bold()
-                    .font(.title)
+            VStack(spacing:50) {
                 List (doctors ?? doctorVacia) { doctor in
                     InfoDoctor(name: doctor.name,  medicalBackground: doctor.speciality ?? "", phoneNumber: doctor.phone).swipeActions {
                         Button {
-                            //al hacer click quiero que se haga una alerta que pregunte si estas seguro y si le picas eliminar otra vez en la alerta se elimina al doctor completamente.
                             showSure = true
                             currentDoctorId = doctor.id
                             
                         } label: {
                             Image(systemName: "trash.fill")
                         }.tint(.red)
+                            
+                            
                     }
+                    .listRowBackground(colorScheme == .light ? Color(red: 236/255, green: 239/255, blue: 235/255) : Color(UIColor.secondarySystemGroupedBackground))
                     .alert(isPresented: $showSure) {
                         Alert(
-                            title: Text("Hola"), message: Text("¿Estas seguro que quieres eliminar al doctor?"),
+                            title: Text("hola"), message: Text("Estas seguro que quieres eliminar al doctor?"),
                             primaryButton: .default(
                                 Text("cancelar"),
                                 action: {}
@@ -60,12 +73,15 @@ struct DoctorDetailsView: View {
                             secondaryButton: .destructive(
                                 Text("Eliminar"),
                                 action: {
-                                    deleteDoctor(doctorId: currentDoctorId) { doctor in
-                                        self.doctor = doctor
-                                        fetchDoctor { doctors in
-                                            self.doctors = doctors
+                                    if let patientData = patientData {
+                                        deleteDoctor(doctorId: currentDoctorId, patientId: patientData.id, patientToken: patientData.token) { doctor in
+                                            self.doctor = doctor
+                                            fetchDoctor(patientId: patientData.id, patientToken: patientData.token) { doctors in
+                                                self.doctors = doctors
+                                            }
                                         }
                                     }
+                                    
                                     
                                 }
                             )
@@ -73,18 +89,24 @@ struct DoctorDetailsView: View {
                     }
                 }
                     
-            }.listStyle(PlainListStyle())
+                   
+
+                }.listStyle(.sidebar)
                 .scrollContentBackground(.hidden)
                 .scrollDisabled(true)
                 .background(Color.clear)
                 Spacer()
                 
             }
-            //.navigationTitle("Doctores registrados")
+            .navigationTitle("Doctores registrados")
             .onAppear(perform: {
-                fetchDoctor { doctors in
-                    self.doctors = doctors
+                handlePatientData()
+                if let patientData = patientData {
+                    fetchDoctor(patientId: patientData.id, patientToken: patientData.token) { doctors in
+                        self.doctors = doctors
+                    }
                 }
+               
             })
         }
         
