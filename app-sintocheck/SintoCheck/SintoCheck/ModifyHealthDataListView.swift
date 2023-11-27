@@ -10,6 +10,7 @@ import SwiftUI
 struct ModifyHealthDataListView: View {
     @State var listEmpty = true
     let amarillo = Color(red: 246/255, green: 226/255, blue: 127/255)
+    let rojo = Color(red: 148/255, green: 28/255, blue: 47/255)
     @State var patientData = AuthenticationResponse()
     @State var healthData : HealthDataResponse
     
@@ -23,6 +24,9 @@ struct ModifyHealthDataListView: View {
     @State var registerSuccessful = false
     
     @State var backView = false
+    @State var showAlert = false
+    @State var showError = false
+    @State var errorText = ""
     
     @State var combinedList: [HealthDataResponse] = []
 
@@ -76,6 +80,8 @@ struct ModifyHealthDataListView: View {
                     if standardList?.contains(where: { $0.name == tappedHealthData.name }) ?? false {
                         // Si es un dato estándar, llamamos a postHealthData
                         _ = try await postHealthData(healthDataToPost: tappedHealthData)
+                        combineAndRemoveDuplicates()
+                        
                     } else {
                         // Si no, llamamos a trackHealthData
                         _ = try await trackHealthData(healthDataToTrack: tappedHealthData)
@@ -167,6 +173,47 @@ struct ModifyHealthDataListView: View {
                     
                     registerSuccessful = true
                 }
+                
+            } else {
+                throw FileReaderError.fileReadError
+            }
+        }catch {
+            print("Error: \(error)")
+            // If there's an error, show an alert
+        }
+        return healthData
+    }
+    
+    func EraseHealthData(healthDataToErase: HealthDataResponse) async throws -> HealthDataResponse {
+        print("Entre aqui")
+        guard let url = URL(string: "https://sintocheck-backend.vercel.app/personalizedHealthData/\(healthDataToErase.id)") else { fatalError("Invalid URL") }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "DELETE"
+        
+        do {
+            print("borrando")
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            urlRequest.setValue(patientData.token, forHTTPHeaderField: "Authorization")
+        }
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Status Code:", httpResponse.statusCode)
+                if httpResponse.statusCode != 200 {
+                    errorText = "No se pueden eliminar datos estandar"
+                    showErrorAlert = true
+                    print("Response Data:", String(data: data, encoding: .utf8) ?? "No data")
+                    throw FileReaderError.fileReadError
+                }
+                if httpResponse.statusCode == 200 {
+                    SwitchView()
+                }
+                
+                if httpResponse.statusCode == 403 {
+                    healthData = try JSONDecoder().decode(HealthDataResponse.self, from: data)}
                 
             } else {
                 throw FileReaderError.fileReadError
@@ -288,6 +335,38 @@ struct ModifyHealthDataListView: View {
                                     .onTapGesture {
                                         handleStarTap(for: healthData)
                                     }
+                                Button(action: {
+                                    // Acción a realizar cuando se toca el botón
+                                    print("hola")
+                                    showAlert = true
+                                }) {
+                                    Image(systemName: "trash")
+                                        .foregroundColor(rojo)
+                                }
+                                .alert(isPresented: $showAlert) {
+                                    Alert(
+                                        title: Text("Confirmación"),
+                                        message: Text("¿Estás seguro? Se eliminara toda la informacion de ese dato de salud"),
+                                        primaryButton: .destructive(Text("Confirmar")) {
+                                            Task{
+                                                do{
+                                                    _ = try await EraseHealthData(healthDataToErase: healthData)
+                                                }
+                                                    catch let error as FileReaderError {
+                                                        print(error)
+                                                        switch error {
+                                                        case .fileNotFound:
+                                                            print("not found")
+                                                        case .fileReadError:
+                                                            print("read error")
+                                                        }
+                                                }
+                                            }
+                                        },
+                                        secondaryButton: .cancel()
+                                    )
+                                }
+                                .alert(errorText, isPresented : $showErrorAlert, actions: {})
                             }
                         }
                         
@@ -340,3 +419,4 @@ struct ModifyHealthDataListView_Previews: PreviewProvider {
         ModifyHealthDataListView(healthData: HealthDataResponse(id: "6525e53c250bcddf903d32d5", name: "Tos", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""), standardList: $previewHealthData, personalizedList: $previewHealthData)
     }
 }
+
