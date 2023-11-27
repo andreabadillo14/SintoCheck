@@ -219,7 +219,7 @@ struct RegisterOptionalDataView: View {
                         .frame(width: UIScreen.main.bounds.width - 50)
                 }
                 .fullScreenCover(isPresented: $registerSuccessful, content: {
-                        ContentView()
+                        LoginView()
                 })
                 .background(azul)
                 .cornerRadius(10)

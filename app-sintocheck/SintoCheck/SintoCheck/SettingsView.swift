@@ -29,7 +29,7 @@ struct SettingsView: View {
             Text("¿Estás seguro de que quieres cerrar sesión?")
         }
         .fullScreenCover(isPresented: $cerrarSesion) {
-            ContentView()
+            LoginView()
         }
         .onAppear {
             Task{
