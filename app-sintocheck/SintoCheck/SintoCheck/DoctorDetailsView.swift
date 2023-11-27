@@ -28,7 +28,17 @@ struct DoctorDetailsView: View {
         
         NavigationView {
             
-            VStack(spacing:50) {
+            VStack() {
+                Image("Logo Chiquito")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+
+                Divider()
+                    .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                    .frame(width: 390, height: 1)
+                Text("Doctores registrados")
+                    .bold()
+                    .font(.title)
                 List (doctors ?? doctorVacia) { doctor in
                     InfoDoctor(name: doctor.name,  medicalBackground: doctor.speciality ?? "", phoneNumber: doctor.phone).swipeActions {
                         Button {
@@ -39,12 +49,10 @@ struct DoctorDetailsView: View {
                         } label: {
                             Image(systemName: "trash.fill")
                         }.tint(.red)
-                            
-                            
                     }
                     .alert(isPresented: $showSure) {
                         Alert(
-                            title: Text("hola"), message: Text("Estas seguro que quieres eliminar al doctor?"),
+                            title: Text("Hola"), message: Text("¿Estas seguro que quieres eliminar al doctor?"),
                             primaryButton: .default(
                                 Text("cancelar"),
                                 action: {}
@@ -65,16 +73,14 @@ struct DoctorDetailsView: View {
                     }
                 }
                     
-                   
-
-                }.listStyle(.sidebar)
+            }.listStyle(PlainListStyle())
                 .scrollContentBackground(.hidden)
                 .scrollDisabled(true)
                 .background(Color.clear)
                 Spacer()
                 
             }
-            .navigationTitle("Doctores registrados")
+            //.navigationTitle("Doctores registrados")
             .onAppear(perform: {
                 fetchDoctor { doctors in
                     self.doctors = doctors

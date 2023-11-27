@@ -82,6 +82,14 @@ struct AddPersonalizedHealthDataView: View {
     
     var body: some View {
         VStack{
+            Image("Logo Chiquito")
+                .resizable()
+                .frame(width: 50, height: 50)
+
+            Divider()
+                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                .frame(width: 390, height: 1)
+            
             Text("Registrar Datos de Salud")
                 .font(.title)
                 .fontWeight(.bold)

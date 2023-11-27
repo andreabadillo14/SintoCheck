@@ -70,6 +70,20 @@ struct RegisterHealthDataView: View {
                 Color("Backgrounds")
                     .ignoresSafeArea()
                 VStack {
+                    
+                    Image("Logo Chiquito")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+
+                    Divider()
+                        .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                        .frame(width: 390, height: 1)
+                    
+                    Text(healthData.name)
+                        .bold()
+                        .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
                     VStack {
                         Section {
                             VStack {
@@ -127,7 +141,7 @@ struct RegisterHealthDataView: View {
                         }
                     }
                     .padding()
-                    .navigationTitle(healthData.name)
+                    //.navigationTitle(healthData.name)
                 }
                 .onAppear {
                     // merge with login and test

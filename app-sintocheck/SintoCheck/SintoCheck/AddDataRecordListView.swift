@@ -21,6 +21,14 @@ struct AddDataRecordListView: View {
             ZStack {
                 Color("Backgrounds").ignoresSafeArea()
                 VStack {
+                    Image("Logo Chiquito")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+
+                    Divider()
+                        .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                        .frame(width: 390, height: 1)
+                    
                     Text("Registro de Datos")
                         .padding(.top, 15)
                         .font(.largeTitle)
@@ -48,12 +56,16 @@ struct AddDataRecordListView: View {
             }
             .navigationBarItems(trailing: Button("Editar") {
                 editView = true
-            }.fullScreenCover(isPresented: $editView, content: {
+            }
+                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+            .fullScreenCover(isPresented: $editView, content: {
                 ModifyHealthDataListView(healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "1", rangeMin: 1, rangeMax: 10, unit: "", tracked: false, createdAt: ""), standardList: $standardList, personalizedList: $personalizedList)
             }))
-            .navigationBarItems(leading: Button("Regresar"){
+            .navigationBarItems(leading: Button("Perfil"){
                backView = true
-            }.fullScreenCover(isPresented: $backView, content: {
+            }
+                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+            .fullScreenCover(isPresented: $backView, content: {
                 SwitchView()
             }))
         }

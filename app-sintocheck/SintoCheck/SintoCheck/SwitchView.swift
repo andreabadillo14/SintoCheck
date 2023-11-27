@@ -80,54 +80,61 @@ struct SwitchView : View {
     }
     
     var body: some View {
-        VStack{
-            TabView(selection: $selectedTab) {
-                ProfileView(personalizedList: $personalizedList, standardList: $standardList)
-                    .tabItem {
-                        Image(systemName: "person")
-                        Text("Perfil")
-                    }
-                    .tag(0)
-                
-                AddDataRecordListView(standardList: $standardList, personalizedList: $personalizedList, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""))
-                    .tabItem {
-                        Image(systemName: "plus")
-                        Text("Añadir registro")
-                    }
-                    .tag(1)
-                
-                SettingsView()
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text("Configuración")
-                    }
-                    .tag(2)
+        ZStack {
+            VStack {
+                TabView(selection: $selectedTab) {
+                    ProfileView(personalizedList: $personalizedList, standardList: $standardList)
+                        .tabItem {
+                            Image(systemName: "person")
+                            Text("Perfil")
+                        }
+                        .tag(0)
+                    
+                    AddDataRecordListView(standardList: $standardList, personalizedList: $personalizedList, healthData: HealthDataResponse(id: "", name: "", quantitative: false, patientId: "", rangeMin: 0.0, rangeMax: 0.0, unit: "", tracked: false, createdAt: ""))
+                        .tabItem {
+                            Image(systemName: "plus")
+                            Text("Añadir registro")
+                        }
+                        .tag(1)
+                    
+                    SettingsView()
+                        .tabItem {
+                            Image(systemName: "gear")
+                            Text("Configuración")
+                        }
+                        .tag(2)
+                }
+                .accentColor(Color(red: 26/255, green: 26/255, blue: 102/255))
             }
-            .accentColor(Color(red: 26/255, green: 26/255, blue: 102/255))
-        }
-        .onAppear {
-                selectedTab = 0 // Set the default selected tab to be the profile view
-            Task{
-                do {
-                    patientData = try getPatientData()
-                    let healthData = try await loadListData()
-                    personalizedList = healthData
-                    let standardHealthData = try await loadSListData()
-                    standardList = standardHealthData
-                    getSuccessful = true
-                } catch let error as FileReaderError {
-                    print(error)
-                    switch error {
-                    case .fileNotFound:
-                        print("not found")
-                    case .fileReadError:
-                        print("read error")
+            Divider()
+                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                .padding(.top, 650)
+            
+            .onAppear {
+                    selectedTab = 0 // Set the default selected tab to be the profile view
+                Task{
+                    do {
+                        patientData = try getPatientData()
+                        let healthData = try await loadListData()
+                        personalizedList = healthData
+                        let standardHealthData = try await loadSListData()
+                        standardList = standardHealthData
+                        getSuccessful = true
+                    } catch let error as FileReaderError {
+                        print(error)
+                        switch error {
+                        case .fileNotFound:
+                            print("not found")
+                        case .fileReadError:
+                            print("read error")
+                        }
+                    } catch {
+                        print("unknown: \(error)")
                     }
-                } catch {
-                    print("unknown: \(error)")
                 }
             }
-            }
+
+        }
         }
     }
 
