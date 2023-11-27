@@ -92,166 +92,167 @@ struct ProfileView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                ZStack {
-                    Color("Backgrounds")
-                        .ignoresSafeArea()
-                    VStack {
+            GeometryReader { geometry in
+                VStack {
+                    ZStack {
+                        Color("Backgrounds")
+                            .ignoresSafeArea()
                         VStack {
-                            
-                            Image("Logo Chiquito")
-                                .resizable()
-                                .frame(width: 50, height: 50)
- 
-                            Divider()
-                                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
-                                .frame(width: 390, height: 1)
+                            VStack {
                                 
-                            Text("Mi perfil")
-                                .bold()
-                                .font(.largeTitle)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
-                            
-                            
-//                            HStack(alignment: .center) {
-//                                Image(systemName: "person.circle.fill")
-//                                    .resizable()
-//                                    .aspectRatio(contentMode: .fit)
-//                                    .frame(width: 73)
-//                                    .padding(.leading, -60)
-//                                
-//                                VStack(alignment: .leading) {
-//                                    if let patientData = patientData{
-//                                        Text("\(patientData.name)")
-//                                        Text("\(patientData.phone)")
-//                                    }
-//                                }
-//                                .padding(.leading)
-//                                
-//                            }
-                            HStack(alignment: .center) {
-                                Menu {
-                                    Button("Cambiar foto de perfil") {
-                                        showPhotosPicker = true
-                                    }
-                                } label: {
-                                    if let url = url {
-                                        AsyncImage(url: URL(string: url.url)) { image in
-                                            image
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 80, height: 80)
-                                                .clipShape(.circle)
-                                        } placeholder: {
+                                Image("Logo Chiquito")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+     
+                                Divider()
+                                    .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                    .frame(width: geometry.size.width * 0.92, height: 1)
+                                    
+                                Text("Mi perfil")
+                                    .bold()
+                                    .font(.largeTitle)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding()
+                                
+                                
+    //                            HStack(alignment: .center) {
+    //                                Image(systemName: "person.circle.fill")
+    //                                    .resizable()
+    //                                    .aspectRatio(contentMode: .fit)
+    //                                    .frame(width: 73)
+    //                                    .padding(.leading, -60)
+    //                                
+    //                                VStack(alignment: .leading) {
+    //                                    if let patientData = patientData{
+    //                                        Text("\(patientData.name)")
+    //                                        Text("\(patientData.phone)")
+    //                                    }
+    //                                }
+    //                                .padding(.leading)
+    //                                
+    //                            }
+                                HStack(alignment: .center) {
+                                    Menu {
+                                        Button("Cambiar foto de perfil") {
+                                            showPhotosPicker = true
+                                        }
+                                    } label: {
+                                        if let url = url {
+                                            AsyncImage(url: URL(string: url.url)) { image in
+                                                image
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: geometry.size.width * 0.25)
+                                                    .clipShape(.circle)
+                                            } placeholder: {
+                                                Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: geometry.size.width * 0.25)
+                                                    .clipShape(.circle)
+                                            }
+                                            
+                                        } else {
                                             Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .frame(width: 80, height: 80)
+                                                .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.11)
                                                 .clipShape(.circle)
                                         }
                                         
-                                    } else {
-                                        Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fill)
-                                            .frame(width: 90, height: 90)
-                                            .clipShape(.circle)
-                                    }
+                                    }.foregroundColor(Color.black)
                                     
-                                }.foregroundColor(Color.black)
-                                
-                                
-                                VStack(alignment: .leading) {
-                                    if let patientData = patientData{
-                                        Text("\(patientData.name)")
-                                        Text("\(patientData.phone)")
+                                    
+                                    VStack(alignment: .leading) {
+                                        if let patientData = patientData{
+                                            Text("\(patientData.name)")
+                                            Text("\(patientData.phone)")
+                                        }
                                     }
+                                    .padding(.leading)
+                                    Spacer()
                                 }
-                                .padding(.leading)
+                                .padding(.leading, geometry.size.width * 0.05)
+                                
+                                
                                 Spacer()
-                            }.padding(.leading, 20)
-                            
-                            
-                            
-                            
-                            Spacer()
-                            
-                            Section {
-                                List {
-                                    NavigationLink(destination: MedicalDataView()) {
-                                    Image(systemName: "aqi.medium")
-                                        .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
-                                    Text("Detalles personales médicos")
-                                }
-                                    NavigationLink(destination: HealthDataDetails(personalizedList: $personalizedList, standardList: $standardList)) {
-                                        Image(systemName: "heart.fill")
+                                
+                                Section {
+                                    List {
+                                        NavigationLink(destination: MedicalDataView()) {
+                                        Image(systemName: "aqi.medium")
                                             .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
-                                        Text("Detalles de datos de salud")
+                                        Text("Detalles personales médicos")
+                                    }
+                                        NavigationLink(destination: HealthDataDetails(personalizedList: $personalizedList, standardList: $standardList)) {
+                                            Image(systemName: "heart.fill")
+                                                .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
+                                            Text("Detalles de datos de salud")
+                                        }
+                                        
+                                    }
+                                    
+                                }
+                                Section {
+                                    List {
+                                        NavigationLink(destination: DoctorDetailsView()) {
+                                            Image(systemName: "book.pages")
+                                                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                            Text("Detalles de médico")
+                                        }
+                                        NavigationLink(destination: MedicalLinkView(exito: $seRegistroDoctor, mensajeLink: $mensajeEnlace)) {
+                                            Image(systemName: "person.crop.circle.badge.plus")
+                                                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                            Text("Enlazar a un médico")
+                                        }
+                                        
                                     }
                                     
                                 }
                                 
+                                Spacer(minLength: 175)
                             }
-                            Section {
-                                List {
-                                    NavigationLink(destination: DoctorDetailsView()) {
-                                        Image(systemName: "book.pages")
-                                            .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
-                                        Text("Detalles de médico")
-                                    }
-                                    NavigationLink(destination: MedicalLinkView(exito: $seRegistroDoctor, mensajeLink: $mensajeEnlace)) {
-                                        Image(systemName: "person.crop.circle.badge.plus")
-                                            .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
-                                        Text("Enlazar a un médico")
-                                    }
-                                    
-                                }
-                                
-                            }
+                            .padding()
                             
-                            Spacer(minLength: 175)
+                            // 124,152,159
+                            //.navigationTitle("Mi perfil")
+                            //.foregroundColor(Color(red: 124/255, green: 152/255, blue: 159/255))
+                            
                         }
-                        .padding()
                         
-                        // 124,152,159
-                        //.navigationTitle("Mi perfil")
-                        //.foregroundColor(Color(red: 124/255, green: 152/255, blue: 159/255))
-                        
+                        .background(Color.clear)
                     }
                     
-                    .background(Color.clear)
-                }
-                
-                .onAppear {
-                    handlePatientData()
-                    //obtener el url del endpoint para paciente luego
-                    fetchImage() { url in
-                        self.url = url
+                    .onAppear {
+                        handlePatientData()
+                        //obtener el url del endpoint para paciente luego
+                        fetchImage() { url in
+                            self.url = url
+                        }
                     }
-                }
-                .background(Color.clear)
-                .alert("\(mensajeEnlace)", isPresented: $seRegistroDoctor, actions: {})
-                .photosPicker(isPresented: $showPhotosPicker, selection: $photosPickerItem, matching: .images)
-                .onChange(of: photosPickerItem) { _, _ in
-                    Task {
-                        if let photosPickerItem,
-                           let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
-                            if let image = UIImage(data: data) {
-                                sendImage(image: image) {
-                                    fetchImage() { url in
-                                        DispatchQueue.main.async {
-                                                self.url = url
+                    .background(Color.clear)
+                    .alert("\(mensajeEnlace)", isPresented: $seRegistroDoctor, actions: {})
+                    .photosPicker(isPresented: $showPhotosPicker, selection: $photosPickerItem, matching: .images)
+                    .onChange(of: photosPickerItem) { _, _ in
+                        Task {
+                            if let photosPickerItem,
+                               let data = try? await photosPickerItem.loadTransferable(type: Data.self) {
+                                if let image = UIImage(data: data) {
+                                    sendImage(image: image) {
+                                        fetchImage() { url in
+                                            DispatchQueue.main.async {
+                                                    self.url = url
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
+                    //.navigationTitle("Mi perfil")
+                    //            .task {
+                    //                await getMedicalData()
                 }
-                //.navigationTitle("Mi perfil")
-                //            .task {
-                //                await getMedicalData()
             }
             
         }

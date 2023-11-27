@@ -60,64 +60,66 @@ struct ContentView: View {
 
     
     var body: some View {
-        VStack (spacing: 0){
-            Image("Logo Chiquito")
-                .frame(width: 100, height: 150)
-            Text("Iniciar Sesión")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(Color.black)
-                .padding(.top, 35)
-            Text("Teléfono")
-                .padding(.top, 25)
-                .padding(.bottom, 15)
-            TextField("Teléfono", text: $phone)
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 4).stroke(phone != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
-                .keyboardType(.numberPad)
-            
-            Text("Contraseña")
-                .padding(.top, 25)
-                .padding(.bottom, 15)
-            SecureField("Contraseña", text: $pass)
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 4).stroke(pass != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
-                .padding(.bottom, 25)
-            Button(action: {
-                Task {
-                    await postLogin()
-                }
-            }){
+        GeometryReader { geometry in
+            VStack (spacing: 0){
+                Image("Logo Chiquito")
+                    .frame(width: geometry.size.width * 0.2, height: geometry.size.height * 0.3)
                 Text("Iniciar Sesión")
-                    .foregroundColor(.white)
-                    .padding(.vertical)
-                    .frame(width: UIScreen.main.bounds.width - 50)
-            }
-            .background(azul)
-            .cornerRadius(10)
-            .padding(.top, 25)
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"), message: Text("Teléfono o Contraseña Incorrecta"), dismissButton: .default(Text("Entendido")))
-            }
-            .fullScreenCover(isPresented: $loginSuccessful) {
-                SwitchView()
-            }
-            HStack{
-                Text("¿No tienes una cuenta?")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(Color.black)
+                    .padding(.top, geometry.size.height * 0.025)
+                Text("Teléfono")
+                    .padding(.top, geometry.size.height * 0.025)
+                    .padding(.bottom, geometry.size.height * 0.015)
+                TextField("Teléfono", text: $phone)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 4).stroke(phone != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
+                    .keyboardType(.numberPad)
+                
+                Text("Contraseña")
+                    .padding(.top, geometry.size.height * 0.025)
+                    .padding(.bottom, geometry.size.height * 0.015)
+                SecureField("Contraseña", text: $pass)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 4).stroke(pass != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
+                    .padding(.bottom, geometry.size.height * 0.025)
                 Button(action: {
-                    mostrarRegistro = true
+                    Task {
+                        await postLogin()
+                    }
                 }){
-                    Text("Registrarme")
-                        .foregroundColor(azul)
+                    Text("Iniciar Sesión")
+                        .foregroundColor(.white)
+                        .padding(.vertical)
+                        .frame(width: geometry.size.width - geometry.size.width * 0.2)
                 }
-                .fullScreenCover(isPresented: $mostrarRegistro){
-                    RegisterView()
+                .background(azul)
+                .cornerRadius(geometry.size.width * 0.03) // Adjust corner radius based on screen size
+                .padding(.top, geometry.size.height * 0.025)
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text("Teléfono o Contraseña Incorrecta"), dismissButton: .default(Text("Entendido")))
                 }
+                .fullScreenCover(isPresented: $loginSuccessful) {
+                    SwitchView()
+                }
+                HStack{
+                    Text("¿No tienes una cuenta?")
+                    Button(action: {
+                        mostrarRegistro = true
+                    }){
+                        Text("Registrarme")
+                            .foregroundColor(azul)
+                    }
+                    .fullScreenCover(isPresented: $mostrarRegistro){
+                        RegisterView()
+                    }
+                }
+                .padding(.top, geometry.size.height * 0.015)
+                
             }
-            .padding(.top, 15)
-            
+            .padding(.horizontal, geometry.size.width * 0.07)
         }
-        .padding(.horizontal, 25)
     }
 }
 
