@@ -65,9 +65,9 @@ struct DoctorDetailsView: View {
                     .listRowBackground(colorScheme == .light ? Color(red: 236/255, green: 239/255, blue: 235/255) : Color(UIColor.secondarySystemGroupedBackground))
                     .alert(isPresented: $showSure) {
                         Alert(
-                            title: Text("hola"), message: Text("Estas seguro que quieres eliminar al doctor?"),
+                            title: Text("¿Quieres eliminar al doctor?"),
                             primaryButton: .default(
-                                Text("cancelar"),
+                                Text("Cancelar"),
                                 action: {}
                             ),
                             secondaryButton: .destructive(

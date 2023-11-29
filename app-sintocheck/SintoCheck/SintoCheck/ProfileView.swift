@@ -142,13 +142,15 @@ struct ProfileView: View {
                                                 image
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
-                                                    .frame(width: geometry.size.width * 0.25)
+                                                    //.frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.08)
+                                                    .frame(width: 100, height: 85)
                                                     .clipShape(.circle)
                                             } placeholder: {
                                                 Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
                                                     .resizable()
                                                     .aspectRatio(contentMode: .fill)
-                                                    .frame(width: geometry.size.width * 0.25)
+                                                    //.frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.08)
+                                                    .frame(width: 100, height: 85)
                                                     .clipShape(.circle)
                                             }
                                             
@@ -156,7 +158,8 @@ struct ProfileView: View {
                                             Image(uiImage: (UIImage(systemName: "person.crop.circle.fill"))!)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
-                                                .frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.11)
+                                                //.frame(width: geometry.size.width * 0.23, height: geometry.size.height * 0.08)
+                                                .frame(width: 100, height: 85)
                                                 .clipShape(.circle)
                                         }
                                         
@@ -170,12 +173,12 @@ struct ProfileView: View {
                                         }
                                     }
                                     .padding(.leading)
-                                    Spacer()
+                                    //Spacer()
                                 }
                                 .padding(.leading, geometry.size.width * 0.05)
                                 
                                 
-                                Spacer()
+                                //Spacer()
                                 
                                 Section {
                                     List {
@@ -192,7 +195,7 @@ struct ProfileView: View {
                                         NavigationLink(destination: viewNotes()) {
                                             Image(systemName: "note.text")
                                                 .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
-                                            Text("agregar notas de salud")
+                                            Text("Detalles de notas de salud")
                                         }
                                         
                                     }
@@ -212,17 +215,17 @@ struct ProfileView: View {
                                         }
                                         NavigationLink(destination: addNote()) {
                                             Image(systemName: "note.text.badge.plus")
-                                                .foregroundColor(Color(red: 148/255, green: 28/255, blue: 47/255))
-                                            Text("Escribir una nota de salud")
+                                                .foregroundColor(Color(red: 26/255, green: 26/255, blue: 102/255))
+                                            Text("Agregar una nota de salud")
                                         }
                                         
                                     }
                                     
                                 }
                                 
-                                Spacer(minLength: 175)
+                                Spacer()
                             }
-                            .padding()
+                            //.padding()
                             
                             // 124,152,159
                             //.navigationTitle("Mi perfil")

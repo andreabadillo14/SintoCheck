@@ -70,7 +70,7 @@ struct MedicalLinkView: View {
                                     //checar si existe el doctor que obtuve
                                     if let doctor = doctor {
                                         exito = true
-                                        mensajeLink = "Se registro exitasomanete el doctor \(doctor.name)"
+                                        mensajeLink = "Se registró exitosamente el doctor \(doctor.name)"
                                     } else {
                                         exito = true
                                         mensajeLink = "No se pudo registrar el doctor"
@@ -82,10 +82,10 @@ struct MedicalLinkView: View {
                         } else {
                             if (doctorCode == "") {
                                 alertValidation = true
-                                alertValidationMessage = "introduce un codigo"
+                                alertValidationMessage = "Introduce un código"
                             } else if (!doctorCode.isAlphanumeric) {
                                 alertValidation = true
-                                alertValidationMessage = "introduce un código valido"
+                                alertValidationMessage = "Introduce un código valido"
                             }
                             
                         }
@@ -108,7 +108,7 @@ struct MedicalLinkView: View {
                 }
                 Spacer()
             }
-            .navigationTitle("Enlace con su medico")
+            .navigationTitle("Enlace con su médico")
         }.onTapGesture {
             UIApplication.shared.endEditing()
         }.onAppear {

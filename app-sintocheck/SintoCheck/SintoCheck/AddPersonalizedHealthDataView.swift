@@ -175,7 +175,7 @@ struct AddPersonalizedHealthDataView: View {
                                 .frame(width: 150, height: 5)
                                 .padding()
                                 .background(RoundedRectangle(cornerRadius: 4).stroke(unidades != "" ? Color(Color(red: 148/255, green: 28/255, blue: 47/255)) : Color.black, lineWidth: 2))
-                                .keyboardType(.decimalPad)
+                                .keyboardType(.default)
                         }
                         .padding(.horizontal)
                         .padding(.bottom, 25)

@@ -170,7 +170,7 @@ func deleteDoctor(doctorId: String, patientId: String, patientToken: String, com
 
 //para view ProfileView
 func sendImage(image: UIImage, patientId: String, patientToken: String, completion: @escaping () -> Void) {
-    guard let url = URL(string: "https://sintocheck-backendsinto.vercel.app/image/patient") else { return }
+    guard let url = URL(string: "https://api-text.vercel.app/image/patient") else { return }
     let boundary = UUID().uuidString
     
     var request = URLRequest(url: url)

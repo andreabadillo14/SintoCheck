@@ -106,9 +106,9 @@ struct SwitchView : View {
                 }
                 .accentColor(Color(red: 26/255, green: 26/255, blue: 102/255))
             }
-            Divider()
-                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
-                .padding(.top, 650)
+//            Divider()
+//                .background(Color(red: 26/255, green: 26/255, blue: 102/255))
+//                .padding(.top, 650)
             
             .onAppear {
                     selectedTab = 0 // Set the default selected tab to be the profile view

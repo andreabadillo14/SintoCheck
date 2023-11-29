@@ -24,7 +24,9 @@ struct viewNotes: View {
     @State var patientData : AuthenticationResponse?
     @State var deletedNote = false
     
-
+    func formattedDate(_ dateString: String) -> String {
+        return String(dateString.prefix(10))
+    }
 
 
     func handlePatientData() {
@@ -92,7 +94,7 @@ struct viewNotes: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    Text("09/08/2023")
+                                    Text(formattedDate(note.createdAt))
                                     Spacer()
                                 }
 
@@ -145,6 +147,3 @@ struct viewNotes: View {
 #Preview {
     viewNotes()
 }
-
-
-

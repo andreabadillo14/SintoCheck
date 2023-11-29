@@ -12,6 +12,7 @@ struct Note: Codable, Identifiable {
     let id: String
     let title: String
     let content: String
+    let createdAt: String
 }
 
 
@@ -24,6 +25,7 @@ struct addNote: View {
     @State private var alertValidationMessage = ""
     @State var note: Note?
     @State var noteWasAdded: Bool = false
+    @State var canGoToProfile = false
     
     @State var patientData : AuthenticationResponse?
 
@@ -83,16 +85,17 @@ struct addNote: View {
                         addNoteAPI(title: titulo, content: contenido, patientId: patientData.id, patientToken: patientData.token) { note in
                             self.note = note
                             noteWasAdded = true
+                            canGoToProfile = true
                         }
                     }
                     
                 } else {
                     if (titulo == "" && contenido == "") {
                         alertValidation = true
-                        alertValidationMessage = "No puedes registar una nota vacia"
+                        alertValidationMessage = "No puedes registar una nota vacía"
                     } else if (titulo == "") {
                         alertValidation = true
-                        alertValidationMessage = "No puedes registrar una nota sin titulo"
+                        alertValidationMessage = "No puedes registrar una nota sin título"
                         
                     } else if (contenido == "") {
                         alertValidation = true
@@ -123,6 +126,9 @@ struct addNote: View {
             handlePatientData()
         }.alert(isPresented: $noteWasAdded) {
             Alert(title: Text("Se registro la nota exitosamente"))
+        }
+        .fullScreenCover(isPresented: $canGoToProfile) {
+            SwitchView()
         }
         
     }

@@ -49,7 +49,12 @@ struct HealthDataDetailView: View {
     
     // Function to format the date string
     func formattedDate(_ dateString: String) -> String {
-        return String(dateString.prefix(10))
+        //return String(dateString.prefix(10))
+        let startIndex = dateString.index(dateString.startIndex, offsetBy: 5)
+        let endIndex = dateString.index(dateString.startIndex, offsetBy: 9)
+        let mmddSubstring = dateString[startIndex...endIndex]
+        print(mmddSubstring)
+        return String(mmddSubstring)
     }
     
     func dateLabelForIndex(_ index: AxisValue, in healthDataList: [HealthDataRecordResponse]) -> String {

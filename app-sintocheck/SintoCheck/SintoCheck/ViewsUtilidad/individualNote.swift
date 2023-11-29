@@ -78,7 +78,7 @@ struct individualNote: View {
                     }.padding()
             }.alert(isPresented: $showSure) {
                 Alert(
-                    title: Text("Estas seguro de que quieres eliminar esta nota?"), message: Text(""),
+                    title: Text("¿Quieres eliminar esta nota?"), message: Text(""),
                     primaryButton: .default(
                         Text("cancelar"),
                         action: {}
